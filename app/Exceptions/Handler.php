@@ -34,6 +34,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if( $exception instanceof BaseException){
+            $exception->report();
+            return $exception->render();
+        }
         parent::report($exception);
     }
 

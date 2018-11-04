@@ -7,8 +7,11 @@
     "require": {
         "php": "^7.1.3",
         "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.6.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "monolog/monolog": "^1.23",
+        "overtrue/easy-sms": "^1.1"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
