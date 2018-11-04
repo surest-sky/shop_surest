@@ -8,6 +8,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\SmsException;
 use Carbon\Carbon;
 use Overtrue\EasySms\EasySms;
 
@@ -45,7 +46,7 @@ class SendSmsService
                 'phone' => $phoneNumbers,
                 'time' => Carbon::now()
             ];
-            \Log::error('发送失败' . json_encode($error));
+            throw new SmsException(json_encode($error));
         }
         return false;
     }

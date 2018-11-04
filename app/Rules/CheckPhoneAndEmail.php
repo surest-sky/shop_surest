@@ -25,9 +25,10 @@ class CheckPhoneAndEmail implements Rule
      */
     public function passes($attribute, $value)
     {
-        if( filter_var($value,FILTER_VALIDATE_EMAIL) ) {
-
+        if( $res = checkParamType($value) ){
+            return true;
         }
+            return false;
     }
 
     /**
@@ -37,6 +38,6 @@ class CheckPhoneAndEmail implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return '验证格式不匹配';
     }
 }

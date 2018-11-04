@@ -7,9 +7,6 @@
  */
 
 return [
-    'log' => [
-        'file' =>storage_path('logs/login/'.date('Y-m-d') . '.php')
-    ],
    'weibo' => [
        // 微博登录相关key
        'w_key' => ENV('W_KEY',''),

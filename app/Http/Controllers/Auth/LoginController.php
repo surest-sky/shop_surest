@@ -18,7 +18,7 @@ class LoginController extends Controller
 
     public static function store($uid,$type)
     {
-        $fild = User::FIELD[$type];
+
 
     }
 

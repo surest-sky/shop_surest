@@ -27,5 +27,15 @@ function checkParamType($value) {
         }
     ]);
 
-    return false;
+    return is_null($res) ? false : $res;
+}
+function setCode($num)
+{
+    $i = 0;
+    $code = '';
+    while ($i<$num) {
+        $code .= random_int(0,9);
+        $i++;
+    }
+    return $code;
 }

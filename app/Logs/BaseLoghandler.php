@@ -18,10 +18,10 @@ class BaseLoghandler
 
     protected $level;
 
-    public function __construct($level='WARNING')
+    public function __construct($file)
     {
-        $this->logger = new Logger('login_logger');
-        $this->logger->pushHandler(new StreamHandler(config('login.log.file'), 100));
+        $this->logger = new Logger('logger');
+        $this->logger->pushHandler(new StreamHandler($file, 100));
         $this->logger->pushHandler(new FirePHPHandler());
 }
 

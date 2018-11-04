@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Services\SendSmsHandleService;
 
 class RegisterController extends Controller
 {
@@ -29,6 +30,13 @@ class RegisterController extends Controller
 
     public function account(RegisterRequest $request)
     {
-        dd($request->all());
+        $account = $request->account;
+        $type = checkParamType($account);
+        $sms = new SendSmsHandleService();
+
+        $res = $sms->handler($account,$type);
+
+        return response()->json($res,200);
+
     }
 }

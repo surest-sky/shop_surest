@@ -39,10 +39,14 @@ class BaseException extends Exception
      */
     public function report()
     {
-        $logger = new BaseLoghandler();
+        $logger = new BaseLoghandler(config('log.login'));
         $logger->write($this->message);
     }
 
+    /**
+     * 渲染一个错误页面
+     * @return \Illuminate\Http\Response
+     */
     public function render()
     {
         return response()->view(

@@ -1494,7 +1494,7 @@
                         <div class="blog-post col-xs-12 col-sm-6 col-md-4">
                             <article class="entry panel">
                                 <figure class="entry-media embed-responsive embed-responsive-16by9">
-                                    <iframe src="https://player.vimeo.com/video/28786762?portrait=0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+
                                     <div class="entry-date">
                                         <h4>13</h4>
                                         <h6>JUN</h6>
@@ -1527,7 +1527,7 @@
                         <div class="blog-post col-xs-12 col-sm-6 col-md-4">
                             <article class="entry panel">
                                 <figure class="entry-media embed-responsive embed-responsive-16by9">
-                                    <iframe src="https://www.youtube.com/embed/mcixldqDIEQ?v=mcixldqDIEQ" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+                                    {{--ttps://www.youtube.com/embed/mcixldqDIEQ?v=mcixldqDIEQ<iframe src="https://www.youtube.com/embed/mcixldqDIEQ?v=mcixldqDIEQ" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>--}}
                                     <div class="entry-date">
                                         <h4>13</h4>
                                         <h6>JUN</h6>

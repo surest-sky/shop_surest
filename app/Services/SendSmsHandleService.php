@@ -9,14 +9,15 @@
 namespace App\Services;
 
 
+use App\Exceptions\BaseException;
+use App\Exceptions\SmsException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
-
+use App\Jobs\SendMailJob;
 class SendSmsHandleService
 {
-    public function handler($phone,$len=5)
+    public function handler($account,$type,$len=5)
     {
-        $sendSmsService = new SendSmsService();
         $result = [
             'msg' => '',
             'status' => false,
@@ -33,8 +34,12 @@ class SendSmsHandleService
             $sendSms = true;
             $code = 1234;
         }else{
+
+            // 生成验证码
             $code = $this->setCode($len);
-            $sendSms = $sendSmsService->easysms($phone , $code);
+
+            $sendSms = $this->send($account,$type,$code);
+
         }
         if( $sendSms ) {
             $result['status'] = true;
@@ -42,7 +47,7 @@ class SendSmsHandleService
             $result['key'] = $key;
 
             $data = [
-              'phone' => $phone,
+              'account' => $account,
               'code' => $code
             ];
             Cache::put($key,$data,$minutes);
@@ -50,7 +55,6 @@ class SendSmsHandleService
         }else{
             $result['msg'] = '发送短信失败，超出频率限制';
         }
-
         return $result;
 
     }
@@ -64,5 +68,23 @@ class SendSmsHandleService
             $i++;
         }
         return $code;
+    }
+
+    protected function send($account,$type,$code)
+    {
+        // 校验是否是手机还是邮箱
+        switch ($type) {
+            case 'phone' :
+                $sendSmsService = new SendSmsService();
+                $sendSms = $sendSmsService->easysms($account , $code);
+                return $sendSms;
+                break;
+            case 'email' :
+                SendMailJob::dispatch($code,$account);
+                break;
+            default :
+                throw new SmsException('短信组件问题，未知异常，请检查');
+        }
+        return true;
     }
 }

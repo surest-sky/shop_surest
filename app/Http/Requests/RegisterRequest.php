@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\CheckPhoneAndEmail;
 
 class RegisterRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'account' => 'required'
+            'account' => ['required',new CheckPhoneAndEmail]
         ];
     }
 
