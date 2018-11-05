@@ -11,4 +11,5 @@ window.onload = function () {
 function _alert($param,$bol=true) {
     $str = $bol ? 'success' : 'error';
     swal($param, "",$str);
+    return ;
 }

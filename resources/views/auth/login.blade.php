@@ -8,17 +8,38 @@
                     <h3 class="sign-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登录</font></font><small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">或</font></font><a href="signup.html" class="color-green"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册</font></font></a></small></h3>
                     <div class="row row-rl-0">
                         <div class="col-sm-6 col-md-7 col-left">
-                            <form class="p-40" action="#" method="post">
+
+                            @if($status = session('status') )
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        <li>{{ $status }}</li>
+                                    </ul>
+                                </div>
+                            @endif
+
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                            <form class="p-40" action="{{ route('login.store') }}" method="post">
+                                {{{ csrf_field() }}}
                                 <div class="form-group">
-                                    <label class="sr-only"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">电子邮件</font></font></label>
-                                    <input name="user" type="text" class="form-control input-lg" placeholder="用户名/手机号/QQ邮箱">
+                                    <label class="sr-only"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用户名/手机号/邮箱/</font></font></label>
+                                    <input required name="name" type="text" class="form-control input-lg" placeholder="用户名/手机号/邮箱">
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">密码</font></font></label>
-                                    <input type="password" name="password" class="form-control input-lg" placeholder="密码">
+                                    <input required type="password" name="password" class="form-control input-lg" placeholder="密码">
                                 </div>
                                 <div class="form-group">
-                                    <a href="#" class="forgot-pass-link color-green"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">忘了你的密码？</font></font></a>
+                                    <a href="{{ route('forget') }}" class="forgot-pass-link color-green"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">忘记密码？</font></font></a>
                                 </div>
                                 <div class="custom-checkbox mb-20">
                                     <input type="checkbox" id="remember_account" checked="">

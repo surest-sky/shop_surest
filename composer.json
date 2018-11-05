@@ -10,8 +10,10 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
+        "mews/captcha": "^2.2",
         "monolog/monolog": "^1.23",
-        "overtrue/easy-sms": "^1.1"
+        "overtrue/easy-sms": "^1.1",
+        "overtrue/laravel-lang": "~3.0"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

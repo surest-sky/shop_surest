@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->comment('头像');
             $table->enum('active',[0,1])->comment('头像');
             $table->string('password')->nullable()->comment('密码');
+            $table->string('salt')->nullable()->comment('加盐串');
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

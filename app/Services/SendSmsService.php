@@ -26,10 +26,9 @@ class SendSmsService
      */
     public function easysms($phoneNumbers,$code)
     {
-        $config = config('easysms');
-        $easySms = new EasySms($config);
-
         try{
+            $config = config('easysms');
+            $easySms = new EasySms($config);
             $result = $easySms->send($phoneNumbers, [
                 'template' => config('easysms.gateways.qcloud.tid'),
                 'data' => [
@@ -46,7 +45,9 @@ class SendSmsService
                 'phone' => $phoneNumbers,
                 'time' => Carbon::now()
             ];
-            throw new SmsException(json_encode($error));
+            throw new SmsException([
+                'message' => json_encode($error)
+            ]);
         }
         return false;
     }

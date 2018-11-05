@@ -14,6 +14,12 @@ function getAssets() {
     return config('APP_URL') . config('mian.assets');
 }
 
+/**
+ * 返回登录的字段类型
+ *
+ * @param $value
+ * @return bool|mixed|string
+ */
 function checkParamType($value) {
     if( filter_var($value,FILTER_VALIDATE_EMAIL) ) {
         return 'email';
@@ -38,4 +44,8 @@ function setCode($num)
         $i++;
     }
     return $code;
+}
+
+function eny($pwd,$salt){
+    return md5($salt . md5($pwd));
 }

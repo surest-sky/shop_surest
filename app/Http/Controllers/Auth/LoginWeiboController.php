@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Traits\LoginWeiboHandler;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class LoginWeiboController extends BaseController
 {
@@ -22,6 +23,7 @@ class LoginWeiboController extends BaseController
     public function login(Request $request)
     {
         $code = $request->code;
+
         if (!$code) {
             return $this->getCode();
         }
@@ -37,7 +39,7 @@ class LoginWeiboController extends BaseController
     {
         $userInfo = $this->getUserInfo($access_token,$uid);
         // 执行登录操作
-        return $this->store($uid,'weibo',$userInfo);
+        return User::kindStore($uid,'weibo',$userInfo);
     }
 
 }

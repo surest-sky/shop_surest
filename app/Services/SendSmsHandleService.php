@@ -26,7 +26,7 @@ class SendSmsHandleService
         ];
 
 
-        $minutes = Carbon::now()->addMinute(10);
+        $minutes = Carbon::now()->addMinute(2);
 
         $key = 'verify_' . str_random(10);
 
@@ -34,10 +34,8 @@ class SendSmsHandleService
             $sendSms = true;
             $code = 1234;
         }else{
-
             // 生成验证码
             $code = $this->setCode($len);
-
             $sendSms = $this->send($account,$type,$code);
 
         }

@@ -30,7 +30,7 @@
     <meta name="	black friday, coupon, coupon codes, coupon theme, coupons, deal news, deals, discounts, ecommerce, friday deals, groupon, promo codes, responsive, shop, store coupons">
     <meta name="robots" content="index, follow">
     <meta name="author" content="CODASTROID">
-    <meta name="csrf_token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @include('layout._css')
 

@@ -4,5 +4,7 @@
 
 - GuzzleHttp: [https://github.com/guzzle/guzzle](https://github.com/guzzle/guzzle)
 
+- new/captcha: [https://github.com/mewebstudio/captcha](https://github.com/mewebstudio/captcha)
+
 ## 使用的是database驱动
 

@@ -16,6 +16,11 @@ class SmsException extends BaseException
 
     protected $code = 500; // 错误代码
 
+    public function __construct($err=[])
+    {
+        parent::__construct($err);
+        $this->report();
+    }
     public function report()
     {
         $logger = new BaseLoghandler(config('log.sms'));

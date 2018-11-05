@@ -20,7 +20,7 @@ class BaseException extends Exception
 
     protected $time;
 
-    public function __construct($errInfo='')
+    public function __construct($errInfo=[])
     {
         if( !is_array($errInfo) || !$errInfo){
             return;

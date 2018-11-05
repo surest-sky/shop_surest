@@ -9,16 +9,18 @@
                     <h3 class="sign-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册</font></font><small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">或</font></font><a href="signin.html" class="color-green"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登录</font></font></a></small></h3>
 
                     <div class="row row-rl-0">
-                        <form class="p-40" action="{{ route('register.store') }}" method="post">
+                        <form class="p-40" action="{{ route('forget.store_pwd') }}" method="post">
+                            {{ csrf_field() }}
                         <div class="col-sm-12 col-md-12 col-left">
 
-                            @if( $error = session('verify') )
+                            @if($status = session('status') )
                                 <div class="alert alert-danger">
                                     <ul>
-                                        <li>{{ $error }}</li>
+                                        <li>{{ $status }}</li>
                                     </ul>
                                 </div>
                             @endif
+
 
                             @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -30,38 +32,16 @@
                                 </div>
                             @endif
 
-                                {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label class="sr-only"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用户名</font></font></label>
-                                    <input type="text"  name="name" class="form-control input-lg" placeholder="用户名" value="{{ old('name') ?? session('name') ?? $name ?? '' }}">
-                                </div>
-                                <div class="form-group">
-                                    <div class="row row-rl-0">
-                                        <div class="col-sm-12 col-md-12">
-                                            <div class="col-sm-6 col-md-6">
-                                                <label class="sr-only"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">手机号码/邮箱</font></font></label>
-                                                <input value="" id="account" type="text" name="model" class="form-control input-lg" placeholder="手机号码/邮箱">
-                                                <input type="hidden" name="key" id="key"  value="{{ old('key') ?? session('key') ?? '' }}">
-                                            </div>
-                                            <div class="col-sm-3 col-md-3">
-                                                <label class="sr-only"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">验证码</font></font></label>
-                                                <input type="text" name="captcha" class="form-control input-lg" placeholder="验证码" value="{{ old('captcha') ?? ''}}">
-                                            </div>
-                                            <div class="col-sm-3  col-md-3">
-                                                <input id="getCode" type="button" class="btn btn-block" value="获取验证码">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="form-group">
                                     <label class="sr-only"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">密码</font></font></label>
                                     <input type="password" name="password" class="form-control input-lg" placeholder="密码">
+                                    <input type="hidden" name="key" value="{{ old($key) ?? $key ?? '' }}">
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">确认密码</font></font></label>
                                     <input type="password" name="password_confirmation" class="form-control input-lg" placeholder="确认密码">
                                 </div>
-                                <button type="submit" class="btn btn-block btn-lg"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册</font></font></button>
+                                <button type="submit" class="btn btn-block btn-lg"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">提交</font></font></button>
 
                         </div>
                         </form>
@@ -98,14 +78,14 @@
                             $.ajax({
                                 async: false,
                                 type : 'POST',
-                                url: '{{ route('register.account')}}',
+                                url: '{{ route('forget.account')}}',
                                 data: {
                                     'account' : account,
                                     'captcha' : captcha
                                 },
                                 success:function (data) {
                                     $('#key').val(data['key']);
-                                    $(this).val('已发送').css({"background" : "#c12d2b"}).attr('disabled',true);
+                                    console.log(data);
                                     _alert('验证码已经发送',true)
                                 },
                                 error:function (data) {
@@ -115,6 +95,8 @@
                                             _alert(msg.captcha[0],false);
                                         }else if( typeof msg.account !== 'undefined' ){
                                             _alert(msg.account[0],false);
+                                        }else{
+                                            _alert('系统错误',false);
                                         }
                                     }else if(data.status == 401) {
                                         _alert(msg,false);

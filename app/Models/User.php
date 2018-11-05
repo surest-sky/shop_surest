@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use \Auth;
+use App\Http\Traits\UserHandlerTrait;
 
 class User extends Authenticatable
 {
+    // 有关于suer处理的相关操作
+    use UserHandlerTrait;
+
     use Notifiable;
+
     const TYPE_WEIBO = 'weibo';
     const TYPE_QQ = 'qq';
     const TYPE_WECHAT = 'weixin';
@@ -23,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','avatar','phone','w_id','q_id','x_id','active'
+        'name', 'email', 'password','avatar','phone','w_id','q_id','x_id','active','salt'
     ];
 
     /**
@@ -36,14 +40,13 @@ class User extends Authenticatable
     ];
 
 
-    public static function getUserInfo($uid,$field)
+    public static function getUserInfo($val,$field)
     {
-        $user = self::where($field,$uid)->first();
+        if( !$field ) {
+            $field = checkParamType($val);
+        }
+        $user = self::where($field,$val)->first();
 
         return $user;
     }
-
-
-
-
 }
