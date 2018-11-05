@@ -127,12 +127,6 @@
                         })
                     }
                 });
-
-                {{--axios.post('{{ route('register.account')}}' , {--}}
-                //     'account' : account,
-                {{--}).then(function (response) {--}}
-                    {{--console.log(response.data);--}}
-                {{--})--}}
             })
 
 

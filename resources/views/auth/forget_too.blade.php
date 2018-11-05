@@ -85,6 +85,7 @@
                                 },
                                 success:function (data) {
                                     $('#key').val(data['key']);
+                                    $(this).val('已发送').css({"background" : "#c12d2b"}).attr('disabled',true);
                                     console.log(data);
                                     _alert('验证码已经发送',true)
                                 },
