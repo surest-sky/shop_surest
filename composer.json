@@ -13,7 +13,8 @@
         "mews/captcha": "^2.2",
         "monolog/monolog": "^1.23",
         "overtrue/easy-sms": "^1.1",
-        "overtrue/laravel-lang": "~3.0"
+        "overtrue/laravel-lang": "~3.0",
+        "spatie/laravel-permission": "^2.23"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

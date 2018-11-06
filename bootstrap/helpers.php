@@ -49,3 +49,10 @@ function setCode($num)
 function eny($pwd,$salt){
     return md5($salt . md5($pwd));
 }
+
+function setResponse($msg,$status){
+    $res = config('response');
+    $res['msg'] = $msg;
+    $res['status'] = $status;
+    return $res;
+}

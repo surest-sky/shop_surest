@@ -6,5 +6,7 @@
 
 - new/captcha: [https://github.com/mewebstudio/captcha](https://github.com/mewebstudio/captcha)
 
-## 使用的是database驱动
+- spatie/laravel-permission [https://github.com/spatie/laravel-permission](https://github.com/spatie/laravel-permission)
+
+
 
