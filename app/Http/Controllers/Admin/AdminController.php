@@ -13,6 +13,8 @@ use App\Models\Role;
 use App\Models\Permission;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\RoleRequest;
+use App\Exceptions\SysException;
 
 class AdminController extends BaseController
 {
@@ -39,7 +41,7 @@ class AdminController extends BaseController
         return view('admin.admins.permission',compact('permissions'));
     }
 
-    public function roleEdit(Role $role,Request $request)
+    public function roleEditOrAdd(Role $role,RoleRequest $request)
     {
         $id = $request->id;
         // 当id 存在的时候表明要编辑更新
@@ -49,11 +51,55 @@ class AdminController extends BaseController
             $ids = $permissions->intersect($role_permissions)->pluck('id')->toArray(); // 两者交集
             return view('admin.admins.role_edit',compact('permissions','role','ids'));
         }
+        // 添加操作
+
     }
 
-    public function roleUpdat(Request $request)
+    public function roleStore(RoleRequest $request)
     {
+        $id = $request->id;
 
+        // id存在的时候表明更新
+        if( $id ) {
+            try{
+                \DB::BeginTransaction();
+                $role = Role::findById($id);
+                $p_id = $role->permissions()->pluck('id')->all(); // 原表中的权限
+                $ids = self::setIds($request->ids,$role->id);
+                \DB::table(config('permission.table_names.role_has_permissions'))->whereIn('role_id',$p_id)->delete();
+                \DB::table(config('permission.table_names.role_has_permissions'))->insert($ids);
+                $role->name = $request->name;
+                $role->description = $request->description;
+
+                $role->save();
+
+                \DB::commit();
+                dd('添加成功');
+
+            }catch (\Exception $e){
+                \DB::rollBack();
+                throw new SysException([
+                    'message' => '更新角色出现错误 : '. $e->getMessage()
+                ]);
+            }
+
+        }
+    }
+
+    /**
+     * 组装存入中间表的数据
+     * @param $r_id
+     */
+    public static function setIds($ids,$r_id)
+    {
+        $arr = [];
+        foreach ($ids as $id){
+            $temp['permission_id'] = $id;
+            $temp['role_id'] = $r_id;
+            array_push($arr,$temp);
+            unset($temp);
+        }
+        return $arr;
     }
 
 }

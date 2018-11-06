@@ -13,3 +13,4 @@ class Role extends RoleModel
         return $role->permissions;
     }
 }
+
