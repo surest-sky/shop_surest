@@ -41,18 +41,17 @@ class AdminController extends BaseController
         return view('admin.admins.permission',compact('permissions'));
     }
 
-    public function roleEditOrAdd(Role $role,RoleRequest $request)
+    public function roleEditOrAdd(Role $role,Request $request)
     {
         $id = $request->id;
+        $permissions = Permission::all();
         // 当id 存在的时候表明要编辑更新
-        if( $role = Role::findById($id) ){
+        if( $id && $role = Role::findById($id) ){
             $role_permissions = $role->permissions;
-            $permissions = Permission::all();
             $ids = $permissions->intersect($role_permissions)->pluck('id')->toArray(); // 两者交集
             return view('admin.admins.role_edit',compact('permissions','role','ids'));
         }
-        // 添加操作
-
+            return view('admin.admins.role_edit',compact('permissions'));
     }
 
     public function roleStore(RoleRequest $request)
@@ -70,11 +69,8 @@ class AdminController extends BaseController
                 \DB::table(config('permission.table_names.role_has_permissions'))->insert($ids);
                 $role->name = $request->name;
                 $role->description = $request->description;
-
                 $role->save();
-
                 \DB::commit();
-                dd('添加成功');
 
             }catch (\Exception $e){
                 \DB::rollBack();
@@ -82,8 +78,18 @@ class AdminController extends BaseController
                     'message' => '更新角色出现错误 : '. $e->getMessage()
                 ]);
             }
-
         }
+
+        // 添加操作
+        $name = $request->name;
+        $description = $request->description;
+        $role = Role::create(compact('name','description'));
+
+        $ids = self::setIds($request->ids,$role->id);
+        \DB::table(config('permission.table_names.role_has_permissions'))->insert($ids);
+        session()->flash('status','添加成功');
+
+        return response()->view('admin.error.title',['msg'=>'添加成功,请刷新']);
     }
 
     /**
@@ -101,5 +107,45 @@ class AdminController extends BaseController
         }
         return $arr;
     }
+
+    public function roleDelete(Role $role,Request $request)
+    {
+        $id = $request->id;
+        if( $id ){
+            if( $role = Role::find($id) ){
+                $role->delete();
+                return response()->json([
+                    'message' => '删除成功'
+                ],200);
+            }
+        }
+
+        return response()->json([
+            'message' => '未找到'
+        ],404);
+    }
+
+
+    /***--------权限管理模块------------*/
+    public function PermissionEditOrAdd()
+    {
+        return view('admin.admins.permission_edit');
+    }
+
+    public function PermissionStore(PermissionRequest $request)
+    {
+        $id = $request->id;
+
+        // 编辑操作
+        if( $id ) {
+            if( $permission = Permission::find($id) ) {
+                $permission->name = $request->name;
+                $permission->description = $request->description;
+                $permission->route = $request->route;
+            }
+        }
+    }
+
+
 
 }

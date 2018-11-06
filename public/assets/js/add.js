@@ -13,3 +13,7 @@ function _alert($param,$bol=true) {
     swal($param, "",$str);
     return ;
 }
+
+function dd(a) {
+    console.log(a);
+}

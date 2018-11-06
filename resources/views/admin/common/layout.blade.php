@@ -11,12 +11,15 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/x-admin.css') }}" media="all">
 </head>
 <body>
 @yield('body')
 <script src="{{ asset('assets/admin/lib/layui/layui.js') }}" charset="utf-8"></script>
 <script src="{{ asset('assets/admin/js/x-layui.js') }}" charset="utf-8"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" src="{{ asset('assets/js/add.js') }}"></script>
 @yield('script')
 </body>
 </html>

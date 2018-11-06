@@ -66,9 +66,10 @@ Route::namespace('Admin')->group(function () {
                      * 权限相关
                      */
                     Route::get('/admins/list', 'AdminController@list')->name('admins.list');
-                    Route::get('/admins/role', 'AdminController@role')->name('admins.role');
                     Route::get('/admins/role/store/{id?}', 'AdminController@roleEditOrAdd')->name('admins.role.edit_or_add');
+                    Route::get('/admins/role', 'AdminController@role')->name('admins.role');
                     Route::post('/admins/role/store', 'AdminController@roleStore')->name('admins.role.store');
+                    Route::delete('/admins/role','AdminController@roleDelete')->name('admins.role.delete');
                     Route::get('/admins/permission', 'AdminController@permission')->name('admins.permission');
                     Route::get('/admins/permission', 'AdminController@permission')->name('admins.permission');
                 });

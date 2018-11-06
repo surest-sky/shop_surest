@@ -28,16 +28,17 @@ class RoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','between:2,10','roles|unique'],
+            'name' => ['required','between:2,10','unique:roles'],
             'id' => [new IdIsExist],
             'ids' => ['required','array',new IdIsRequired],
-            'description' => ['required','between:2,10']
         ];
     }
 
     public function attributes()
     {
         return [
+            'name' => '角色名',
+            'ids' => '权限',
             'description' => '描述'
         ];
     }
