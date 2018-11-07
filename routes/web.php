@@ -99,6 +99,15 @@ Route::namespace('Admin')->group(function () {
                     Route::post('/users/store', 'UserController@create')->name('user.create');
                     Route::delete('/users','UserController@delete')->name('user.delete');
 
+                    /**
+                     * 分类管理
+                     */
+                    Route::get('/category', 'CategoryController@list')->name('admins.category');
+                    Route::get('/category/store/{id?}', 'CategoryController@addOrEdit')->name('category.add_or_edit');
+                    Route::put('/category/store/{id}', 'CategoryController@update')->name('category.update');
+                    Route::post('/category/store', 'CategoryController@create')->name('category.create');
+                    Route::delete('/category','CategoryController@delete')->name('category.delete');
+
                 });
         });
 

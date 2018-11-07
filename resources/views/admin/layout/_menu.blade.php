@@ -98,7 +98,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd class="">
-                        <a href="javascript:;" _href="./category.html">
+                        <a href="javascript:;" _href="{{ route('admin.admins.category') }}">
                             <cite>分类列表</cite>
                         </a>
                     </dd>
@@ -132,28 +132,8 @@
                         </a>
                     </dd>
                     <dd class="">
-                        <a href="javascript:;" _href="./member-del.html">
-                            <cite>删除会员</cite>
-                        </a>
-                    </dd>
-                    <dd class="">
-                        <a href="javascript:;" _href="./member-level.html">
-                            <cite>等级管理</cite>
-                        </a>
-                    </dd>
-                    <dd class="">
-                        <a href="javascript:;" _href="./member-kiss.html">
-                            <cite>积分管理</cite>
-                        </a>
-                    </dd>
-                    <dd class="">
                         <a href="javascript:;" _href="./member-view.html">
                             <cite>浏览记录</cite>
-                        </a>
-                    </dd>
-                    <dd class="">
-                        <a href="javascript:;" _href="./member-view.html">
-                            <cite>分享记录</cite>
                         </a>
                     </dd>
                 </dl>
