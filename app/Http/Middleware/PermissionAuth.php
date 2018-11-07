@@ -18,17 +18,20 @@ class PermissionAuth
     public function handle($request, Closure $next)
     {
         $route = Route::current()->uri();
+
         /**
          * 校验当前路由是否加入到权限中
          */
-        if ( $permission = Permission::where('route',$route)->first() ) {
-            if( !\Auth::guard('admin')->user()->hasPermissionTo($permission->name) ){
-                if ($request->ajax() || $request->wantsJson()) {
-                    return response(setResponse('权限不足',4003), 403);
-                } else {
-                    return response()->view('admin.error.403');
+        if( \Auth::guard('admin')->user()->name != config('main.admin') ){
+            if ( $permission = Permission::where('route',$route)->first() ) {
+                    if( !\Auth::guard('admin')->user()->hasPermissionTo($permission->name) ){
+                        if ($request->ajax() || $request->wantsJson()) {
+                            return response(setResponse('权限不足',4003), 403);
+                        } else {
+                            return response()->view('admin.error.403');
+                        }
+                    }
                 }
-            }
         }
         return $next($request);
     }

@@ -13,13 +13,13 @@ class Admin extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name' , 'password'
+        'name' , 'password', 'salt','actived','avatar'
     ];
 
     public $guard_name  = 'admin';
 
     protected $hidden = [
-        'password' , 'remember_token'
+        'password' , 'remember_token','salt'
     ];
 
     const total = 5;
@@ -87,4 +87,11 @@ class Admin extends Authenticatable
         }
         return $value;
     }
+
+    public function getSimpleRolesAttribute()
+    {
+        $roles = $this->getRoleNames();
+        return $roles;
+    }
+
 }

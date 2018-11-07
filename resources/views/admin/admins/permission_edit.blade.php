@@ -3,7 +3,7 @@
     
     <body>
         <div class="x-body">
-            <form action="{{ route('admin.admins.role.store') }}" method="post" class="layui-form layui-form-pane">
+            <form action="{{ route('admin.admins.permission.store') }}" method="post" class="layui-form layui-form-pane">
 
                 {{ csrf_field() }}
 
@@ -20,7 +20,7 @@
                         <span class="x-red">*</span>权限名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="name" name="name" required="" lay-verify="required" value="{{ $permission->name ?? ''}}" autocomplete="off" class="layui-input">
+                        <input type="text" id="name" name="name" required="" lay-verify="required" value="{{  old('name') ?? $permission->name?? ''}}" autocomplete="off" class="layui-input">
                         <input type="hidden" name="id" value="{{ $permission->id ?? ''}}">
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                         <span class="x-red">*</span>Http - Url
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="name" name="name" required="" lay-verify="required" value="{{ $permission->name ?? ''}}" autocomplete="off" class="layui-input">
+                        <input type="text" id="name" name="route" required="" lay-verify="required" value="{{ old('route') ?? $permission->route ?? ''}}" autocomplete="off" class="layui-input" placeholder="模块/控制器/位置">
                         <input type="hidden" name="id" value="{{ $permission->id ?? ''}}">
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         描述
                     </label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入内容" id="desc" name="description" class="layui-textarea">{{ $permission->description ?? '' }}</textarea>
+                        <textarea placeholder="请输入内容" id="desc" name="description" class="layui-textarea">{{ old('description') ?? $permission->description ?? '' }}</textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">

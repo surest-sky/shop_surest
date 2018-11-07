@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\Registered;
 use App\Models\User;
+use App\Exceptions\SysException;
 
 trait UserHandlerTrait
 {
@@ -66,7 +67,7 @@ trait UserHandlerTrait
                 'name' => $userInfo['name'],
                 $field => $userInfo['id'],
                 'avatar' => $userInfo['avatar_hd'] ?? 'https://laravel-china.org/users/5758',
-                'active' => '1',
+                'actived' => '1',
             ];
 
             $user = User::create($arr);

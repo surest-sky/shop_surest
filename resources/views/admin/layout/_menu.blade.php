@@ -127,7 +127,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd class="">
-                        <a href="javascript:;" _href="member-list.html">
+                        <a href="javascript:;" _href="{{ route('admin.admins.users') }}">
                             <cite>会员列表</cite>
                         </a>
                     </dd>
@@ -164,7 +164,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd class="">
-                        <a href="javascript:;" _href="{{ route('admin.admins.list') }}">
+                        <a href="javascript:;" _href="{{ route('admin.admins') }}">
                             <cite>管理员列表</cite>
                         </a>
                     </dd>

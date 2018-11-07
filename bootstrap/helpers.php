@@ -56,3 +56,13 @@ function setResponse($msg,$status){
     $res['status'] = $status;
     return $res;
 }
+
+function getRouteList(){
+    $app = app();
+    $routes = $app->routes->getRoutes();
+    $list = [];
+    foreach ($routes as $k=>$value){
+        array_push($list,$value->uri);
+    }
+    return $list;
+}

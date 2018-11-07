@@ -9,8 +9,7 @@
                 <a href="javascript:;">{{ $user->name }}</a>
                 <dl class="layui-nav-child"> <!-- 二级菜单 -->
                     <dd><a href="">个人信息</a></dd>
-                    <dd><a href="">切换帐号</a></dd>
-                    <dd><a href="javascript:;" onclick="document.getElementById('logout').submit()">退出</a></dd>
+                    <dd><a href="javascript:;" onclick="document.getElementById('logout').submit()">切换帐号</a></dd>
                     <form id="logout" action="{{ route('admin.logout') }}" method="post">
                         {{ csrf_field() }}
                     </form>

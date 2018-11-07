@@ -63,15 +63,42 @@ Route::namespace('Admin')->group(function () {
                     Route::get('/welcome', 'IndexController@welcome')->name('welcome');;
 
                     /**
-                     * 权限相关
+                     * 角色相关
                      */
-                    Route::get('/admins/list', 'AdminController@list')->name('admins.list');
                     Route::get('/admins/role/store/{id?}', 'AdminController@roleEditOrAdd')->name('admins.role.edit_or_add');
                     Route::get('/admins/role', 'AdminController@role')->name('admins.role');
                     Route::post('/admins/role/store', 'AdminController@roleStore')->name('admins.role.store');
                     Route::delete('/admins/role','AdminController@roleDelete')->name('admins.role.delete');
+
+                    /**
+                     * 权限相关
+                     */
                     Route::get('/admins/permission', 'AdminController@permission')->name('admins.permission');
+                    Route::get('/admins/permission/store/{id?}', 'AdminController@permissionEditOrAdd')->name('admins.permission.edit_or_add');
+                    Route::post('/admins/permission/store', 'AdminController@permissionStore')->name('admins.permission.store');
                     Route::get('/admins/permission', 'AdminController@permission')->name('admins.permission');
+                    Route::delete('/admins/permission','AdminController@permissionDelete')->name('admins.permission.delete');
+
+
+                    /**
+                     * 管理员管理
+                     */
+                    Route::get('/admins', 'AdminController@admins')->name('admins.admins');
+                    Route::get('/admins/store/{id?}', 'AdminController@adminsEditOrAdd')->name('admins.edit_or_add');
+                    Route::post('/admins/store', 'AdminController@adminsStore')->name('admins.store');
+                    Route::get('/admins', 'AdminController@admins')->name('admins');
+                    Route::delete('/admins','AdminController@adminsDelete')->name('admins.delete');
+                    Route::put('/admins/active','AdminController@adminsActived')->name('admins.active');
+
+                    /**
+                     * 用户管理
+                     */
+                    Route::get('/users', 'UserController@list')->name('admins.users');
+                    Route::get('/users/store/{id?}', 'UserController@addOrEdit')->name('user.add_or_edit');
+                    Route::put('/users/store/{id}', 'UserController@update')->name('user.update');
+                    Route::post('/users/store', 'UserController@create')->name('user.create');
+                    Route::delete('/users','UserController@delete')->name('user.delete');
+
                 });
         });
 

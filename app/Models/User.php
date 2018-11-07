@@ -49,4 +49,15 @@ class User extends Authenticatable
 
         return $user;
     }
+
+    /**
+     * 获取所有的用户信息
+     * @param $bol boolean 是否倒叙
+     */
+    public static function getUserAll($bol = true)
+    {
+        $type = $bol ? 'DESC' : 'ASC';
+        $users = Self::query()->orderBy('created_at','DESC')->get();
+        return $users;
+    }
 }

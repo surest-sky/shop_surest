@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Rules;
+namespace App\Rules\User;
 
 use Illuminate\Contracts\Validation\Rule;
-use App\Models\Role;
+use App\Models\User;
 
-class IdIsExist implements Rule
+class IsUserRule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -14,7 +14,7 @@ class IdIsExist implements Rule
      */
     public function __construct()
     {
-
+        //
     }
 
     /**
@@ -26,12 +26,15 @@ class IdIsExist implements Rule
      */
     public function passes($attribute, $value)
     {
-        if( $value ) {
-            if( !Role::findById($value) ) {
-                return false;
+        try{
+            if( User::find($value) ){
+                return true;
             }
+        }catch (\Exception $e){
+            return false;
         }
-        return true;
+
+        return false;
     }
 
     /**
@@ -41,6 +44,6 @@ class IdIsExist implements Rule
      */
     public function message()
     {
-        return '您所要更新的角色不存在';
+        return '用户不存在';
     }
 }

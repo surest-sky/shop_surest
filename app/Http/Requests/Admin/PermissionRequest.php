@@ -3,12 +3,9 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Rule;
-use App\Rules\IdIsRequired;
-use App\Rules\IdIsExist;
+use App\Rules\IsRoute;
 
-
-class RoleRequest extends FormRequest
+class PermissionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,19 +25,16 @@ class RoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => [new IdIsExist],
-            'name' => ['required','between:2,10'],
-            'ids' => ['required','array',new IdIsRequired],
+            'name' => ['required','between:2,15'],
+            'description' => ['required','between:2,15'],
+            'route' => ['required',new IsRoute]
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => '角色名',
-            'ids' => '权限',
-            'description' => '描述'
+            'route' => '路由'
         ];
     }
-
 }

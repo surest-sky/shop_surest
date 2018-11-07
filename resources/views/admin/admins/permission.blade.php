@@ -11,7 +11,8 @@
         </div>
         <div class="x-body">
             
-            <xblock><button class="layui-btn" onclick="role_add('添加用户','role-add.html','900','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            <xblock><button class="layui-btn" onclick="role_add('添加权限','{{ route('admin.admins.permission.edit_or_add') }}','900','500')">
+                    <i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据: {{ $permissions->count() }} 条</span></xblock>
             <table class="layui-table">
                 <thead>
                     <tr>
@@ -54,11 +55,11 @@
                                {{ $permission->created_at ?? '' }}
                            </td>
                            <td class="td-manage">
-                               <a title="编辑" href="javascript:;" onclick="role_edit('编辑','role-edit.html','4','','510')"
+                               <a title="编辑" href="javascript:;" onclick="role_edit('编辑','{{ route('admin.admins.permission.edit_or_add',['id' => $permission->id]) }}','4','','510')"
                                   class="ml-5" style="text-decoration:none">
                                    <i class="layui-icon">&#xe642;</i>
                                </a>
-                               <a title="删除" href="javascript:;" onclick="role_del(this,'1')"
+                               <a title="删除" href="javascript:;" onclick="role_del(this,'{{ $permission->id }}')"
                                   style="text-decoration:none">
                                    <i class="layui-icon">&#xe640;</i>
                                </a>
@@ -85,13 +86,7 @@
             //以上模块根据需要引入
         });
 
-        //批量删除提交
-        function delAll () {
-            layer.confirm('确认要删除吗？',function(index){
-                //捉到所有被选中的，发异步进行删除
-                layer.msg('删除成功', {icon: 1});
-            });
-        }
+
         /*添加*/
         function role_add(title,url,w,h){
             x_admin_show(title,url,w,h);
@@ -102,12 +97,33 @@
         function role_edit (title,url,id,w,h) {
             x_admin_show(title,url,w,h);
         }
+
         /*删除*/
         function role_del(obj,id){
             layer.confirm('确认要删除吗？',function(index){
                 //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!',{icon:1,time:1000});
+                $.ajax({
+                    type: 'delete',
+                    url: '{{ route('admin.admins.permission.delete') }}',
+                    dataType: 'json',
+                    data: {
+                        _method: 'delete',
+                        id : id,
+
+                    },
+                    success: function (data,text,response) {
+                        if( response.status == 200 ){
+                            $(obj).parents("tr").remove();
+                            layer.msg('已删除!',{icon:1,time:1000});
+                        }else{
+                            layer.msg('系统错误!',{icon:1,time:1000});
+                        }
+                    },
+                    error: function (error) {
+                        layer.msg('系统错误!',{icon:1,time:1000});
+                    }
+                });
+
             });
         }
     </script>

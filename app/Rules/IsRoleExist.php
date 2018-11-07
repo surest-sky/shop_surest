@@ -5,7 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use App\Models\Role;
 
-class IdIsExist implements Rule
+class IsRoleExist implements Rule
 {
     /**
      * Create a new rule instance.
@@ -14,7 +14,7 @@ class IdIsExist implements Rule
      */
     public function __construct()
     {
-
+        //
     }
 
     /**
@@ -26,12 +26,10 @@ class IdIsExist implements Rule
      */
     public function passes($attribute, $value)
     {
-        if( $value ) {
-            if( !Role::findById($value) ) {
-                return false;
-            }
+        if( Role::where('name',$value)->count() ) {
+            return true;
         }
-        return true;
+            return false;
     }
 
     /**
@@ -41,6 +39,6 @@ class IdIsExist implements Rule
      */
     public function message()
     {
-        return '您所要更新的角色不存在';
+        return 'The validation error message.';
     }
 }

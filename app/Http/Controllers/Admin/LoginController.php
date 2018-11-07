@@ -41,16 +41,19 @@ class LoginController extends BaseController
 
     public function store(AdminLoginRequest $request)
     {
-//        $user = Admin::where('name',$request->name)->orWhere('password',$request->password)->first();
+
         $user = Admin::where('name',$request->name)->first();
 
         if( $user ) {
-            $password = eny($request->password,$user->salt);
-            if( $password == $user->password ) {
-                // 登录成功
-                \Auth::guard('admin')->login($user);
-
-//                dd(\Auth::guard('admin')->user());
+            if( $user->name == config('main.admin') || $user->actived) {
+                $password = eny($request->password, $user->salt);
+                if ($password == $user->password) {
+                    // 登录成功
+                    \Auth::guard('admin')->login($user);
+                }
+            }else{
+                session()->flash('status','您的账号已经被封停');
+                return redirect()->back();
             }
         }
         session()->flash('status','用户不存在或者密码错误');
