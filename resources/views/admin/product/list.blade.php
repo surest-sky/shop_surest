@@ -9,7 +9,7 @@
         <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body">
-        <xblock><button class="layui-btn" onclick="product_add('添加商品','{{ route('admin.product.add_or_edit') }}','800','500')">
+        <xblock><button class="layui-btn" onclick="product_add('添加商品','{{ route('admin.product.add_or_edit') }}')">
                 <i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：{{ $products->count() }} 条</span></xblock>
         <table class="layui-table">
             <thead>
@@ -92,18 +92,18 @@
                     </td>
                     <td class="td-manage">
                         @if($product->actived)
-                            <a style="text-decoration:none" onclick="admin_stop(this,'{{ $product->id }}','0')" href="javascript:;" title="停用">
+                            <a style="text-decoration:none" onclick="product_stop(this,'{{ $product->id }}','0')" href="javascript:;" title="停用">
                                 <i class="layui-icon">&#xe601;</i>
                             </a>
                         @else
-                            <a style="text-decoration:none" onClick="admin_start(this,'{{ $product->id }}','1')" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>
+                            <a style="text-decoration:none" onClick="product_start(this,'{{ $product->id }}','1')" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>
                         @endif
 
-                        <a title="编辑" href="javascript:;" onclick="admin_edit('编辑','{{{ route('admin.product.add_or_edit',['id' => $product->id]) }}}','4','','510')"
+                        <a title="编辑" href="javascript:;" onclick="product_add('编辑','{{{ route('admin.product.add_or_edit',['id' => $product->id]) }}}')"
                            class="ml-5" style="text-decoration:none">
                             <i class="layui-icon">&#xe642;</i>
                         </a>
-                        <a title="删除" href="javascript:;" onclick="admin_del(this,'{{ $product->id }}')"
+                        <a title="删除" href="javascript:;" onclick="product_del(this,'{{ $product->id }}')"
                            style="text-decoration:none">
                             <i class="layui-icon">&#xe640;</i>
                         </a>
@@ -113,7 +113,9 @@
 
             </tbody>
         </table>
-        {{--@include('admin.common._page',['datas'=>$products , 'datasAll' => $productsAll])--}}
+
+        @include('admin.common._page',['datas'=>$products , 'datasAll' => $productsAll])
+
     </div>
 @stop
 
@@ -126,24 +128,29 @@
             laydate = layui.laydate;//日期插件
             lement = layui.element();//面包导航
             layer = layui.layer;//弹出层
-
             //以上模块根据需要引入
 
         });
 
         /*添加*/
-        function product_add(title,url,w,h){
-            x_admin_show(title,url,w,h);
+        function product_add(title,url){
+            var index = layer.open({
+                type: 2,
+                content: url,
+                area: ['320px', '800px'],
+                maxmin: true
+            });
+            layer.full(index);
         }
 
         /*停用*/
-        function admin_stop(obj,id,actived){
+        function product_stop(obj,id,actived){
             layer.confirm('确认要停用吗？',function(index){
                 if( !parseInt(admin_active(id,actived)) ){
                     return ;
                 }
                 //发异步把用户状态进行更改
-                $(obj).parents("tr").find(".td-manage").prepend(`<a style="text-decoration:none" onClick="admin_start(this,${id},\'1\')" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>`);
+                $(obj).parents("tr").find(".td-manage").prepend(`<a style="text-decoration:none" onClick="product_start(this,${id},\'1\')" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>`);
                 $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>');
                 $(obj).remove();
                 layer.msg('已停用!',{icon: 5,time:1000});
@@ -151,24 +158,24 @@
         }
 
         /*启用*/
-        function admin_start(obj,id,actived){
+        function product_start(obj,id,actived){
             layer.confirm('确认要启用吗？',function(index){
                 //发异步把用户状态进行更改
                 if( !parseInt(admin_active(id,actived)) ){
                     return ;
                 }
-                $(obj).parents("tr").find(".td-manage").prepend(`<a style="text-decoration:none" onClick="admin_stop(this,${id},\'0\')" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>`);
+                $(obj).parents("tr").find(".td-manage").prepend(`<a style="text-decoration:none" onClick="product_stop(this,${id},\'0\')" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>`);
                 $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
                 $(obj).remove();
                 layer.msg('已启用!',{icon: 6,time:1000});
             });
         }
         //编辑
-        function admin_edit (title,url,id,w,h) {
+        function product_edit (title,url,w,h) {
             x_admin_show(title,url,w,h);
         }
         /*删除*/
-        function admin_del(obj,id) {
+        function product_del(obj,id) {
             layer.confirm('确认要删除吗？', function (index) {
                 //发异步删除数据
                 $.ajax({

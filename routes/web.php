@@ -116,6 +116,7 @@ Route::namespace('Admin')->group(function () {
                     Route::put('/product/store', 'ProductController@update')->name('product.update');
                     Route::post('/product/store', 'ProductController@create')->name('product.create');
                     Route::delete('/product','ProductController@delete')->name('product.delete');
+                    Route::post('/upload','ProductController@upload')->name('product.upload');
 
                 });
         });

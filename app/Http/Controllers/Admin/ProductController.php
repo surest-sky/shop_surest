@@ -10,15 +10,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 
 class ProductController
 {
     public function list()
     {
-        $products = Product::with(['category'])->get();
+        $products = Product::getProductsAll();
+        $productsAll = Product::getProductsAll(false);
 
-        return view('admin.product.list',compact('products'));
+        return view('admin.product.list',compact('products','productsAll'));
     }
 
     // 添加用户
@@ -29,7 +31,20 @@ class ProductController
         if( $id ) {
             $product = Product::find($id);
         }
-//        return view('admin.product.add_edit',compact('product','id'));
+        $categoies = Category::all();
+        return view('admin.product.add_edit',compact('product','id','categoies'));
 
+    }
+
+    public function upload()
+    {
+        return response()->json([
+            'code' => '0',
+            'msg' => '失败',
+            'data' => [
+                'src' => 'https://ss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/pacific/1147952599.jpg',
+                'title' => 'upload'
+            ]
+        ],200);
     }
 }
