@@ -49,7 +49,7 @@ class LoginController extends BaseController
                 $password = eny($request->password, $user->salt);
                 if ($password == $user->password) {
                     // 登录成功
-                    \Auth::guard('admin')->login($user);
+                    \Auth::guard('admin')->login($user,true);
                 }
             }else{
                 session()->flash('status','您的账号已经被封停');

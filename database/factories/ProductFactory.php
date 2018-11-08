@@ -1,29 +1,22 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Models\Category;
 
 $factory->define(App\Models\Product::class, function (Faker $faker) {
+    $cateIds = Category::all()->pluck('id')->toArray();
 
-    $image = $faker->randomElement([
-        "https://lccdn.phphub.org/uploads/images/201806/01/5320/7kG1HekGK6.jpg",
-        "https://lccdn.phphub.org/uploads/images/201806/01/5320/1B3n0ATKrn.jpg",
-        "https://lccdn.phphub.org/uploads/images/201806/01/5320/r3BNRe4zXG.jpg",
-        "https://lccdn.phphub.org/uploads/images/201806/01/5320/C0bVuKB2nt.jpg",
-        "https://lccdn.phphub.org/uploads/images/201806/01/5320/82Wf2sg8gM.jpg",
-        "https://lccdn.phphub.org/uploads/images/201806/01/5320/nIvBAQO5Pj.jpg",
-        "https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg",
-        "https://lccdn.phphub.org/uploads/images/201806/01/5320/uYEHCJ1oRp.jpg",
-        "https://lccdn.phphub.org/uploads/images/201806/01/5320/2JMRaFwRpo.jpg",
-        "https://lccdn.phphub.org/uploads/images/201806/01/5320/pa7DrV43Mw.jpg",
-    ]);
-
+    $price = $faker->numberBetween(100,9999);
+    $sale = min($price,$faker->numberBetween(100,9999));
     return [
-        'name' => $faker->word,
+        'name' => $faker->name,
         'description' => $faker->sentence,
         'rating' => $faker->numberBetween(0,5),
         'sold_count' => 0,
         'review_count' => 0,
-        'price' => 0,
+        'price' => $price,
+        'on_sale'=> $sale,
+        'category_id'=>$faker->randomElement($cateIds)
     ];
 });
 

@@ -102,11 +102,20 @@ Route::namespace('Admin')->group(function () {
                     /**
                      * 分类管理
                      */
-                    Route::get('/category', 'CategoryController@list')->name('admins.category');
+                    Route::get('/category', 'CategoryController@list')->name('category');
                     Route::get('/category/store/{id?}', 'CategoryController@addOrEdit')->name('category.add_or_edit');
                     Route::put('/category/store', 'CategoryController@update')->name('category.update');
                     Route::post('/category/store', 'CategoryController@create')->name('category.create');
                     Route::delete('/category','CategoryController@delete')->name('category.delete');
+
+                    /**
+                     * 商品管理
+                     */
+                    Route::get('/product', 'ProductController@list')->name('product');
+                    Route::get('/product/store/{id?}', 'ProductController@addOrEdit')->name('product.add_or_edit');
+                    Route::put('/product/store', 'ProductController@update')->name('product.update');
+                    Route::post('/product/store', 'ProductController@create')->name('product.create');
+                    Route::delete('/product','ProductController@delete')->name('product.delete');
 
                 });
         });

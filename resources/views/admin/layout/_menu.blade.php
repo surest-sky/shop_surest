@@ -29,8 +29,8 @@
                 <dl class="layui-nav-child">
                     <dd class="">
                     <dd class="">
-                        <a href="javascript:;" _href="./welcome.html">
-                            <cite>产品列表（待开发）</cite>
+                        <a href="javascript:;" _href="{{ route('admin.product') }}">
+                            <cite>商品管理</cite>
                         </a>
                     </dd>
                     </dd>
@@ -98,7 +98,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd class="">
-                        <a href="javascript:;" _href="{{ route('admin.admins.category') }}">
+                        <a href="javascript:;" _href="{{ route('admin.category') }}">
                             <cite>分类列表</cite>
                         </a>
                     </dd>

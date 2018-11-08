@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Models\ProductSku;
 
 $factory->define(App\Models\Product::class, function (Faker $faker) {
     $image = $faker->randomElement([
@@ -15,4 +16,5 @@ $factory->define(App\Models\Product::class, function (Faker $faker) {
         "https://lccdn.phphub.org/uploads/images/201806/01/5320/2JMRaFwRpo.jpg",
         "https://lccdn.phphub.org/uploads/images/201806/01/5320/pa7DrV43Mw.jpg",
     ]);
+
 });

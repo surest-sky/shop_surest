@@ -17,5 +17,6 @@ $factory->define(App\Models\Admin::class, function (Faker $faker) {
         'password' => $password,
         'salt' => $code,
         'remember_token' => str_random(10),
+        'actived' => 1
     ];
 });
