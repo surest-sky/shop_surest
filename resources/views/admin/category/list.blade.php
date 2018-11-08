@@ -10,13 +10,16 @@
     </div>
     <div class="x-body">
         <form class="layui-form x-center" method="post" action="{{ route('admin.category.create') }}" style="width:50%" >
+            @if( $status = session('status') )
+                <button class="layui-btn layui-btn-danger layui-btn-radius">{{ $status }}</button>
+            @endif
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
                     <button class="layui-btn layui-btn-danger layui-btn-radius">{{ $error }}</button>
                 @endforeach
             @endif
 
-            @method('put')
+            @method('post')
             @csrf
             <div class="layui-form-pane" style="margin-top: 15px;">
                 <div class="layui-form-item">
@@ -58,7 +61,7 @@
                     <a title="编辑" href="javascript:;" onclick="cate_edit('编辑','{{ route('admin.category.add_or_edit',['id'=>$category->id]) }}','4','','510')" class="ml-5" style="text-decoration:none">
                         <i class="layui-icon"></i>
                     </a>
-                    <a title="删除" href="javascript:;" onclick="cate_del(this,'{{ $category->id }}')" style="text-decoration:none">
+                    <a title="删除" href="javascript:;" onclick="category_del(this,'{{ $category->id }}')" style="text-decoration:none">
                         <i class="layui-icon"></i>
                     </a>
                 </td>
@@ -86,12 +89,12 @@
 
 
         /*删除*/
-        function admin_del(obj,id) {
+        function category_del(obj,id) {
             layer.confirm('确认要删除吗？', function (index) {
                 //发异步删除数据
                 $.ajax({
                     type: 'delete',
-                    url: '{{ route('admin.user.delete') }}',
+                    url: '{{ route('admin.category.delete') }}',
                     dataType: 'json',
                     data: {
                         _method: 'delete',

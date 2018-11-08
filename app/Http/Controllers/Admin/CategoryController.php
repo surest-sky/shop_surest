@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\Admin\CategoryCreateRequest;
+use App\Http\Requests\Admin\CategoryUpdateRequest;
+use App\Services\CommonService;
+use App\Exceptions\ModelException;
 
 class CategoryController extends Controller
 {
@@ -19,12 +22,12 @@ class CategoryController extends Controller
     // 添加用户
     public function addOrEdit(Request $request)
     {
-        $user = null;
+        $category = null;
         $id = $request->id ?? null;
         if( $id ) {
-            $user = User::find($id);
+            $category = Category::find($id);
         }
-        return view('admin.users.add_edit',compact('user','id'));
+        return view('admin.category.add_edit',compact('category','id'));
 
     }
 
@@ -33,8 +36,8 @@ class CategoryController extends Controller
     {
         $id = $request->id;
         if ($id) {
-            if ($user = User::find($id)) {
-                $user->delete();
+            if ($categroy = Category::find($id)) {
+                $categroy->delete();
                 return response()->json([
                     'message' => '删除成功'
                 ], 200);
@@ -48,51 +51,43 @@ class CategoryController extends Controller
     }
 
 //    // 处理用户添加更新操作
-//    public function update(UserUpdateRequest $request)
-//    {
-//        $id = $request->id;
-//        try{
-//            \DB::BeginTransaction();
-//            $params = CommonService::userSetParams($request);
-//            User::where('id',$id)->update($params);
-//            \DB::commit();
-//
-//            return response()->view('admin.error.title',['msg'=>'添加成功,请刷新']);
-//        }catch (\Exception $e){
-//            \DB::rollBack();
-//            throw new ModelException([
-//                'message' => '创建用户出现错误 : '. $e->getMessage()
-//            ]);
-//            return response()->view('admin.error.title',['msg'=>'创建失败,系统错误']);
-//        }
-//
-//        return response()->view('admin.error.title',['msg'=>'编辑成功,请刷新']);
-//    }
-//
-//
+    public function update(Request $request)
+    {
+        $id = $request->id;
+        try {
+            \DB::BeginTransaction();
+            Category::where('id', $id)->update([
+                'name' => $request->name
+            ]);
+            \DB::commit();
+            return response()->view('admin.error.title', ['msg' => '更新成功,请刷新']);
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            throw new ModelException([
+                'message' => '创建用户出现错误 : ' . $e->getMessage()
+            ]);
+            return response()->view('admin.error.title', ['msg' => '创建失败,系统错误']);
+        }
+
+        return response()->view('admin.error.title', ['msg' => '编辑成功,请刷新']);
+    }
+
     public function create(CategoryCreateRequest $request)
     {
         try {
             \DB::BeginTransaction();
-            $params = CommonService::userSetParams($request);
-            User::create($params);
+            $category = new Category();
+            $category->name = $request->name;
+            $category->save();
+            session()->flash('status','添加成功');
             \DB::commit();
-            return response()->view('admin.error.title',['msg'=>'添加成功,请刷新']);
+            return redirect()->back();
         }catch (\Exception $e){
             \DB::rollBack();
             throw new ModelException([
-                'message' => '创建用户出现错误 : '. $e->getMessage()
+                'message' => '创建分类出现错误 : '. $e->getMessage()
             ]);
             return response()->view('admin.error.title',['msg'=>'添加失败,系统错误']);
         }
     }
-//
-//
-//    public static function isFieldExit($phone,$field)
-//    {
-//        if( User::where($field,$phone)->count() ) {
-//            return false;
-//        }
-//        return true;
-//    }
 }

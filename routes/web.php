@@ -104,7 +104,7 @@ Route::namespace('Admin')->group(function () {
                      */
                     Route::get('/category', 'CategoryController@list')->name('admins.category');
                     Route::get('/category/store/{id?}', 'CategoryController@addOrEdit')->name('category.add_or_edit');
-                    Route::put('/category/store/{id}', 'CategoryController@update')->name('category.update');
+                    Route::put('/category/store', 'CategoryController@update')->name('category.update');
                     Route::post('/category/store', 'CategoryController@create')->name('category.create');
                     Route::delete('/category','CategoryController@delete')->name('category.delete');
 

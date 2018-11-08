@@ -57,7 +57,11 @@
                         {{ $user->email }}
                     </td>
                     <td >
-                        {{ $user->simpleRole ?? '' }}
+                        @foreach($user->roles as $role)
+                         <span class="layui-btn layui-btn-normal layui-btn-mini">
+                                {{ $role->name }}
+                            </span>
+                        @endforeach
                     </td>
                     <td>
                         {{ $user->created_at }}
