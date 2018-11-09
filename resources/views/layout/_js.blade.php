@@ -7,7 +7,8 @@
 <!-- ––––––––––––––––––––––––––––––––––––––––– -->
 <!-- Initialize jQuery library                 -->
 <!-- ––––––––––––––––––––––––––––––––––––––––– -->
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+{{--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>--}}
+<script src="{{ asset('assets/js/jquery-1.12.3.min.js') }}"></script>
 
 <!-- ––––––––––––––––––––––––––––––––––––––––– -->
 <!-- Latest compiled and minified Bootstrap    -->
@@ -40,3 +41,6 @@
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://cdn.bootcss.com/limonte-sweetalert2/7.28.5/sweetalert2.all.js"></script>
+
+
+

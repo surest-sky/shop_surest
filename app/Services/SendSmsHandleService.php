@@ -70,19 +70,28 @@ class SendSmsHandleService
 
     protected function send($account,$type,$code)
     {
-        // 校验是否是手机还是邮箱
-        switch ($type) {
-            case 'phone' :
-                $sendSmsService = new SendSmsService();
-                $sendSms = $sendSmsService->easysms($account , $code);
-                return $sendSms;
-                break;
-            case 'email' :
-                SendMailJob::dispatch($code,$account);
-                break;
-            default :
-                throw new SmsException('短信组件问题，未知异常，请检查');
+        try{
+            // 校验是否是手机还是邮箱
+            switch ($type) {
+                case 'phone' :
+                    $sendSmsService = new SendSmsService();
+                    $sendSms = $sendSmsService->easysms($account , $code);
+                    return $sendSms;
+                    break;
+                case 'email' :
+                    SendMailJob::dispatch($code,$account);
+                    break;
+                default :
+                    throw new SmsException([
+                        'message' => '短信组件问题，未知异常，请检查'
+                    ]);
+            }
+            return true;
+        }catch (\Exception $e){
+            throw new SmsException([
+                'message' => ' 短信组件问题: 来自于账号'.$account .$e->getMessage()
+            ]);
         }
-        return true;
+
     }
 }

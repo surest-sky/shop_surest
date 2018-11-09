@@ -32,7 +32,7 @@ class LoginController extends Controller
             return redirect()->back();
         }
 
-        \Auth::login($user);
+        \Auth::login($user,true);
 
         return redirect('/');
     }

@@ -6,6 +6,9 @@ jQuery.ajaxSetup({
 
 window.onload = function () {
 
+    $('#logout-click').on('click',function () {
+        $("#logout-form").submit();
+    })
 
 }
 function _alert($param,$bol=true) {

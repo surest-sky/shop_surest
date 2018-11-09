@@ -83,7 +83,8 @@ class RegisterController extends Controller
         $con = $sms->handler($account,$type);
 
         $res = [
-            'key' => $con['key']
+            'key' => $con['key'],
+            'msg' => '发送成功',
         ];
 
         return response()->json($res,200);

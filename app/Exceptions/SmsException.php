@@ -29,6 +29,8 @@ class SmsException extends BaseException
 
     public function render()
     {
-        
+        return response()->json([
+            'msg' => '邮箱或者手机号错误,发送失败'
+        ],401);
     }
 }

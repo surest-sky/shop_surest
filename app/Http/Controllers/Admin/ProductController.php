@@ -108,6 +108,8 @@ class ProductController
             ]);
 
             \DB::commit();
+
+            return response()->view('admin.error.title',['msg'=>'创建成功,请刷新']);
         }catch (\Exception $e){
             \DB::rollback();
             throw new ModelException([
@@ -117,17 +119,71 @@ class ProductController
         }
     }
 
-    public function update(ProductUpdateRequest $request)
+    public function update(ProductUpdateRequest $request , ProductService $productService)
     {
+        try{
+            \DB::BeginTransaction();
+            # 商品id
+            $id = $request->id;
+            if( !$id || !$product = Product::find($id) ) {
+                session()->flash('status','商品不存在');
+                return redirect()->back();
+            }
 
-        $id = $request->id;
-        if( !$id || !Product::find($id) ) {
-            session()->flash('status','商品不存在');
-            return redirect()->back();
+            #先更新商品的数据
+            $result = $productService->getParams($request);
+            Product::where('id',$id)->update($result);
+
+            # 写入商品的图片数据
+            $img = $request->product_img;
+            $pid = $product->id;
+
+            Image::where('product_id',$pid)->update([
+                'src' => $img
+            ]);
+
+
+            $id[0] = $product->productSkus->first()->id;
+            $id[1] = $product->productSkus->last()->id;
+
+            Image::where('product_sku_id',$id[0])->update([
+                'src' => $request->skus['new1']['skuImg']
+            ]);
+
+            Image::where('product_sku_id',$id[0])->update([
+                'src' => $request->skus['new2']['skuImg'],
+            ]);
+
+            \DB::commit();
+
+            return response()->view('admin.error.title',['msg'=>'更新成功,请刷新']);
+
+        }catch (\Exception $e){
+            \DB::rollback();
+            throw new ModelException([
+                'message' => "更新商品数据异常" . $e->getMessage()
+            ]);
+
         }
 
 
-        dd($request->all());
 
+    }
+
+    public function delete(Request $request)
+    {
+        $id = $request->id;
+        if ($id) {
+            if ($product = Product::find($id)) {
+                $product->delete();
+                return response()->json([
+                    'message' => '删除成功'
+                ], 200);
+            }
+        }
+
+        return response()->json([
+            'message' => '未找到'
+        ], 404);
     }
 }

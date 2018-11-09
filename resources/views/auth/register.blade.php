@@ -1,6 +1,6 @@
 @extends('layout.layout')
 @section('title','注册页面')
-@section('content')
+@section('main')
 
     <main id="mainContent" class="main-content">
         <div class="page-container ptb-60">
@@ -83,12 +83,14 @@
             $('#getCode').on('click',function () {
                 var account = $('#account').val();
 
-                if( account.length == 0 ){
-                    _alert('请输入',false);
+                if( !isEmail(account) ){
+                    if( !checkMobile(account)){
+                        _alert('请输入符合规则的手机号码或者邮箱',false);
+                        return;
+                    }
                 }
-
                 swal({
-                    title: "<img src='{!! captcha_src() !!}' onclick=\"this.src = '{!! captcha_src() !!}' + '?' + +Math.random();\">",
+                    title: "<b>如遇验证码错误，请手动点击图片：</b><br/><img src='{!! captcha_src() !!}' onclick=\"this.src = '{!! captcha_src() !!}' + '?' + +Math.random();\">",
                     input: 'text',
                     showCancelButton: true,
                     confirmButtonText: 'Submit',
@@ -106,10 +108,11 @@
                                 success:function (data) {
                                     $('#key').val(data['key']);
                                     $(this).val('已发送').css({"background" : "#c12d2b"}).attr('disabled',true);
+                                    $('#account').attr('disabled','true');
                                     _alert('验证码已经发送',true)
                                 },
                                 error:function (data) {
-                                    var msg = data.responseJSON.errors;
+                                    var msg = data.responseJSON.msg;
                                     if( data.status == 422 ) {
                                         if( typeof msg.captcha !== 'undefined' ) {
                                             _alert(msg.captcha[0],false);
@@ -119,7 +122,7 @@
                                     }else if(data.status == 401) {
                                         _alert(msg,false);
                                     }else{
-                                        _alert('系统错误',false);
+                                        _alert('请正确检查邮箱或者手机号码',false);
                                     }
 
                                 }
@@ -129,6 +132,22 @@
                 });
             })
 
+            function isEmail(mail) {
+                var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if (filter.test(mail)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            function checkMobile($phone){
+                if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test($phone))){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
 
         }
 

@@ -30,14 +30,13 @@
     <meta name="	black friday, coupon, coupon codes, coupon theme, coupons, deal news, deals, discounts, ecommerce, friday deals, groupon, promo codes, responsive, shop, store coupons">
     <meta name="robots" content="index, follow">
     <meta name="author" content="CODASTROID">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @include('layout._css')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 
 <body id="body" class="wide-layout preloader-active">
-
 
 
 
@@ -72,15 +71,13 @@
 <!-- ––––––––––––––––––––––––––––––––––––––––– -->
 <div id="pageWrapper" class="page-wrapper">
     <!-- –––––––––––––––[ HEADER ]––––––––––––––– -->
-
-        <!-- –––––––––––––––[ HEADER ]––––––––––––––– -->
-        @include('layout._header')
-        <!-- –––––––––––––––[ HEADER ]––––––––––––––– -->
-
+    @include('layout._header')
     <!-- –––––––––––––––[ HEADER ]––––––––––––––– -->
 
     <!-- –––––––––––––––[ PAGE CONTENT ]––––––––––––––– -->
-    @yield("main")
+
+    @yield('content')
+
     <!-- –––––––––––––––[ END PAGE CONTENT ]––––––––––––––– -->
     <section class="footer-top-area pt-70 pb-30 pos-r bg-blue">
         <div class="container">
@@ -206,6 +203,7 @@
 </div>
 
 @include('layout._js')
+
 @yield('script')
 </body>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        {{ config('mian.name') }}
+        {{ config('main.name') }} - 后台
     </title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">

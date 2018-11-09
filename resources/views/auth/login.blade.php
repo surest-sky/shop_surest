@@ -1,6 +1,6 @@
 @extends('layout.layout')
 @section('title','登录页面')
-@section('content')
+@section('main')
     <main id="mainContent" class="main-content">
         <div class="page-container ptb-60">
             <div class="container">
@@ -73,7 +73,5 @@
                 </section>
             </div>
         </div>
-
-
     </main>
 @endsection()

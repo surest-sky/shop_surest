@@ -42,7 +42,7 @@
         <div class="container">
             <div class="row row-rl-0 row-tb-20 row-md-cell">
                 <div class="brand col-md-3 t-xs-center t-md-left valign-middle">
-                    <a href="#" class="logo">
+                    <a href="/" class="logo">
                         <img src="assets/images/logo.png" alt="" width="250">
                     </a>
                 </div>
@@ -106,22 +106,22 @@
                 </div>
                 <div id="header-navbar" class="nav-collapse" style="display: block;">
                     <ul class="nav-menu">
-                        <li class="active active-mobile">
-                            <a href="index.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">家</font></font></a>
+                        <li class="active">
+                            <a href="index.html">Home</a>
                         </li>
                         <li class="dropdown-mega-menu">
-                            <a href="deals_grid.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">交易</font></font><span class="indicator"><i class="fa fa-angle-down"></i></span></a>
-                            <div class="mega-menu">
+                            <a href="deals_grid.html">Deals<span class="indicator"><i class="fa fa-angle-down"></i></span></a>
+                            <div class="mega-menu" style="">
                                 <div class="row row-v-10">
                                     <div class="col-md-3">
                                         <ul>
-                                            <li><a href="deals_grid.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网格视图</font></font></a>
+                                            <li><a href="deals_grid.html">Grid View</a>
                                             </li>
-                                            <li><a href="deals_grid_sidebar.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">带侧边栏的网格</font></font></a>
+                                            <li><a href="deals_grid_sidebar.html">Grid With Sidebar</a>
                                             </li>
-                                            <li><a href="deals_list.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">列表显示</font></font></a>
+                                            <li><a href="deals_list.html">List View</a>
                                             </li>
-                                            <li><a href="deal_single.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">交易单身</font></font></a>
+                                            <li><a href="deal_single.html">Deal Single</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -139,7 +139,7 @@
 										                    </span>
                                                 </div>
                                                 <h6 class="deal-title mb-10">
-                                                    <a href="deal_single.html" class="color-lighter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">茉莉如临床或质量</font></font></a>
+                                                    <a href="deal_single.html" class="color-lighter">Aenean ut orci vel massa</a>
                                                 </h6>
                                             </div>
                                         </figure>
@@ -158,14 +158,14 @@
 										                    </span>
                                                 </div>
                                                 <h6 class="deal-title mb-10">
-                                                    <a href="deal_single.html" class="color-lighter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">茉莉如临床或质量</font></font></a>
+                                                    <a href="deal_single.html" class="color-lighter">Aenean ut orci vel massa</a>
                                                 </h6>
                                             </div>
                                         </figure>
                                     </div>
                                     <div class="col-md-3">
                                         <figure class="deal-thumbnail embed-responsive embed-responsive-4by3" data-bg-img="assets/images/deals/deal_05.jpg" style="background-image: url(&quot;assets/images/deals/deal_05.jpg&quot;);">
-                                            <div class="label-discount top-10 right-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-60%</font></font></div>
+                                            <div class="label-discount top-10 right-10">-60%</div>
                                             <div class="deal-about p-10 pos-a bottom-0 left-0">
                                                 <div class="rating mb-10">
                                                             <span class="rating-stars rate-allow" data-rating="5">
@@ -177,7 +177,7 @@
 										                    </span>
                                                 </div>
                                                 <h6 class="deal-title mb-10">
-                                                    <a href="deal_single.html" class="color-lighter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">茉莉如临床或质量</font></font></a>
+                                                    <a href="deal_single.html" class="color-lighter">Aenean ut orci vel massa</a>
                                                 </h6>
                                             </div>
                                         </figure>
@@ -186,153 +186,153 @@
                             </div>
                         </li>
                         <li>
-                            <a href="coupons_grid.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">优惠券</font></font><span class="indicator"><i class="fa fa-angle-down"></i></span></a>
-                            <ul>
-                                <li><a href="coupons_grid.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网格视图</font></font></a>
+                            <a href="coupons_grid.html">Coupons<span class="indicator"><i class="fa fa-angle-down"></i></span></a>
+                            <ul style="">
+                                <li><a href="coupons_grid.html">Grid View</a>
                                 </li>
-                                <li><a href="coupons_grid_sidebar.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">带侧边栏的网格</font></font></a>
+                                <li><a href="coupons_grid_sidebar.html">Grid With Sidebar</a>
                                 </li>
-                                <li><a href="coupons_list.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">列表显示</font></font></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="stores_01.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">商店</font></font><span class="indicator"><i class="fa fa-angle-down"></i></span></a>
-                            <ul>
-                                <li><a href="stores_01.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">商店搜索</font></font></a>
-                                </li>
-                                <li><a href="stores_02.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">商店类别</font></font></a>
-                                </li>
-                                <li><a href="store_single_01.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">商店单身1</font></font></a>
-                                </li>
-                                <li><a href="store_single_02.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">商店单身2</font></font></a>
+                                <li><a href="coupons_list.html">List View</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="contact_us_01.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">联系我们</font></font><span class="indicator"><i class="fa fa-angle-down"></i></span></a>
-                            <ul>
-                                <li><a href="contact_us_01.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">联系我们1</font></font></a>
+                            <a href="stores_01.html">Stores<span class="indicator"><i class="fa fa-angle-down"></i></span></a>
+                            <ul style="">
+                                <li><a href="stores_01.html">Stores Search</a>
                                 </li>
-                                <li><a href="contact_us_02.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">联系我们2</font></font></a>
+                                <li><a href="stores_02.html">Stores Categories</a>
                                 </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">博客</font></font><span class="indicator"><i class="fa fa-angle-down"></i></span></a>
-                            <ul>
-                                <li>
-                                    <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">经典视图</font></font><span class="indicator"><i class="fa fa-angle-right"></i></span></a>
-                                    <ul>
-                                        <li><a href="blog_classic_right_sidebar.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">右边的</font></font></a>
-                                        </li>
-                                        <li><a href="blog_classic_left_sidebar.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">左侧边栏</font></font></a>
-                                        </li>
-                                        <li><a href="blog_classic_fullwidth.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">全屏宽度</font></font></a>
-                                        </li>
-                                    </ul>
+                                <li><a href="store_single_01.html">Store Single 1</a>
                                 </li>
-                                <li>
-                                    <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网格视图</font></font><span class="indicator"><i class="fa fa-angle-right"></i></span></a>
-                                    <ul>
-                                        <li><a href="blog_grid_3col.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3列</font></font></a>
-                                        </li>
-                                        <li><a href="blog_grid_2col.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2列</font></font></a>
-                                        </li>
-                                        <li><a href="blog_grid_right_sidebar.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">右侧边栏</font></font></a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">列表显示</font></font><span class="indicator"><i class="fa fa-angle-right"></i></span></a>
-                                    <ul>
-                                        <li><a href="blog_list_right_sidebar.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">右边的</font></font></a>
-                                        </li>
-                                        <li><a href="blog_list_left_sidebar.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">左侧边栏</font></font></a>
-                                        </li>
-                                        <li><a href="blog_list_fullwidth.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">全屏宽度</font></font></a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">博客单身</font></font><span class="indicator"><i class="fa fa-angle-right"></i></span></a>
-                                    <ul>
-                                        <li><a href="blog_single_standard.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标准邮政</font></font></a>
-                                        </li>
-                                        <li><a href="blog_single_gallery.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">画廊邮报</font></font></a>
-                                        </li>
-                                        <li><a href="blog_single_youtube.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Youtube视频</font></font></a>
-                                        </li>
-                                        <li><a href="blog_single_vimeo.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vimeo视频</font></font></a>
-                                        </li>
-                                        <li><a href="blog_single_map.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谷歌地图</font></font></a>
-                                        </li>
-                                        <li><a href="blog_single_quote.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">引用帖子</font></font></a>
-                                        </li>
-                                        <li><a href="blog_single_audio.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">音频发布</font></font></a>
-                                        </li>
-                                    </ul>
+                                <li><a href="store_single_02.html">Store Single 2</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网页</font></font><span class="indicator"><i class="fa fa-angle-down"></i></span></a>
-                            <ul>
-                                <li><a href="index.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">主页默认</font></font></a>
+                            <a href="contact_us_01.html">Contact Us<span class="indicator"><i class="fa fa-angle-down"></i></span></a>
+                            <ul style="display: none;">
+                                <li><a href="contact_us_01.html">Contact Us 1</a>
                                 </li>
-                                <li><a href="signin.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登入</font></font></a>
+                                <li><a href="contact_us_02.html">Contact Us 2</a>
                                 </li>
-                                <li><a href="signup.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册</font></font></a>
-                                </li>
-                                <li><a href="404.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">404页</font></font></a>
-                                </li>
-                                <li><a href="faq.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">FAQ页面</font></font></a>
-                                </li>
-                                <li><a href="cart.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">购物车页面</font></font></a>
-                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Blog<span class="indicator"><i class="fa fa-angle-down"></i></span></a>
+                            <ul style="">
                                 <li>
-                                    <a href="checkout_method.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查看</font></font><span class="indicator"><i class="fa fa-angle-right"></i></span></a>
-                                    <ul>
-                                        <li><a href="checkout_method.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">结帐方法</font></font></a>
+                                    <a href="#">Classic View<span class="indicator"><i class="fa fa-angle-right"></i></span></a>
+                                    <ul style="">
+                                        <li><a href="blog_classic_right_sidebar.html">Right Sidenar</a>
                                         </li>
-                                        <li><a href="checkout_billing.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">账单信息</font></font></a>
+                                        <li><a href="blog_classic_left_sidebar.html">Left Sidebar</a>
                                         </li>
-                                        <li><a href="checkout_payment.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">支付信息</font></font></a>
+                                        <li><a href="blog_classic_fullwidth.html">Full Width</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">联系我们</font></font><span class="indicator"><i class="fa fa-angle-right"></i></span></a>
-                                    <ul>
-                                        <li><a href="contact_us_01.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">联系我们1</font></font></a>
+                                    <a href="#">Grid View<span class="indicator"><i class="fa fa-angle-right"></i></span></a>
+                                    <ul style="">
+                                        <li><a href="blog_grid_3col.html">3 Columns</a>
                                         </li>
-                                        <li><a href="contact_us_02.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">联系我们2</font></font></a>
+                                        <li><a href="blog_grid_2col.html">2 Columns</a>
                                         </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">优惠页面</font></font><span class="indicator"><i class="fa fa-angle-right"></i></span></a>
-                                    <ul>
-                                        <li><a href="deals_grid.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网格视图</font></font></a>
-                                        </li>
-                                        <li><a href="deals_list.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">列表显示</font></font></a>
-                                        </li>
-                                        <li><a href="deal_single.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">交易单身</font></font></a>
+                                        <li><a href="blog_grid_right_sidebar.html">Right Sidebar</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">优惠券页面</font></font><span class="indicator"><i class="fa fa-angle-right"></i></span></a>
-                                    <ul>
-                                        <li><a href="coupons_grid.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网格视图</font></font></a>
+                                    <a href="#">List View<span class="indicator"><i class="fa fa-angle-right"></i></span></a>
+                                    <ul style="">
+                                        <li><a href="blog_list_right_sidebar.html">Right Sidenar</a>
                                         </li>
-                                        <li><a href="coupons_grid_sidebar.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">带侧边栏的网格</font></font></a>
+                                        <li><a href="blog_list_left_sidebar.html">Left Sidebar</a>
                                         </li>
-                                        <li><a href="coupons_list.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">列表显示</font></font></a>
+                                        <li><a href="blog_list_fullwidth.html">Full Width</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="terms_conditions.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">条款和条件</font></font></a>
+                                <li>
+                                    <a href="#">Blog Single<span class="indicator"><i class="fa fa-angle-right"></i></span></a>
+                                    <ul style="">
+                                        <li><a href="blog_single_standard.html">Standard Post</a>
+                                        </li>
+                                        <li><a href="blog_single_gallery.html">Gallery Post</a>
+                                        </li>
+                                        <li><a href="blog_single_youtube.html">Youtube Video</a>
+                                        </li>
+                                        <li><a href="blog_single_vimeo.html">Vimeo Video</a>
+                                        </li>
+                                        <li><a href="blog_single_map.html">Google Map</a>
+                                        </li>
+                                        <li><a href="blog_single_quote.html">Quote Post</a>
+                                        </li>
+                                        <li><a href="blog_single_audio.html">Audio Post</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Pages<span class="indicator"><i class="fa fa-angle-down"></i></span></a>
+                            <ul style="">
+                                <li><a href="index.html">Home Default</a>
+                                </li>
+                                <li><a href="signin.html">Sign In</a>
+                                </li>
+                                <li><a href="signup.html">Sign Up</a>
+                                </li>
+                                <li><a href="404.html">404 Page</a>
+                                </li>
+                                <li><a href="faq.html">FAQ Page</a>
+                                </li>
+                                <li><a href="cart.html">Cart Page</a>
+                                </li>
+                                <li>
+                                    <a href="checkout_method.html">Checkout<span class="indicator"><i class="fa fa-angle-right"></i></span></a>
+                                    <ul style="">
+                                        <li><a href="checkout_method.html">Checkout method</a>
+                                        </li>
+                                        <li><a href="checkout_billing.html">Billing Information</a>
+                                        </li>
+                                        <li><a href="checkout_payment.html">Payment Information</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Contact Us<span class="indicator"><i class="fa fa-angle-right"></i></span></a>
+                                    <ul style="">
+                                        <li><a href="contact_us_01.html">Contact Us 1</a>
+                                        </li>
+                                        <li><a href="contact_us_02.html">Contact Us 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Deals Pages<span class="indicator"><i class="fa fa-angle-right"></i></span></a>
+                                    <ul style="">
+                                        <li><a href="deals_grid.html">Grid View</a>
+                                        </li>
+                                        <li><a href="deals_list.html">List View</a>
+                                        </li>
+                                        <li><a href="deal_single.html">Deal Single</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Coupons Pages<span class="indicator"><i class="fa fa-angle-right"></i></span></a>
+                                    <ul style="">
+                                        <li><a href="coupons_grid.html">Grid View</a>
+                                        </li>
+                                        <li><a href="coupons_grid_sidebar.html">Grid With Sidebar</a>
+                                        </li>
+                                        <li><a href="coupons_list.html">List View</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="terms_conditions.html">Terms &amp; conditions</a>
                                 </li>
                             </ul>
                         </li>
