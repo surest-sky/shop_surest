@@ -1,7 +1,7 @@
 <div class="layui-header header header-demo">
     <div class="layui-main">
-        <a class="logo" href="./index.html">
-            后台管理
+        <a class="logo" href="/admin">
+            {{ config('main.name') }} - 后台管理
         </a>
         <ul class="layui-nav" lay-filter="">
             <li class="layui-nav-item"><img src="./images/logo.png" class="layui-circle" style="border: 2px solid #A9B7B7;" width="35px" alt=""></li>

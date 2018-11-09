@@ -31,6 +31,6 @@ class ModelException extends BaseException
 
     public function render()
     {
-        return response()->view('admin.error.title',['msg'=>'系统异常']);
+        return response()->view('admin.error.title',['msg'=>'写入数据异常']);
     }
 }

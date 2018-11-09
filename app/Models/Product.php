@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Collection;
 
 class Product extends Model
 {
+
     public $guarded = [];
 
     const total = 10;
 
     const type = 'DESC';
+
 
     public static function getProductsAll($page=true)
     {
@@ -42,7 +44,7 @@ class Product extends Model
 
     public function image()
     {
-        return $this->hasMany(Image::class,'product_id','id');
+        return $this->hasOne(Image::class,'product_id','id');
     }
 
     public function category()
@@ -69,4 +71,20 @@ class Product extends Model
         $value= max(1,sprintf('%d',$value));
         return str_repeat('⭐',$value);
     }
+
+    public function getSku1Attribute()
+    {
+        return $this->productSkus->first();
+    }
+
+    public function getSku2Attribute()
+    {
+        return $this->productSkus->last();
+    }
+
+    public function getProductImgAttribute()
+    {
+        return $this->image->src;
+    }
+
 }

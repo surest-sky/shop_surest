@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        X-admin v1.0
+        {{ config('mian.name') }}
     </title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
