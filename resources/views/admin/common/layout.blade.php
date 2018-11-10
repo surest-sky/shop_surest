@@ -13,6 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/x-admin.css') }}" media="all">
+    @yield('css')
 </head>
 <body>
 @yield('body')

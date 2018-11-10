@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Banner;
 
 class IndexController extends Controller
 {
@@ -20,6 +21,8 @@ class IndexController extends Controller
 
         $products = Product::getProductsAll(false)->take(6);
 
-        return view('index.index',compact('categories','products'));
+        $banners = Banner::getCacheBanner()->take(4);
+
+        return view('index.index',compact('categories','products','banners'));
     }
 }

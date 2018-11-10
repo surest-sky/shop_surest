@@ -19,12 +19,12 @@
                         <!-- End List Control View -->
 
                         <div class="right-10 pos-tb-center">
-                            <select class="form-control input-sm">in
-                                <option>最新发布</option>
-                                <option>销量最多</option>
-                                <option>评论最多</option>
-                                <option>价格最贵</option>
-                                <option>价格最低</option>
+                            <select class="form-control input-sm sort">in
+                                <option value="new" @if($sort=='new') selected @endif>最新发布</option>
+                                <option value="sale" @if($sort=='sale') selected @endif>销量最多</option>
+                                <option value="review" @if($sort=='review') selected @endif>评论最多</option>
+                                <option value="h_price" @if($sort=='h_price') selected @endif>价格最贵</option>
+                                <option value="b_price" @if($sort=='b_price') selected @endif>价格最低</option>
                             </select>
                         </div>
                     </header>
@@ -36,7 +36,7 @@
                                 <div class="deal-single panel">
                                     <figure class="deal-thumbnail embed-responsive embed-responsive-16by9"
                                             data-bg-img="{{ $product->image->src ?? '' }}">
-                                        <div class="label-discount left-20 top-15">{{ $product->category->name ?? ''}}</div>
+                                        <div class="label-discount left-20 top-15">{{ str_limit($product->category->name,4,'..') }}</div>
                                         <ul class="deal-actions top-15 right-20">
                                             <li class="like-deal"><span><i class="fa fa-heart"></i></span>
                                             </li>
@@ -93,21 +93,18 @@
                         <nav>
                             <!-- Page Pagination -->
                             <ul class="page-pagination">
-                                <li><a class="page-numbers previous" href="#">Previous</a>
+                                <li><a href="?current='{{ $result['prev'] }}" class="page-numbers previous" href="#">上一页</a>
                                 </li>
-                                <li><a href="#" class="page-numbers">1</a>
-                                </li>
-                                <li><span class="page-numbers current">2</span>
-                                </li>
-                                <li><a href="#" class="page-numbers">3</a>
-                                </li>
-                                <li><a href="#" class="page-numbers">4</a>
-                                </li>
-                                <li><span class="page-numbers dots">...</span>
-                                </li>
-                                <li><a href="#" class="page-numbers">20</a>
-                                </li>
-                                <li><a href="#" class="page-numbers next">Next</a>
+                                @for($i=1; $i <= $result['endPage']; $i++ )
+                                    @if( $i == $result['current'] )
+                                        <li><a href="{{ url()->current() .'?current=' . $i }}" class="page-numbers current">{{ $i }}</a>
+                                        </li>
+                                    @else
+                                        <li><a href="{{ url()->current() .'?current=' . $i }}" class="page-numbers">{{ $i }}</a>
+                                        </li>
+                                    @endif
+                                @endfor
+                                <li><a href="{{ url()->current() .'?current=' . $result['next'] }}" class="page-numbers next">下一页</a>
                                 </li>
                             </ul>
                             <!-- End Page Pagination -->
@@ -122,4 +119,11 @@
 
 
     </main>
+@stop
+@section('script')
+    <script>
+        $('.sort').on('change',function () {
+            window.location = '?sort='+$(this).val();
+        })
+    </script>
 @stop

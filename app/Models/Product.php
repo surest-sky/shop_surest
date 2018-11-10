@@ -121,8 +121,67 @@ class Product extends Model
         return $this->image->src;
     }
 
-    public function getPriceAttribute($value)
+    public function getStrPriceAttribute()
     {
-        return '￥' . $value;
+        return '￥' . $this->value;
+    }
+
+    /**
+     * 数据排序
+     * @param $products
+     * @param $sort
+     * @return mixed
+     */
+    public function productSort($products,$sort)
+    {
+        switch ($sort){
+            case 'sale':
+                return $products->sortByDesc('sold_count');
+                break;
+            case 'review':
+                return $products->sortByDesc('review_count');
+                break;
+            case 'h_price':
+                return $products->sortByDesc('price');
+                break;
+            case 'b_price':
+                return $products->sortBy('price');
+                break;
+            default:
+                return $products->sortByDesc('created_at');
+                break;
+        }
+    }
+
+    // 分类数据组装
+    public function productPage($products,$currentPage)
+    {
+        $pageSize = 6;  #每页多少数据
+        $total = $products->count(); # 总数量
+        $endPage = (int)ceil($total/$pageSize);
+        $nextPage = (int)$currentPage+1;
+        $prevPage = (int)$currentPage-1;
+
+
+        if( $currentPage >= $endPage ){
+            $currentPage = $endPage;
+            $nextPage = $endPage;
+        }
+        if( $currentPage <= 1 ){
+            $currentPage = 1;
+            $prevPage = 1;
+        }
+
+        # 从当前页*5取出指定条数
+        $products = $products->slice(($currentPage-1)*$pageSize);
+        $products = $products->take($pageSize);
+
+        return [
+            'products' => $products,
+            'next' => $nextPage,
+            'prev' => (int)$prevPage,
+            'endPage' => $endPage,
+            'current' => $currentPage
+        ];
     }
 }

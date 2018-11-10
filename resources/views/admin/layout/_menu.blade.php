@@ -36,8 +36,8 @@
                     </dd>
                     <dd class="">
                     <dd class="">
-                        <a href="javascript:;" _href="./welcome.html">
-                            <cite>品牌管理（待开发）</cite>
+                        <a href="javascript:;" _href="{{ route('admin.banner') }}">
+                            <cite>推荐位管理</cite>
                         </a>
                     </dd>
                     </dd>

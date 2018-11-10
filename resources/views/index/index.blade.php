@@ -9,7 +9,7 @@
                             <aside>
                                 <ul class="nav-coupon-category panel">
                                     @foreach($categories as $category)
-                                        <li><a href="#"><i class="fa fa-navicon"></i>{{ $category->name }}
+                                        <li><a href="{{ route('category.show',['id' => $category->id]) }}"><i class="fa fa-navicon"></i>{{ $category->name }}
                                                 <span>{{ $category->pcount }}</span></a>
                                         </li>
                                     @endforeach
@@ -25,11 +25,11 @@
                                  data-nav="true" data-xxs-items="1" data-xxs-nav="true" data-xs-items="1"
                                  data-xs-nav="true" data-sm-items="1" data-sm-nav="true" data-md-items="1"
                                  data-md-nav="true" data-lg-items="1" data-lg-nav="true">
-
+                                @foreach($banners as $banner)
                                 <div class="deal-single panel item">
                                     <figure class="deal-thumbnail embed-responsive embed-responsive-16by9"
-                                            data-bg-img="assets/images/deals/deal_01.jpg">
-                                        <div class="label-discount top-10 right-10">-50%</div>
+                                            data-bg-img="{{ $banner->image }}">
+                                        <div class="label-discount top-10 right-10">{{ $banner->cName }}</div>
                                         <ul class="deal-actions top-10 left-10">
                                             <li class="like-deal">
                                                     <span>
@@ -38,10 +38,9 @@
                                             </li>
                                             <li class="share-btn">
                                                 <div class="share-tooltip fade">
-                                                    <a target="_blank" href="#"><i class="fa fa-facebook"></i></a>
-                                                    <a target="_blank" href="#"><i class="fa fa-twitter"></i></a>
-                                                    <a target="_blank" href="#"><i class="fa fa-google-plus"></i></a>
-                                                    <a target="_blank" href="#"><i class="fa fa-pinterest"></i></a>
+                                                    <a target="_blank" href="#"><i class="fa fa-weibo"></i></a>
+                                                    <a target="_blank" href="#"><i class="fa fa-qq"></i></a>
+                                                    <a target="_blank" href="#"><i class="fa fa-wechat"></i></a>
                                                 </div>
                                                 <span><i class="fa fa-share-alt"></i></span>
                                             </li>
@@ -53,7 +52,7 @@
                                         </ul>
                                         <div class="deal-about p-20 pos-a bottom-0 left-0">
                                             <div class="rating mb-10">
-                                                    <span class="rating-stars" data-rating="5">
+                                                    <span class="rating-stars" data-rating="{{ $banner->product->rating }}">
 			                        <i class="fa fa-star-o star-active"></i>
 			                        <i class="fa fa-star-o"></i>
 			                        <i class="fa fa-star-o"></i>
@@ -61,107 +60,16 @@
 			                        <i class="fa fa-star-o"></i>
 			                    </span>
                                                 <span class="rating-reviews color-light">
-			                    	( <span class="rating-count">241</span> Reviews )
+			                    	( <span class="rating-count">{{ $banner->product->review_count }}</span> Reviews )
                                                     </span>
                                             </div>
                                             <h3 class="deal-title mb-10 ">
-                                                <a href="deal_single.html" class="color-light color-h-lighter">The Crash
-                                                    Bad Instant Folding Twin Bed</a>
+                                                <a href="{{ route('product.show',['id'=>$banner->product->id]) }}l" class="color-light color-h-lighter">{{ $banner->product->name }}</a>
                                             </h3>
                                         </div>
                                     </figure>
                                 </div>
-                                <div class="deal-single panel item">
-                                    <figure class="deal-thumbnail embed-responsive embed-responsive-16by9"
-                                            data-bg-img="assets/images/deals/deal_02.jpg">
-                                        <div class="label-discount top-10 right-10">-30%</div>
-                                        <ul class="deal-actions top-10 left-10">
-                                            <li class="like-deal">
-                                                    <span>
-			                        <i class="fa fa-heart"></i>
-			                    </span>
-                                            </li>
-                                            <li class="share-btn">
-                                                <div class="share-tooltip fade">
-                                                    <a target="_blank" href="#"><i class="fa fa-facebook"></i></a>
-                                                    <a target="_blank" href="#"><i class="fa fa-twitter"></i></a>
-                                                    <a target="_blank" href="#"><i class="fa fa-google-plus"></i></a>
-                                                    <a target="_blank" href="#"><i class="fa fa-pinterest"></i></a>
-                                                </div>
-                                                <span><i class="fa fa-share-alt"></i></span>
-                                            </li>
-                                            <li>
-                                                    <span>
-			                        <i class="fa fa-camera"></i>
-			                    </span>
-                                            </li>
-                                        </ul>
-                                        <div class="deal-about p-20 pos-a bottom-0 left-0">
-                                            <div class="rating mb-10">
-                                                    <span class="rating-stars" data-rating="5">
-			                        <i class="fa fa-star-o star-active"></i>
-			                        <i class="fa fa-star-o"></i>
-			                        <i class="fa fa-star-o"></i>
-			                        <i class="fa fa-star-o"></i>
-			                        <i class="fa fa-star-o"></i>
-			                    </span>
-                                                <span class="rating-reviews color-light">
-			                    	( <span class="rating-count">132</span> Reviews )
-                                                    </span>
-                                            </div>
-                                            <h3 class="deal-title mb-10 ">
-                                                <a href="deal_single.html" class="color-light color-h-lighter">Western
-                                                    Digital USB 3.0 Hard Drives</a>
-                                            </h3>
-                                        </div>
-                                    </figure>
-                                </div>
-                                <div class="deal-single panel item">
-                                    <figure class="deal-thumbnail embed-responsive embed-responsive-16by9"
-                                            data-bg-img="assets/images/deals/deal_03.jpg">
-                                        <div class="label-discount top-10 right-10">-30%</div>
-                                        <ul class="deal-actions top-10 left-10">
-                                            <li class="like-deal">
-                                                    <span>
-			                        <i class="fa fa-heart"></i>
-			                    </span>
-                                            </li>
-                                            <li class="share-btn">
-                                                <div class="share-tooltip fade">
-                                                    <a target="_blank" href="#"><i class="fa fa-facebook"></i></a>
-                                                    <a target="_blank" href="#"><i class="fa fa-twitter"></i></a>
-                                                    <a target="_blank" href="#"><i class="fa fa-google-plus"></i></a>
-                                                    <a target="_blank" href="#"><i class="fa fa-pinterest"></i></a>
-                                                </div>
-                                                <span><i class="fa fa-share-alt"></i></span>
-                                            </li>
-                                            <li>
-                                                    <span>
-			                        <i class="fa fa-camera"></i>
-			                    </span>
-                                            </li>
-                                        </ul>
-                                        <div class="deal-about p-20 pos-a bottom-0 left-0">
-                                            <div class="rating mb-10">
-                                                    <span class="rating-stars" data-rating="5">
-			                        <i class="fa fa-star-o star-active"></i>
-			                        <i class="fa fa-star-o"></i>
-			                        <i class="fa fa-star-o"></i>
-			                        <i class="fa fa-star-o"></i>
-			                        <i class="fa fa-star-o"></i>
-			                    </span>
-                                                <span class="rating-reviews color-light">
-			                    	( <span class="rating-count">160</span> Reviews )
-                                                    </span>
-                                            </div>
-                                            <h3 class="deal-title mb-10 ">
-                                                <a href="deal_single.html" class="color-light color-h-lighter">Hampton
-                                                    Bay LED Light Ceiling Exhaust Fan</a>
-                                            </h3>
-                                        </div>
-                                    </figure>
-                                </div>
-
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -171,7 +79,7 @@
                 <section class="section latest-deals-area ptb-30">
                     <header class="panel ptb-15 prl-20 pos-r mb-30">
                         <h3 class="section-title font-18">最新商品</h3>
-                        <a class="btn btn-o btn-xs pos-a right-10 pos-tb-center">查看所有</a>
+                        <a href="{{ route('product.showAll') }}" class="btn btn-o btn-xs pos-a right-10 pos-tb-center">查看所有</a>
                     </header>
 
                     <div class="row row-masnory row-tb-20">

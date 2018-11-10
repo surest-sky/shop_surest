@@ -62,6 +62,7 @@ Route::get('/category/{id}','CategoryController@show')->name('category.show');
 
 # 商品模块
 Route::get('/product/{id}','ProductController@show')->name('product.show');
+Route::get('/product','ProductController@showAll')->name('product.showAll');
 
 
 
@@ -131,6 +132,14 @@ Route::namespace('Admin')->group(function () {
                     Route::post('/product/store', 'ProductController@create')->name('product.create');
                     Route::delete('/product','ProductController@delete')->name('product.delete');
                     Route::post('/upload/product','ProductController@upload')->name('product.upload');
+
+                    /**
+                     * 首页头图管理
+                     */
+                    Route::get('/banner', 'BannerController@list')->name('banner');
+                    Route::get('/banner/store/{id?}', 'BannerController@add')->name('banner.add');
+                    Route::post('/banner/store', 'BannerController@create')->name('banner.create');
+                    Route::delete('/banner','BannerController@delete')->name('banner.delete');
 
                 });
         });

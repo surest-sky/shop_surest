@@ -74,7 +74,7 @@ trait CategoryCacheTrait
      */
     public static function setFileCategory()
     {
-        $key = self::getKey();
+        $key = self::getCategoryKey();
         # 获取所有的分类数据
         $expirAt = Carbon::now()->addDays(10);
         $categories = Category::with(['product'])->orderBy('created_at','DESC')
@@ -92,7 +92,7 @@ trait CategoryCacheTrait
      */
     public static function getCategoryByProduct($id)
     {
-        $key = self::setByProductKey($id);
+        $key = self::getByProductKey($id);
         $products = Cache::get($key);
         if( !$products ){
             $products = self::setCategoryByProduct($id);
@@ -103,7 +103,7 @@ trait CategoryCacheTrait
 
     public static function setCategoryByProduct($id)
     {
-        $key = self::setByProductKey($id);
+        $key = self::getByProductKey($id);
         $expirAt = Carbon::now()->addDays(10);
         $products = Product::with(['image','category'])->orderBy('created_at','DESC')->where('category_id',$id)
                       ->get();
@@ -119,7 +119,7 @@ trait CategoryCacheTrait
         return (boolean)config('main.redis_open');
     }
 
-    public static function setByProductKey($id)
+    public static function getByProductKey($id)
     {
         return 'category_by_product' . $id;
     }

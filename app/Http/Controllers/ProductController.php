@@ -15,4 +15,23 @@ class ProductController extends Controller
         }
         return view('product.show',compact('product'));
     }
+
+    public function showAll(Request $request,Product $product)
+    {
+        $products = Product::getProductsAll(false);
+
+        $sort = $request->sort ?? 'new';
+
+        $products = $product->productSort($products,$sort);
+
+        $currentPage = $request->current ?? 1;
+
+
+        # 分页数据组装
+        $result = $product->productPage($products,$currentPage);
+
+        $products = $result['products'];
+
+        return view('product.show',compact('products','sort','result'));
+    }
 }
