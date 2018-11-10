@@ -18,9 +18,12 @@ use App\Http\Requests\Admin\ProductUpdateRequest;
 use App\Services\ProductService;
 use App\Models\Image;
 use App\Exceptions\ModelException;
+use App\Http\Traits\ProductCacheTrait;
 
 class ProductController
 {
+    use ProductCacheTrait;
+
     public function list()
     {
         $products = Product::getProductsAll();
@@ -107,6 +110,9 @@ class ProductController
                 'product_sku_id' => $id[1],
             ]);
 
+            # 写入缓存
+            self::setCacheProduct();
+
             \DB::commit();
 
             return response()->view('admin.error.title',['msg'=>'创建成功,请刷新']);
@@ -153,6 +159,9 @@ class ProductController
             Image::where('product_sku_id',$id[0])->update([
                 'src' => $request->skus['new2']['skuImg'],
             ]);
+
+            # 写入缓存
+            self::setCacheProduct();
 
             \DB::commit();
 

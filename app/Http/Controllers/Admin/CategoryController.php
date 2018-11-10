@@ -9,9 +9,12 @@ use App\Http\Requests\Admin\CategoryCreateRequest;
 use App\Http\Requests\Admin\CategoryUpdateRequest;
 use App\Services\CommonService;
 use App\Exceptions\ModelException;
+use App\Http\Traits\CategoryCacheTrait;
 
 class CategoryController extends Controller
 {
+    use CategoryCacheTrait;
+
     // 渲染用户视图
     public function list()
     {
@@ -59,6 +62,10 @@ class CategoryController extends Controller
             Category::where('id', $id)->update([
                 'name' => $request->name
             ]);
+
+            #执行重新写缓存
+            self::setCacheCategory();
+
             \DB::commit();
             return response()->view('admin.error.title', ['msg' => '更新成功,请刷新']);
         } catch (\Exception $e) {
@@ -79,6 +86,10 @@ class CategoryController extends Controller
             $category = new Category();
             $category->name = $request->name;
             $category->save();
+
+            #执行重新写缓存
+            self::setCacheCategory();
+
             session()->flash('status','添加成功');
             \DB::commit();
             return redirect()->back();

@@ -21,11 +21,11 @@ class ImageUploadHandler
      * @param bool $max_width 裁剪所需的最大宽度
      * @param bool $qniu 是否采用七牛云上传
      */
-    public function upload($file,$dir,$max_width=false,$qniu=false)
+    public function upload($file,$dir,$max_height=500,$qniu=false)
     {
         try{
             if( !$qniu ){
-                return $this->save_local($file,$dir,$max_width);
+                return $this->save_local($file,$dir,$max_height);
             }
 
         }catch (\Exception $e){
@@ -46,7 +46,7 @@ class ImageUploadHandler
 
     }
 
-    public function save_local($file,$dir,$max_width)
+    public function save_local($file,$dir,$max_height)
     {
         $ext = '.' . $file->getClientOriginalExtension();
         $folder_name = config('main.upload_path') . date('Y-m/'). $dir;
@@ -55,7 +55,7 @@ class ImageUploadHandler
         $file->move($upload_path,$new_filename);
         $new_filepath = $upload_path . '/' . $new_filename;
 
-        $this->reduceSize($new_filepath,$max_width);
+        $this->reduceSize($new_filepath,$max_height);
 
         return  config('app.url') . $folder_name . '/' . $new_filename;;
     }
@@ -63,12 +63,12 @@ class ImageUploadHandler
     /**
      * 图片裁剪
      */
-    public function reduceSize($file_path,$max_width)
+    public function reduceSize($file_path,$max_height)
     {
         // 先实例化，传参是文件的磁盘物理路径
         $image = Image::make($file_path);
         // 进行大小调整的操作
-        $image->resize($max_width, null, function ($constraint) {
+        $image->resize(null, $max_height, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });

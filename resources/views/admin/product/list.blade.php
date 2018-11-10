@@ -74,7 +74,7 @@
                         {{ $product->review_count }}
                     </td>
                     <td >
-                        {{ $product->rating }}
+                        {{ $product->rating_xing }}
                     </td>
                     <td>
                         {{ $product->created_at }}

@@ -9,7 +9,7 @@
  * 相关路由
  * 登录状态下跳转到首页
  */
-Route::get('/','Index\IndexController@index')->name('index');
+Route::get('/','IndexController@index')->name('index');
 
 Route::middleware(['guest'])->group(function (){
     Route::name('login.')->group(function (){
@@ -48,6 +48,20 @@ Route::post('/register/account','Auth\RegisterController@account')->name('regist
 Route::post('/logout','Auth\LoginController@logout')->name('logout');
 //
 Route::get('/register/verify','Auth\RegisterController@verify')->name('verify');
+
+
+/**
+ * 杂项
+ * 关于公司情况的一些模块
+ */
+Route::get('/trems_conditions','About\AboutController@trems_conditions');
+
+# 分类模块
+Route::get('/category','CategoryController@index')->name('category');
+Route::get('/category/{id}','CategoryController@show')->name('category.show');
+
+# 商品模块
+Route::get('/product/{id}','ProductController@show')->name('product.show');
 
 
 
@@ -135,8 +149,6 @@ Route::namespace('Admin')->group(function () {
 
 
 
- /**
-  * 杂项
-  * 关于公司情况的一些模块
-  */
- Route::get('/trems_conditions','About\AboutController@trems_conditions');
+
+
+

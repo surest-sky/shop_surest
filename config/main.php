@@ -7,8 +7,9 @@
  */
 
 return [
-    'assets' => '/assets', // 可以自定义，默认保存成在public/assets下， 静态模板的静态文件
-    'name' => 'monday商城', // 可以自定义，默认保存成在public/assets下， 静态模板的静态文件
-    'admin' => 'admin', // 最高管理员权限的名字，不可删除
-    'upload_path' => 'upload/'
+    'assets' => '/assets', # 可以自定义，默认保存成在public/assets下， 静态模板的静态文件
+    'name' => 'monday商城', # 可以自定义，默认保存成在public/assets下， 静态模板的静态文件
+    'admin' => 'admin', # 最高管理员权限的名字，不可删除
+    'upload_path' => 'upload/', # 上传文件的地址
+    'redis_open' => env('REDIS_OPEN',false)
 ];

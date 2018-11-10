@@ -9,6 +9,8 @@
 - spatie/laravel-permission [https://github.com/spatie/laravel-permission](https://github.com/spatie/laravel-permission)
 
 - zgldh/qiniu-laravel-storage：
+
+- predis
 ## 使用的相关扩展
 
 - layui 、layedit
