@@ -25,7 +25,7 @@
                                 <button type="submit"></button>
                             </form>
                         @else
-                        <li><a href="{{ route('login.normal') }}"><i class="fa fa-lock"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登入</font></font></a>
+                        <li><a href="{{ route('login') }}"><i class="fa fa-lock"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登入</font></font></a>
                         </li>
                         <li><a href="{{ route('register') }}"><i class="fa fa-user"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册</font></font></a>
                         </li>
@@ -80,9 +80,9 @@
                                 </a>
                             </div>
                             <div class="header-wishlist ml-20">
-                                <a href="">
+                                <a href="{{ route('wish') }}">
                                     <span class="icon lnr lnr-heart font-30"></span>
-                                    <span class="title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">愿望清单</font></font></span>
+                                    <span class="title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我的收藏</font></font></span>
                                 </a>
                             </div>
                         </div>

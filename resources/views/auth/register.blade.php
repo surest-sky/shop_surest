@@ -20,8 +20,6 @@
                                 </div>
                             @endif
 
-                            <?php session('status','aaa'); echo session('status'); ?>
-
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>

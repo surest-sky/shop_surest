@@ -10,10 +10,28 @@ class WishController extends Controller
 {
     public function list()
     {
-        $id = Auth::id();
-        $products = Wish::find($id)->products();
+        $uid = Auth::id();
 
-        dd($products);
-        return view('wish.list');
+        $products = Wish::getProducts($uid);
+
+        return view('wish.list', compact('products') );
+    }
+
+    // 删除收藏
+    public function delete(Request $request)
+    {
+        $pid = $request->id;
+        if ($pid) {
+            if( Wish::remove($pid) ){
+                return response()->json([
+                    'message' => '删除成功'
+                ], 200);
+            }
+        }
+
+        return response()->json([
+            'message' => '未找到'
+        ], 404);
+
     }
 }

@@ -121,7 +121,7 @@ class ForgetController extends BaseController
 
         session()->flash('status','修改成功');
 
-        return redirect()->route('login.normal');
+        return redirect()->route('login');
 
     }
 

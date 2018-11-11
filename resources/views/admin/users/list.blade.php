@@ -106,6 +106,7 @@
         function admin_edit (title,url,id,w,h) {
             x_admin_show(title,url,w,h);
         }
+
         /*删除*/
         function admin_del(obj,id) {
             layer.confirm('确认要删除吗？', function (index) {

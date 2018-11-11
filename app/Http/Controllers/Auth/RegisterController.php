@@ -64,7 +64,7 @@ class RegisterController extends Controller
 
         session()->flash('status','注册成功');
 
-        return redirect()->route('login.normal');
+        return redirect()->route('login');
 
     }
 

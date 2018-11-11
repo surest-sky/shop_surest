@@ -123,7 +123,7 @@ class Product extends Model
 
     public function getStrPriceAttribute()
     {
-        return '￥' . $this->value;
+        return '￥' . $this->price;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Exceptions\SysException;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
 
@@ -45,4 +46,28 @@ class Wish extends Model
 //    {
 //
 //    }
+
+    public static function remove($pid)
+    {
+        try{
+            $uid = \Auth::id();
+            $pids = collect(self::getProducts($uid)->pluck('id')->toArray());
+
+            $pids = $pids->diff($pid)->toArray();
+
+            $wish = self::where('user_id',$uid)->first();
+            $wish->product_ids = json_encode($pids);
+            $wish->save();
+            return true;
+        }catch (\Exception $e){
+            throw new SysException([
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public static function getProducts($uid)
+    {
+        return self::where('user_id',$uid)->first()->products();
+    }
 }

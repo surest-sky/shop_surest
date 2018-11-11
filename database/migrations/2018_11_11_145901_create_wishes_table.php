@@ -22,6 +22,8 @@ class CreateWishesTable extends Migration
             # 使用一个用户对于一列的数据进行收藏
             # 防止数据量过大，数据冗余
             $table->string('product_ids');
+
+            $table->timestamps();
         });
     }
 

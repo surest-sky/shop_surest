@@ -11,53 +11,56 @@
  */
 Route::get('/','IndexController@index')->name('index');
 
+
+
+
 Route::middleware(['guest'])->group(function (){
-    Route::name('login.')->group(function (){
 
-        Route::get('/login','Auth\LoginController@login')->name('normal');
-        Route::post('/login','Auth\LoginController@store')->name('store');
-        Route::get('/weibo/login','Auth\LoginWeiboController@login')->name('weibo');
-        Route::get('/weibo/user','Auth\LoginWeiboController@user')->name('weibo.user');
-
-    });
+    Route::get('/login','Auth\LoginController@login')->name('login');
+    Route::post('/login','Auth\LoginController@store')->name('login.store');
+    Route::get('/weibo/login','Auth\LoginWeiboController@login')->name('login.weibo');
+    Route::get('/weibo/user','Auth\LoginWeiboController@user')->name('login.weibo.user');
 
     /**
      * 忘记密码
      */
     Route::get('/forget','Auth\ForgetController@forget')->name('forget');
-    // 获取第一步验证码
+    # 获取第一步验证码
     Route::post('/forget/account','Auth\ForgetController@account')->name('forget.account');
-    // 第二步：进入填写密码
+    # 第二步：进入填写密码
     Route::get('/forget_too/{key?}','Auth\ForgetController@forget_too')->name('forget_too');
-    // 处理第二步：
+    # 处理第二步：
     Route::post('/forget/store_pwd','Auth\ForgetController@store_pwd')->name('forget.store_pwd');
-    // 处理第一步验证码字段相关
+    # 处理第一步验证码字段相关
     Route::post('/forget','Auth\ForgetController@store')->name('forget.store');
 });
 
 /**
  * 注册注销相关
  */
-// 注册
+# 注册
 Route::get('/register','Auth\RegisterController@register')->name('register');
-// 注册处理
+# 注册处理
 Route::post('/register','Auth\RegisterController@store')->name('register.store');
-// 获取验证码
+# 获取验证码
 Route::post('/register/account','Auth\RegisterController@account')->name('register.account');
-//
+#
 Route::get('/register/verify','Auth\RegisterController@verify')->name('verify');
 
 Route::post('/logout','Auth\LoginController@logout')->name('logout');
 
-//Route::middleware(['auth'])->group(function (){
-//    # 注销
-//    Route::post('/logout','Auth\LoginController@logout')->name('logout');
-//
-//    # 愿望清单
-//
-//});
+Route::middleware(['auth'])->group(function (){
+    # 注销
+    Route::post('/logout','Auth\LoginController@logout')->name('logout');
 
-//Route::get('/wish','WishController@list')->name('wish');
+    # 愿望清单
+    Route::get('/wish','WishController@list')->name('wish');
+
+    # 删除收藏
+    Route::delete('/wish','WishController@delete')->name('wish.delete');
+
+});
+
 /**
  * 杂项
  * 关于公司情况的一些模块

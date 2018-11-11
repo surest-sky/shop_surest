@@ -1,4 +1,5 @@
 ﻿@extends('layout.layout')
+@section('title','首页')
 @section('main')
     <main id="mainContent" class="main-content">
         <div class="page-container ptb-10">

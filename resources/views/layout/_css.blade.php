@@ -31,3 +31,4 @@
 <!-- Template Stylesheet -->
 <link href="{{ asset('assets/css/base.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+<link href="https://cdn.bootcss.com/limonte-sweetalert2/7.28.11/sweetalert2.css" rel="stylesheet">
