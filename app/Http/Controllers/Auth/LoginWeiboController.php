@@ -30,6 +30,7 @@ class LoginWeiboController extends BaseController
         $result = $this->setGetWbAccessToken($code);
         $access_token = $result['access_token'];
         $uid = $result['uid'];
+
         return $this->user($access_token,$uid);
         // 获取用户信息
 

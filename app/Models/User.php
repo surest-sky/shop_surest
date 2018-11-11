@@ -48,6 +48,14 @@ class User extends Authenticatable
         return $this->hasOne(Wish::class,'user_id','id');
     }
 
+    /**
+     * 用户的购物车
+     */
+    public function carts()
+    {
+        return $this->hasMany(Cart::class,'user_id','id');
+    }
+
     public static function getUserInfo($val,$field)
     {
         if( !$field ) {

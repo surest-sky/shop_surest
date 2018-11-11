@@ -47,7 +47,7 @@ trait UserHandlerTrait
             new Registered($user= self::createUser($userInfo,$field));
         }
 
-        Auth::login($user);
+        Auth::login($user,true);
 
         return redirect()->route('index');
     }

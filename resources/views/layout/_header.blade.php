@@ -72,17 +72,17 @@
                         </div>
                         <div class="col-sm-4 t-xs-center t-md-right">
                             <div class="header-cart">
-                                <a href="cart.html">
+                                <a href="{{ route('cart') }}">
                                     <span class="icon lnr lnr-cart"></span>
                                     <div><span class="cart-number">0</span>
                                     </div>
-                                    <span class="title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">大车</font></font></span>
+                                    <span class="title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">购物车</font></font></span>
                                 </a>
                             </div>
                             <div class="header-wishlist ml-20">
                                 <a href="{{ route('wish') }}">
                                     <span class="icon lnr lnr-heart font-30"></span>
-                                    <span class="title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我的收藏</font></font></span>
+                                    <span class="title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">收藏</font></font></span>
                                 </a>
                             </div>
                         </div>

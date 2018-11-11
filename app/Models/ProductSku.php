@@ -13,4 +13,14 @@ class ProductSku extends Model
     {
         return $this->hasOne(Image::class,'product_sku_id','id');
     }
+
+    public function category()
+    {
+        return $this->hasOne(Category::class,'product_sku_id','id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id','id');
+    }
 }
