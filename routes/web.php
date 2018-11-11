@@ -44,12 +44,20 @@ Route::get('/register','Auth\RegisterController@register')->name('register');
 Route::post('/register','Auth\RegisterController@store')->name('register.store');
 // 获取验证码
 Route::post('/register/account','Auth\RegisterController@account')->name('register.account');
-// 注销
-Route::post('/logout','Auth\LoginController@logout')->name('logout');
 //
 Route::get('/register/verify','Auth\RegisterController@verify')->name('verify');
 
+Route::post('/logout','Auth\LoginController@logout')->name('logout');
 
+//Route::middleware(['auth'])->group(function (){
+//    # 注销
+//    Route::post('/logout','Auth\LoginController@logout')->name('logout');
+//
+//    # 愿望清单
+//
+//});
+
+//Route::get('/wish','WishController@list')->name('wish');
 /**
  * 杂项
  * 关于公司情况的一些模块
@@ -63,6 +71,7 @@ Route::get('/category/{id}','CategoryController@show')->name('category.show');
 # 商品模块
 Route::get('/product/{id}','ProductController@show')->name('product.show');
 Route::get('/product','ProductController@showAll')->name('product.showAll');
+
 
 
 

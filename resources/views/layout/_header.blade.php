@@ -80,7 +80,7 @@
                                 </a>
                             </div>
                             <div class="header-wishlist ml-20">
-                                <a href="wishlist.html">
+                                <a href="">
                                     <span class="icon lnr lnr-heart font-30"></span>
                                     <span class="title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">愿望清单</font></font></span>
                                 </a>

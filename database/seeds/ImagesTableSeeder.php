@@ -26,7 +26,7 @@ class ImagesTableSeeder extends Seeder
 
     public function getSrc()
     {
-        $faker = $faker = Faker\Factory::create();
+        $faker = Faker\Factory::create();
         return $faker->randomElement([
             "https://lccdn.phphub.org/uploads/images/201806/01/5320/7kG1HekGK6.jpg",
             "https://lccdn.phphub.org/uploads/images/201806/01/5320/1B3n0ATKrn.jpg",

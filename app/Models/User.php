@@ -39,12 +39,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * 关联的愿望清单
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function wishes()
+    {
+        return $this->hasOne(Wish::class,'user_id','id');
+    }
 
     public static function getUserInfo($val,$field)
     {
         if( !$field ) {
             $field = checkParamType($val);
         }
+
         $user = self::where($field,$val)->first();
 
         return $user;
@@ -57,7 +66,9 @@ class User extends Authenticatable
     public static function getUserAll($bol = true)
     {
         $type = $bol ? 'DESC' : 'ASC';
-        $users = Self::query()->orderBy('created_at','DESC')->get();
+        $users = self::query()->orderBy('created_at','DESC')->get();
         return $users;
     }
+
+
 }

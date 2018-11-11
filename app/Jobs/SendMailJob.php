@@ -16,6 +16,8 @@ class SendMailJob implements ShouldQueue
 
     protected $code;
     protected $email;
+
+    public $tries = 5;
     /**
      * Create a new job instance.
      *

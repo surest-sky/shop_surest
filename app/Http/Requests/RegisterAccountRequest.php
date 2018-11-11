@@ -26,7 +26,7 @@ class RegisterAccountRequest extends FormRequest
     {
         return [
             'account' => ['required',new CheckPhoneAndEmail],
-            'captcha' => ['captcha']
+//            'captcha' => 'captcha'
         ];
     }
 
@@ -34,7 +34,7 @@ class RegisterAccountRequest extends FormRequest
     {
         return [
             'account.required' => '手机号码或者邮箱不能为空',
-            'captcha.captcha' => '验证码错误'
+//            'captcha.captcha' => '验证码错误'
         ];
     }
 

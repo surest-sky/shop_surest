@@ -20,6 +20,8 @@
                                 </div>
                             @endif
 
+                            <?php session('status','aaa'); echo session('status'); ?>
+
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -112,19 +114,20 @@
                                     _alert('验证码已经发送',true)
                                 },
                                 error:function (data) {
-                                    var msg = data.responseJSON.msg;
+                                    var msg = data.responseJSON;
+                                    console.log(data);
                                     if( data.status == 422 ) {
-                                        if( typeof msg.captcha !== 'undefined' ) {
-                                            _alert(msg.captcha[0],false);
+                                        if( typeof msg.errors.captcha !== 'undefined' ) {
+                                            _alert(msg.errors.captcha[0],false);
                                         }else if( typeof msg.account !== 'undefined' ){
                                             _alert(msg.account[0],false);
                                         }
                                     }else if(data.status == 401) {
-                                        _alert(msg,false);
+                                        _alert(msg.errors,false);
                                     }else{
                                         _alert('请正确检查邮箱或者手机号码',false);
                                     }
-
+                                    return;
                                 }
                             })
                         })

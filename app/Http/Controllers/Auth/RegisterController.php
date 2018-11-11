@@ -14,6 +14,7 @@ use App\Services\SendSmsHandleService;
 use App\Models\User;
 use App\Http\Requests\RegisterRequest;
 use App\Exceptions\SysException;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -26,8 +27,12 @@ class RegisterController extends Controller
     /**
      * 处理注册逻辑
      */
-    public function store(RegisterRequest $request)
+    public function store(Request $request)
     {
+        session()->flash('verify','验证码错误');
+
+        return redirect()->back();
+
         $key = $request->key;
         $captcha = $request->captcha;
         $name = $request->name;
@@ -74,12 +79,15 @@ class RegisterController extends Controller
         $account = $request->account;
         $type = checkParamType($account);
         $user = User::getUserInfo($account,$type);
+
         if( $user ) {
             return response()->json([
                 'errors' => '该手机号码或者邮箱已经被注册'
             ],401);
         }
         $sms = new SendSmsHandleService();
+
+        # 发送邮箱或者手机验证码短信
         $con = $sms->handler($account,$type);
 
         $res = [
