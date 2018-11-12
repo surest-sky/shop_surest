@@ -13,7 +13,7 @@
                                 <tr>
                                     <th>商品名称</th>
                                     <th>商品价格</th>
-                                    <th>商品数量(限100)</th>
+                                    <th>商品数量(限10)</th>
                                     <th>商品总价</th>
                                     <th></th>
                                 </tr>
@@ -28,16 +28,16 @@
                                             </figure>
                                         </div>
                                         <div class="media-body valign-middle">
-                                            <h6 class="title mb-15 t-uppercase"><a href="#">{{ $cart->name }}</a></h6>
+                                            <h6 class="title mb-15 t-uppercase"><a href="{{ route('product.show',['id' => $cart->productSku->product->id ]) }}">{{ $cart->name }}</a></h6>
                                             <div class="type font-12"><span class="t-uppercase">归类 : </span>{{ $cart->cname }}</div>
                                         </div>
                                     </td>
                                     <td>￥{{ $cart->price }}</td>
                                     <td>
-                                        <input class="quantity-label" type="number" onchange="amount(this)" value="{{ $cart->amount }}">
+                                        <input class="quantity-label" type="number" data-price="{{ $cart->productSku->price }}" onchange="amount(this)" value="{{ $cart->amount }}">
                                     </td>
                                     <td>
-                                        <div class="sub-total">￥{{ $cart->totalPrice }}</div>
+                                        <div class="sub-total">￥ <span class="single-total-price">{{ $cart->totalPrice }}</span></div>
                                     </td>
                                     <td>
                                         <button type="button" class="close" onclick="cart_del(this,'{{ $cart->id }}')">
@@ -61,7 +61,7 @@
                                             <input type="text" class="form-control input-lg search-input" name="优惠券" id="" value="aaaa">
                                         </div>
                                         <div>
-                                            <button class="btn btn-lg btn-search btn-block">检查优惠券</button>
+                                            <button onclick="checkCoupon(this)" class="btn btn-lg btn-search btn-block">检查优惠券</button>
                                         </div>
 
                                     </li>
@@ -69,24 +69,20 @@
                                         <div class="item-name">
                                             优惠前
                                         </div>
-                                        <div class="price" id="before-price">
-                                            ￥{{ $totalPrice }}
+                                        <div class="price">￥<span id="before-price">{{ $totalPrice }}</span>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="item-name">
                                             优惠额度
                                         </div>
-                                        <div class="price" id="sale-price">
-                                            0
-                                        </div>
+                                        <div class="price"><span id="sale-price">0</span></div>
                                     </li>
                                     <li>
                                         <div class="item-name">
                                             <strong class="t-uppercase">最后价格</strong>
                                         </div>
-                                        <div class="price" id="after-price" >
-                                            ￥{{ $totalPrice }}
+                                        <div class="price" >￥<span id="after-price">{{ $totalPrice }}</span>
                                         </div>
                                     </li>
                                 </ul>
@@ -106,8 +102,8 @@
     <script>
         function cart_del(obj,id)
         {
-            var r=confirm("是真的要删除它吗")
-            var price = $(obj).parents("tr").find('.sub-total').html();
+            var r = confirm("是真的要删除它吗")
+            var price = $(obj).parents("tr").find('.single-total-price').html();
 
             if (r==true)
             {
@@ -137,24 +133,106 @@
         }
 
         function amount(obj) {
-            if( $(obj).val() <= 0 || $(obj).val() > 100 ){
+            if( $(obj).val() <= 0 || $(obj).val() > 10 ){
                 $(obj).val(1);
-                swal('选择商品数量在1-100之间','','error');
-                return;
+                swal('选择商品数量在1-10之间','','error');
             }
-
+            var price = $(obj).attr('data-price'); // 原价
             var num = $(obj).val();
 
+            $(obj).parents('tr').find('.single-total-price').html( run(parseInt(price) * num) );
+
+            // 改变数量后计算所有价格
+            calculate();
+            return;
+
         }
-        
+
+        /**
+         * 获取当前删除的价格
+         * 获取当前的优惠价格
+         * 优惠后的价格
+         * @param price
+         */
         function edit_price(price) {
-            var total = parseInt($('#after-price').html());
-            var sale_price = parseInt($('#sale-price').html());
 
-            $('#after-price').html(total-price);
-            $('#before-price').html(price);
+            var after_price = parseInt($('#before-price').html());  // 优惠前
+            var before_price = parseInt($('#after-price').html());  // 优惠后
+
+            $('#after-price').html(run((before_price - price)));
+            $('#before-price').html( run((before_price - price)))
 
         }
 
+        function run($price) {
+            return $price.toFixed(2);
+        }
+
+        /**
+         * 计算所有的价格
+         */
+        function calculate() {
+
+            var total_price = 0;
+            $('.single-total-price').each(function () {
+                total_price += parseInt( $(this).html() );
+            })
+
+            var sale_price = $('#sale-price').html(); // 优惠额度
+
+            var after_price = Math.ceil(total_price - sale_price); // 优惠后
+
+            // 优惠前的价格
+            $('#before-price').html( run(total_price) );
+            $('#after-price').html( run(after_price) );
+        }
+
+        // 检查优惠券
+        function checkCoupon(obj,code) {
+            // 检查优惠券
+            swal({
+                title: "<b>如遇验证码错误，请手动点击图片：</b><br/><img src='{!! captcha_src() !!}' onclick=\"this.src = '{!! captcha_src() !!}' + '?' + +Math.random();\">",
+                input: 'text',
+                showCancelButton: true,
+                confirmButtonText: '提交',
+                cancelButtonText: '取消',
+                showLoaderOnConfirm: true,
+                preConfirm: function(captcha) {
+                    return new Promise(function (resolve) {
+                        $.ajax({
+                            async: false,
+                            type : 'POST',
+                            url: '{{ route('register.account')}}',
+                            data: {
+                                'account' : account,
+                                'captcha' : captcha
+                            },
+                            success:function (data) {
+                                $('#key').val(data['key']);
+                                $(this).val('已发送').css({"background" : "#c12d2b"}).attr('disabled',true);
+                                $('#account').attr('disabled','true');
+                                _alert('验证码已经发送',true)
+                            },
+                            error:function (data) {
+                                var msg = data.responseJSON;
+                                console.log(data);
+                                if( data.status == 422 ) {
+                                    if( typeof msg.errors.captcha !== 'undefined' ) {
+                                        _alert(msg.errors.captcha[0],false);
+                                    }else if( typeof msg.account !== 'undefined' ){
+                                        _alert(msg.account[0],false);
+                                    }
+                                }else if(data.status == 401) {
+                                    _alert(msg.errors,false);
+                                }else{
+                                    _alert('请正确检查邮箱或者手机号码',false);
+                                }
+                                return;
+                            }
+                        })
+                    })
+                }
+            });
+        }
     </script>
 @stop

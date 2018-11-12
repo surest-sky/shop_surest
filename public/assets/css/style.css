@@ -2016,3 +2016,30 @@
 .checkout-widget .table tr + tr > td {
   border-top: 1px solid #eee;
 }
+
+
+/* sku*/
+
+.prodcut-sku {
+  padding-top: 10px;
+}
+
+.prodcut-sku li:hover {
+  background-color: #2ed87b; /* For Chrome5+, Safa*/
+  color: white;
+  border: 1px solid #2ed87b;
+}
+.prodcut-sku li {
+  display: inline-block;
+  padding: 0 2px 0 2px;
+  cursor: pointer;
+  color: black;
+  margin: 3px;
+  border: 1px solid #ccc;
+}
+
+.prodcut-sku .active {
+  background-color: #2ed87b; /* For Chrome5+, Safa*/
+  color: white;
+  border: 1px solid #2ed87b;
+}

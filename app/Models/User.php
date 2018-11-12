@@ -48,6 +48,13 @@ class User extends Authenticatable
         return $this->hasOne(Wish::class,'user_id','id');
     }
 
+    public function getWishCountAttribute()
+    {
+        $ids = $this->wishes->product_ids;
+        $ids = json_decode($ids,true);
+        return count($ids);
+    }
+
     /**
      * 用户的购物车
      */

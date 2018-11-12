@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Http\Requests\CartRequest;
 
 class CartController extends Controller
 {
     public function list()
     {
-        $carts = Cart::getCartByProductSkus();
+        $carts = Cart::getCartByProductSku();
 
         $totalPrice = $this->totalAllPrice($carts);
 
@@ -44,5 +45,25 @@ class CartController extends Controller
             'message' => '未找到'
         ], 404);
 
+    }
+
+    public function create(CartRequest $request)
+    {
+        $skuId = $request->skuId;
+        $uid = \Auth::id();
+        $amount = $request->amount ?? 1;
+
+        # 查找购物车中是否有库存
+        # 存在库存的话则++
+        if( $cart = Cart::where('user_id',$uid)->Where('product_sku_id',$skuId)->first() ) {
+            $cart->increment('amount',1);
+        }else{
+            Cart::create([
+                'user_id' => $uid,
+                'product_sku_id' => $skuId,
+                'amount' => $amount
+            ]);
+        }
+        return redirect()->route('cart');
     }
 }

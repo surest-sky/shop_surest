@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Banner;
 
 class ProductController extends Controller
 {
@@ -13,9 +14,12 @@ class ProductController extends Controller
         if( !$pid || !$product = Product::getSimpleProductOrComment($pid) ) {
             return view('error.404',['msg'=>'商品不存在']);
         }
+        $cid = $product->category->id;
 
-        dd($product);
-        return view('product.simple',compact('product'));
+        # 推荐
+        $goods = Product::getGoodsProductOnCategory($cid,$pid)->take(4);
+
+        return view('product.simple',compact('product','goods'));
     }
 
     public function list(Request $request,Product $product)

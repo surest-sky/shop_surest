@@ -7,18 +7,20 @@ use Illuminate\Support\Facades\Auth;
 
 class Cart extends Model
 {
-    public function productSkus()
+    protected $guarded = [];
+
+    public function productSku()
     {
         return $this->belongsTo(ProductSku::class,'product_sku_id','id');
     }
 
-    public static function getCartByProductSkus()
+    public static function getCartByProductSku()
     {
         $user = Auth::user();
 
         $products = collect([]);
 
-        $carts = self::with(['productSkus','productSkus.image','productSkus.product.category'])->where('user_id',$user->id)->get();
+        $carts = self::with(['productSku','productSku.image','productSku.product.category'])->where('user_id',$user->id)->get();
 
         return $carts;
     }
@@ -26,22 +28,22 @@ class Cart extends Model
 
     public function getImageAttribute()
     {
-        return $this->productSkus->image->src;
+        return $this->productSku->image->src;
     }
 
     public function getNameAttribute()
     {
-        return $this->productSkus->name;
+        return $this->productSku->name;
     }
 
     public function getCnameAttribute()
     {
-        return $this->productSkus->product->category->name;
+        return $this->productSku->product->category->name;
     }
 
     public function getPriceAttribute()
     {
-        return $this->productSkus->price;
+        return $this->productSku->price;
     }
 
     public function getTotalPriceAttribute()

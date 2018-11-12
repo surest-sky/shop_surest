@@ -42,8 +42,8 @@
         <div class="container">
             <div class="row row-rl-0 row-tb-20 row-md-cell">
                 <div class="brand col-md-3 t-xs-center t-md-left valign-middle">
-                    <a href="/" class="logo">
-                        <img src="assets/images/logo.png" alt="" width="250">
+                    <a href="{{ route('index') }}" class="logo">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="" width="250">
                     </a>
                 </div>
                 <div class="header-search col-md-9">
@@ -74,12 +74,24 @@
                             <div class="header-cart">
                                 <a href="{{ route('cart') }}">
                                     <span class="icon lnr lnr-cart"></span>
-                                    <div><span class="cart-number">0</span>
+                                    <div>
+                                        @if( $user = Auth::user() )
+                                            <span class="cart-number" style="background-color: #2ed87b">{{ $user->carts->count() }}</span>
+                                        @else
+                                            <span class="cart-number">0</span>
+                                        @endif
                                     </div>
                                     <span class="title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">购物车</font></font></span>
                                 </a>
                             </div>
                             <div class="header-wishlist ml-20">
+                                <div>
+                                    @if( $user = Auth::user() )
+                                        <span class="cart-number" style="background-color: #2ed87b" >{{ $user->wishCount }}</span>
+                                    @else
+                                        <span class="cart-number">0</span>
+                                    @endif
+                                </div>
                                 <a href="{{ route('wish') }}">
                                     <span class="icon lnr lnr-heart font-30"></span>
                                     <span class="title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">收藏</font></font></span>

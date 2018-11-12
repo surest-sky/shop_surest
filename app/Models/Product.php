@@ -39,7 +39,7 @@ class Product extends Model
      */
     public static function getPageProduct()
     {
-        $products = self::with(['productSkus','category'])->orderBy('created_at',self::type)
+        $products = self::with(['productSkus','category','comments.user'])->orderBy('created_at',self::type)
                     ->paginate(self::total);
 
         return $products;
@@ -99,6 +99,24 @@ class Product extends Model
         return $this->hasMany(Comment::class, 'product_id','id');
     }
 
+    /**
+     * 推荐的列表
+     * 算法：
+     * 分类优先
+     * 销量优先
+     * 评论优先
+     * 价格优先
+     */
+    public static function getGoodsProductOnCategory($cid,$pid)
+    {
+        $products = self::getCacheProduct();
+
+        $products = $products->where('category_id',$cid)->whereNotIn('id',$pid)->sortByDesc('sold_count')->take(10);
+
+        $products->shuffle();
+
+        return $products;
+    }
     /**
      * 修改器
      * @return int
