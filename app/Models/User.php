@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class,'user_id','id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class,'user_id','id');
+    }
+
     public static function getUserInfo($val,$field)
     {
         if( !$field ) {
@@ -78,5 +83,5 @@ class User extends Authenticatable
         return $users;
     }
 
-
+    
 }

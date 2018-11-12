@@ -80,7 +80,7 @@
                 <section class="section latest-deals-area ptb-30">
                     <header class="panel ptb-15 prl-20 pos-r mb-30">
                         <h3 class="section-title font-18">最新商品</h3>
-                        <a href="{{ route('product.showAll') }}" class="btn btn-o btn-xs pos-a right-10 pos-tb-center">查看所有</a>
+                        <a href="{{ route('product.list') }}" class="btn btn-o btn-xs pos-a right-10 pos-tb-center">查看所有</a>
                     </header>
 
                     <div class="row row-masnory row-tb-20">

@@ -52,6 +52,9 @@ Route::group(['middleware'=>'web'],function (){
 
     Route::post('/logout','Auth\LoginController@logout')->name('logout');
 
+
+
+
     # 必须登录的情况下使用
     Route::middleware(['auth'])->group(function (){
         # 注销
@@ -82,7 +85,7 @@ Route::group(['middleware'=>'web'],function (){
 
     # 商品模块
     Route::get('/product/{id}','ProductController@show')->name('product.show');
-    Route::get('/product','ProductController@showAll')->name('product.showAll');
+    Route::get('/product','ProductController@list')->name('product.list');
 
 
 });

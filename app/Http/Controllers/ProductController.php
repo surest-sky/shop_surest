@@ -9,14 +9,16 @@ class ProductController extends Controller
 {
     public function show(Request $request)
     {
-        $id = $request->id;
-        if( !$id || !$product = Product::find($id) ) {
+        $pid = $request->id;
+        if( !$pid || !$product = Product::getSimpleProductOrComment($pid) ) {
             return view('error.404',['msg'=>'商品不存在']);
         }
-        return view('product.show',compact('product'));
+
+        dd($product);
+        return view('product.simple',compact('product'));
     }
 
-    public function showAll(Request $request,Product $product)
+    public function list(Request $request,Product $product)
     {
         $products = Product::getProductsAll(false);
 

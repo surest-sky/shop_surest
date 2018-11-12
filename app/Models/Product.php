@@ -55,6 +55,11 @@ class Product extends Model
         return $products;
     }
 
+    public static function getSimpleProductOrComment($pid)
+    {
+        $product = self::with('comments')->where('id',$pid)->first();
+        return $product;
+    }
     /**
      * 关联图片
      * 一对一
@@ -85,6 +90,14 @@ class Product extends Model
         return $this->hasMany(ProductSku::class,'product_id','id');
     }
 
+    /**
+     * 关联评论
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'product_id','id');
+    }
 
     /**
      * 修改器
