@@ -2043,3 +2043,29 @@
   color: white;
   border: 1px solid #2ed87b;
 }
+
+.social-icons__item .fa {
+  background-color: #dd4b39
+}
+.social-icons__item .fa-weibo {
+   background-color: #39b0dd
+ }
+
+.social-icons__item .fa-weibo:hover {
+  background-color: #3190B9
+}
+.social-icons__item .fa-wechat {
+  background-color: #394ddd
+}
+
+.social-icons__item .fa-wechat:hover {
+  background-color: #374bd5
+}
+.social-icons__item .fa-qq {
+  background-color: #39dda0
+}
+.social-icons__item .fa-qq:hover {
+  background-color: #37d095
+}
+
+

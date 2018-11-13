@@ -15,10 +15,11 @@ class CreateAddressesTable extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('country')->comment('国家');
-            $table->string('province')->comment('市区');
-            $table->string('city')->comment('城市');
-            $table->string('detail')->comment('详细地址');
+            $table->string('name')->comment('收货人');
+            $table->string('account')->comment('联系方式');
+            $table->string('address')->comment('收货地址');
+            $table->string('detail')->comment('收货详细地址');
+            $table->integer('user_id')->unsigned();
             $table->softDeletes();
             $table->timestamps();
         });

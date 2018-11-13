@@ -15,7 +15,7 @@
                 <div class="col-sm-12 col-md-8">
                     <ul class="nav-top nav-top-right list-inline t-xs-center t-md-right">
                         @if( $user = Auth::user())
-                            <li><a href="#"><i class="fa fa-user"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>{{ $user->name }}</font></a>
+                            <li><a href="{{ route('me.index') }}"><i class="fa fa-user"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>{{ $user->name }}</font></a>
                             </li>
                             <li id="logout-click"><a href="javascript:;"><i class="fa fa-sign-out"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>注销</font></a>
                             </li>

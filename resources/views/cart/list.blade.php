@@ -7,7 +7,7 @@
                 <div class="cart-area ptb-60">
                     <div class="container">
                         <div class="cart-wrapper">
-                            <h3 class="h-title mb-30 t-uppercase">My Cart</h3>
+                            <h3 class="h-title mb-30 t-uppercase">我的购物车</h3>
                             <table id="cart_list" class="cart-list mb-30">
                                 <thead class="panel t-uppercase">
                                 <tr>

@@ -22,7 +22,7 @@
                                             </figure>
                                         </div>
                                         <div class="media-body valign-middle">
-                                            <h5 class="title mb-5 t-uppercase"><a href="#">{{ $product->name }}</a></h5>
+                                            <h5 class="title mb-5 t-uppercase"><a href="{{ route('product.show',['id' => $product->id]) }}">{{ $product->name }}</a></h5>
                                             <div class="rating mb-10">
                                                         <span class="rating-stars rate-allow" data-rating="{{ $product->rating }}">
 				                        		<i class="fa fa-star-o"></i>

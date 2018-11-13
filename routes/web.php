@@ -54,7 +54,6 @@ Route::group(['middleware'=>'web'],function (){
 
 
 
-
     # 必须登录的情况下使用
     Route::middleware(['auth'])->group(function (){
         # 注销
@@ -71,6 +70,19 @@ Route::group(['middleware'=>'web'],function (){
         Route::get('/carts','CartController@list')->name('cart');
         Route::delete('/carts','CartController@delete')->name('cart.delete');
         Route::put('/carts','CartController@create')->name('cart.create');
+
+
+        # 订单信息
+        Route::get('/order', 'OrderController@list')->name('order.list');  # 支付
+        Route::post('/order/{id}', 'OrderController@simple')->name('order');
+
+        # 个人资料页面
+        Route::get('/me', 'MeController@index')->name('me.index');
+
+        # 收货地址
+        Route::get('/me/address', 'MeController@address')->name('me.address');
+        Route::get('/me/address/add_edit', 'MeController@add')->name('me.address.add_edit');
+
 
     });
 

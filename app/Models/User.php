@@ -90,5 +90,27 @@ class User extends Authenticatable
         return $users;
     }
 
+    public static function getUserDetailInfo($uid)
+    {
+        $user = self::where('id',$uid)->select('name','email','phone','avatar','type')->first();
+        return $user;
+    }
+
+    public function getLoginsAttribute()
+    {
+        if( !$type = $this->type ?? '' ) {
+            return null;
+        }
+        $type = json_decode($type,true);
+        $type = collect($type) ;
+
+        return $type;
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class , 'user_id' , 'id');
+    }
+
     
 }
