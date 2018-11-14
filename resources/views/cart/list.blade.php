@@ -1,11 +1,35 @@
 @extends('layout.layout')
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/vendors/select-searchable/jquery.searchableSelect.css') }}">
+@stop
+
 @section('title','我的愿望清单')
+
 @section('main')
     <main id="mainContent" class="main-content">
         <div class="page-container">
             <div class="container">
                 <div class="cart-area ptb-60">
-                    <div class="container">
+
+                    <form action="{{ route('order.show') }}" method="post">
+                        @csrf()
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        @if($status = session('$status') )
+                            {{ $status }}
+                        @endif
+
+                        <div class="container">
                         <div class="cart-wrapper">
                             <h3 class="h-title mb-30 t-uppercase">我的购物车</h3>
                             <table id="cart_list" class="cart-list mb-30">
@@ -28,13 +52,14 @@
                                             </figure>
                                         </div>
                                         <div class="media-body valign-middle">
+                                            <input type="hidden" name="pids[]" value="{{ $cart->productSku->id }}">
                                             <h6 class="title mb-15 t-uppercase"><a href="{{ route('product.show',['id' => $cart->productSku->product->id ]) }}">{{ $cart->name }}</a></h6>
                                             <div class="type font-12"><span class="t-uppercase">归类 : </span>{{ $cart->cname }}</div>
                                         </div>
                                     </td>
                                     <td>￥{{ $cart->price }}</td>
                                     <td>
-                                        <input class="quantity-label" type="number" data-price="{{ $cart->productSku->price }}" onchange="amount(this)" value="{{ $cart->amount }}">
+                                        <input class="quantity-label" type="number" name="count[]" data-price="{{ $cart->productSku->price }}" onchange="amount(this)" value="{{ $cart->amount }}">
                                     </td>
                                     <td>
                                         <div class="sub-total">￥ <span class="single-total-price">{{ $cart->totalPrice }}</span></div>
@@ -51,17 +76,16 @@
                             </table>
                             <div class="cart-price">
                                 <h5 class="t-uppercase mb-20">购物车结算</h5>
-                                <ul class="panel mb-20">
-
+                                <ul class="panel mb-20" style="overflow: visible">
                                     <li>
                                         <div class="item-name">
                                             优惠券
                                         </div>
                                         <div>
-                                            <input type="text" class="form-control input-lg search-input" name="优惠券" id="" value="aaaa">
+                                            <input type="text" disabled class="form-control input-lg search-input" name="优惠券" id="" value="暂未开启">
                                         </div>
                                         <div>
-                                            <button onclick="checkCoupon(this)" class="btn btn-lg btn-search btn-block">检查优惠券</button>
+                                            <button type="button" disabled onclick="" class="btn btn-lg btn-search btn-block">检查优惠券</button>
                                         </div>
 
                                     </li>
@@ -80,6 +104,18 @@
                                     </li>
                                     <li>
                                         <div class="item-name">
+                                            收货地址选择
+                                        </div>
+                                        <div class="price">
+                                            <select name="address_id" id="select">
+                                                @foreach($addresses as $address)
+                                                    <option value="{{ $address->id }}">{{ $address->address }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-name">
                                             <strong class="t-uppercase">最后价格</strong>
                                         </div>
                                         <div class="price" >￥<span id="after-price">{{ $totalPrice }}</span>
@@ -87,11 +123,13 @@
                                     </li>
                                 </ul>
                                 <div class="t-right">
-                                    <a href="checkout_method.html" class="btn btn-rounded btn-lg">支付</a>
+                                    <button type="submit" class="btn btn-rounded btn-lg">支付</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -99,7 +137,10 @@
 @stop
 
 @section('script')
+    <script src="{{ asset('assets/vendors/select-searchable/jquery.searchableSelect.js') }}"></script>
     <script>
+        $('#select').searchableSelect();
+        $('.searchable-select-caret').remove();
         function cart_del(obj,id)
         {
             var r = confirm("是真的要删除它吗")
@@ -233,6 +274,7 @@
                     })
                 }
             });
+
         }
     </script>
 @stop

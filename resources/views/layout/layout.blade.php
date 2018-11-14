@@ -32,6 +32,7 @@
     <meta name="author" content="CODASTROID">
 
     @include('layout._css')
+    @yield('css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>

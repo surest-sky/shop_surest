@@ -98,7 +98,7 @@ class User extends Authenticatable
 
     public function getLoginsAttribute()
     {
-        if( !$type = $this->type ?? '' ) {
+        if( !$type = $this->type  ) {
             return null;
         }
         $type = json_decode($type,true);
@@ -107,9 +107,9 @@ class User extends Authenticatable
         return $type;
     }
 
-    public function addresses()
+    public function address()
     {
-        return $this->hasMany(Address::class , 'user_id' , 'id');
+        return $this->belongsTo(Address::class , 'user_id' , 'id');
     }
 
     

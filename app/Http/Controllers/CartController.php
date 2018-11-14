@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Http\Requests\CartRequest;
+use App\Models\Address;
 
 class CartController extends Controller
 {
@@ -14,7 +15,9 @@ class CartController extends Controller
 
         $totalPrice = $this->totalAllPrice($carts);
 
-        return view('cart.list',compact('carts','totalPrice'));
+        $addresses = Address::getAddress();
+
+        return view('cart.list',compact('carts','totalPrice','addresses'));
     }
 
     public function totalAllPrice($carts)

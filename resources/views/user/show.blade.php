@@ -43,11 +43,16 @@
                                         <br>
                                         <ul class="social-icons social-icons--colored list-inline">
                                             <li>我的绑定： </li>
+                                            @if ($user->logins)
                                             @foreach($user->logins as $type)
                                                 <li class="social-icons__item">
                                                     <a href="#" onclick="alert('你已经绑定')"><i class="fa fa-{{ $type }}"></i></a>
                                                 </li>
                                             @endforeach
+                                                <li class="social-icons__item">
+                                                    暂未绑定
+                                                </li>
+                                            @endif
                                         </ul>
                                         <br>
                                         <ul>
