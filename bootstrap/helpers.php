@@ -66,3 +66,13 @@ function getRouteList(){
     }
     return $list;
 }
+
+function checkAddress($val) {
+    $parttrn = '#(.*)?[/-](.*)?[-/](.*)?#';
+    preg_match_all($parttrn, $val, $match);
+    if( empty($match) ) {
+        return false;
+    }
+
+    return $match;
+}

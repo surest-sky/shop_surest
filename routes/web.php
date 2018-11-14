@@ -81,7 +81,10 @@ Route::group(['middleware'=>'web'],function (){
 
         # 收货地址
         Route::get('/me/address', 'MeController@address')->name('me.address');
-        Route::get('/me/address/add_edit', 'MeController@add')->name('me.address.add_edit');
+        Route::get('/me/address/add_edit', 'MeController@add_edit')->name('me.address.add_edit');
+
+        # 处理收货地址
+        Route::post('/me/address', 'MeController@create')->name('me.address.create');
 
 
     });
@@ -106,7 +109,7 @@ Route::namespace('Admin')->group(function () {
     Route::name('admin.')->prefix('admin')->group(function (){
 
         // 必须登录状态下才能进入
-        Route::group(['middleware' => ['auth.admin','auth']], function () {
+        Route::group(['middleware' => ['auth.admin']], function () {
 
             // 权限控制路由
             Route::group(['middleware'=>'admin.permission'],function (){
