@@ -9,4 +9,5 @@ return [
     'login' =>storage_path('logs/login/'.date('Y-m-d') . '.log'),
     'sms' =>storage_path('logs/sms/'.date('Y-m-d') . '.log'),
     'sys' =>storage_path('logs/sys/'.date('Y-m-d') . '.log'),
+    'order' =>storage_path('logs/order/'.date('Y-m-d') . '.log'),
 ];

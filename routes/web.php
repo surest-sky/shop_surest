@@ -73,8 +73,9 @@ Route::group(['middleware'=>'web'],function (){
 
 
         # 订单信息
-        Route::get('/order/{no}', 'OrderController@simple')->name('order');
-        Route::post('/order/show', 'OrderController@show')->name('order.show');
+        Route::get('/order/list', 'OrderController@list')->name('order.list');
+        Route::get('/order/{id}', 'OrderController@show')->name('order.show');
+        Route::post('/order/create', 'OrderController@create')->name('order.create');
 
         # 个人资料页面
         Route::get('/me', 'MeController@index')->name('me.index');

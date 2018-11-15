@@ -29,7 +29,7 @@ trait ProductCacheTrait
         }
     }
 
-    public function setCacheProduct()
+    public static function setCacheProduct()
     {
         # 检测是否使用redis缓存
         if( self::isRedis() ){

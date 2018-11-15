@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="cart-area ptb-60">
 
-                    <form action="{{ route('order.show') }}" method="post">
+                    <form action="{{ route('order.create') }}" method="post">
                         @csrf()
 
                         @if ($errors->any())
@@ -109,7 +109,7 @@
                                         <div class="price">
                                             <select name="address_id" id="select">
                                                 @foreach($addresses as $address)
-                                                    <option value="{{ $address->id }}">{{ $address->address }}</option>
+                                                    <option value="{{ $address->id }}">{{ $address->addresses }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

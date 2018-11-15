@@ -1,5 +1,5 @@
 @extends('layout.layout')
-
+@section('title',$products->first()->category->name)
 @section('main')
     <main id="mainContent" class="main-content">
         <div class="page-container ptb-10">
@@ -70,7 +70,7 @@
                                                 </span>
                                             </div>
                                             <h3 class="deal-title mb-10">
-                                                <a href="deal_single.html">{{ $product->name }}</a>
+                                                <a href="{{ route('product.show',['id' => $product->id]) }}">{{ $product->name }}</a>
                                             </h3>
                                             <ul class="deal-meta list-inline mb-10 color-mid">
                                                 <li>

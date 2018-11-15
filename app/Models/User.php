@@ -79,6 +79,10 @@ class User extends Authenticatable
         return $user;
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id' , 'id');
+    }
     /**
      * 获取所有的用户信息
      * @param $bol boolean 是否倒叙
