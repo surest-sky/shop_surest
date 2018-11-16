@@ -9,7 +9,6 @@
 namespace App\Http\Traits;
 use App\Exceptions\OrderException;
 use App\Models\Order;
-use App\Notifications\OrderToMailSuccess;
 
 trait OrderAlipayTrait
 {
@@ -30,26 +29,18 @@ trait OrderAlipayTrait
             $order->closed = 1;
             $order->payed_at = $time;
             $order->save();
+
+            # 邮件通知
+            Order::sendInfo($order,'订单支付成功');
+
+            # 销量增加
+            Order::incrCount($order);
             
         }catch (\Exception $exception) {
 
             throw new OrderException([
                 'message' => '订单处理错误：no: '. $no . $exception->getMessage()
             ]);
-        }
-    }
-
-    /**
-     * 邮件发送
-     * @param $order
-     */
-    public static function sendInfo($order)
-    {
-        $user = $order->user();
-
-        if( $user->email ) {
-            # 发送给用户一个消息，叫他准备支付
-            $order->user()->notify(new OrderToMailSuccess($order));
         }
     }
 }

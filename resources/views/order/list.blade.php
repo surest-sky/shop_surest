@@ -14,7 +14,9 @@
                 <div class="row row-rl-12 row-tb-20">
 
                     <div class="page-sidebar col-xs-12 col-sm-12 col-md-12">
-
+                        @if($status = session('status'))
+                            {{ $status }}
+                        @endif
                         <!-- Blog Sidebar -->
                         <aside class="sidebar blog-sidebar">
                             <div class="row row-tb-10">

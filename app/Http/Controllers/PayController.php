@@ -22,7 +22,7 @@ class PayController extends Controller
     public function payByAlipay(Request $request, Order $order)
     {
         $id = $request->id;
-        if( !$order = Order::find($id) ) {
+        if( !$order = Order::with('user')->where('id',$id)->first() ) {
             return view('error.404',['msg'=>'订单未找到']);
         }
 
@@ -30,7 +30,7 @@ class PayController extends Controller
         $this->authorize('own',$order);
 
         if( $order->closed || ($order->expir_at < Carbon::now())) {
-            return view('error.404',['msg'=>'订单已经过期']);
+            return view('error.404',['msg'=>'订单已经关闭']);
         }
 
         $data = [
@@ -40,7 +40,7 @@ class PayController extends Controller
         ];
 
         # 发送给用户一个消息，叫他准备支付
-        Order::sendInfo($order);
+        Order::sendInfo($order,'创建订单成功，待支付');
 
         return app('alipay')->web($data);
 

@@ -56,6 +56,11 @@
                                                     <th colspan="1">商品总量: {{ sprintf('%d',$order->total_count) }}</th>
                                                     <th colspan="2">商品总价: {{ $order->total_price }}</th>
                                                 </tr>
+                                                @if($data = $order->ship_data)
+                                                    <tr>
+                                                        <th>收货地址： {{ $data }}</th>
+                                                    </tr>
+                                                @endif
                                                 </tbody>
                                             </table>
                                             @if(!$order->closed)

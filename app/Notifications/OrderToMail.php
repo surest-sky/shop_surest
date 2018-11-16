@@ -13,14 +13,16 @@ class OrderToMail extends Notification implements ShouldQueue
     use Queueable;
 
     protected $order;
+    protected $msg;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order,$msg)
     {
         $this->order = $order;
+        $this->msg = $msg;
     }
 
     /**
@@ -43,9 +45,8 @@ class OrderToMail extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('创建订单成功')
+                    ->line($this->msg)
                     ->action('订单详情', route('order.show',['id' => $this->order->id]))
-                    ->line('请尽快支付')
                     ->subject('订单支付');
     }
 

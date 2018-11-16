@@ -12,12 +12,17 @@ use Illuminate\Support\Facades\DB;
 use App\Exceptions\OrderException;
 use App\Models\Cart;
 use App\Http\Traits\OrderAlipayTrait;
+use App\Http\Traits\OrderHanlerTrait;
 
 class Order extends Model
 {
     use SoftDeletes;
 
+    # 引入支付宝支付模块
     use OrderAlipayTrait;
+
+    # 引入相关的订单处理模块
+    use OrderHanlerTrait;
 
     const REFUND_STATUS_PENDING = 'pending';
     const REFUND_STATUS_APPLIED = 'applied';
@@ -60,6 +65,11 @@ class Order extends Model
         'extra' => 'json',
     ];
 
+
+    public function user()
+    {
+        return $this->hasOne(User::class,'id','user_id');
+    }
     /**
      * 数据组装
      * @param $request
@@ -80,6 +90,12 @@ class Order extends Model
         return $data;
     }
 
+    /**
+     * 创建一个订单
+     * @param $result
+     * @param $data
+     * @return Order
+     */
     public static function createNewOrder($result,$data)
     {
         DB::beginTransaction();
@@ -113,8 +129,6 @@ class Order extends Model
 
 
         }catch (\Exception $e) {
-
-            dd($e->getMessage());
             DB::rollback();
 
             new OrderException([
@@ -147,9 +161,12 @@ class Order extends Model
 
         # 减库存
         foreach ($productSkus as $key=>$productSku) {
+
+            # 减库存
             $productSku->decrement('stock',$data[$productSku->id]);
 
-            $arr['product_skus'][$key]['id'] = $productSku->product->id;
+            $arr['product_skus'][$key]['product_id'] = $productSku->product->id;
+            $arr['product_skus'][$key]['id'] = $productSku->id;
             $arr['product_skus'][$key]['name'] = $productSku->name;
             $arr['product_skus'][$key]['count'] = $data[$productSku->id];
             $arr['product_skus'][$key]['price'] = $productSku->price;
@@ -247,6 +264,10 @@ class Order extends Model
 
     public function getStatusAttribute()
     {
+        # 当支付已经关闭的时候，查看订单状态
+        if( $this->closed ) {
+            return $this->pay_status;
+        }
         $expir = strtotime($this->expir_at) - time();
 
         if( $expir < 0 ) {
@@ -258,5 +279,7 @@ class Order extends Model
 
         return '剩余：' . $minute .'分钟 - ' . $second . '秒' . ' 将关闭订单';
     }
+
+
 
 }
