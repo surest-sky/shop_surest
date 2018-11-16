@@ -12,6 +12,7 @@
         "intervention/image": "^2.4",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
+        "maatwebsite/excel": "^3.1",
         "mews/captcha": "^2.2",
         "monolog/monolog": "^1.23",
         "overtrue/easy-sms": "^1.1",

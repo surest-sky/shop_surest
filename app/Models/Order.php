@@ -13,6 +13,7 @@ use App\Exceptions\OrderException;
 use App\Models\Cart;
 use App\Http\Traits\OrderAlipayTrait;
 use App\Http\Traits\OrderHanlerTrait;
+use App\Http\Traits\OrderToAdminTrait;
 
 class Order extends Model
 {
@@ -23,6 +24,9 @@ class Order extends Model
 
     # 引入相关的订单处理模块
     use OrderHanlerTrait;
+
+    # 引入后台处理模块
+    use OrderToAdminTrait;
 
     const REFUND_STATUS_PENDING = 'pending';
     const REFUND_STATUS_APPLIED = 'applied';
@@ -65,6 +69,12 @@ class Order extends Model
         'extra' => 'json',
     ];
 
+    public $appends = [
+        'refundOrStatus',
+        'ShipOrStatus',
+        'PayOrStatus',
+        'shipOrdata'
+    ];
 
     public function user()
     {
@@ -238,28 +248,41 @@ class Order extends Model
     }
 
 
-    /**
-     * 减库存
-     */
-    public function stockIncr($ids)
-    {
-
-    }
-
 
     public function getExtraAttribute($value)
     {
         return json_decode($value,true);
     }
 
-    public function getPayStatusAttribute($value)
+
+    public function getPayOrStatusAttribute()
     {
+        $value = $this->pay_status;
         return self::$payStatusMap[$value];
     }
 
-    public function getShipStatusAttribute($value)
+    public function getRefundOrStatusAttribute()
     {
+        $value = $this->refund_status;
+        return self::$refundStatusMap[$value];
+    }
+
+    public function getShipOrStatusAttribute()
+    {
+        $value = $this->ship_status;
         return self::$shipStatusMap[$value];
+    }
+
+    public function getShipOrdataAttribute()
+    {
+        $data = explode('-',$this->ship_data);
+        $company = \App\Models\Express::where('serial',$data[0])->select('name')->first()->name;
+        return [
+            'company' => $company,
+            'no' => $data[1],
+            'serial' => $data[0]
+        ];
+
     }
 
     public function getStatusAttribute()

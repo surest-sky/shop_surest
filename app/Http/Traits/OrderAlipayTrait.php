@@ -24,7 +24,7 @@ trait OrderAlipayTrait
         try {
             $order = Order::where('no',$no)->first();
             $order->pay_status = Order::PAY_STATUS_DELIVERED;
-            $order->pay_method = 'apliy';
+            $order->pay_method = '支付宝';
             $order->pay_no = $apliy_no;
             $order->closed = 1;
             $order->payed_at = $time;

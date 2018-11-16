@@ -85,8 +85,8 @@
                 <dl class="layui-nav-child">
                     <dd class="">
                     <dd class="">
-                        <a href="javascript:;" _href="./welcome.html">
-                            <cite>订单列表（待开发）</cite>
+                        <a href="javascript:;" _href="{{ route('admin.order') }}">
+                            <cite>订单列表</cite>
                         </a>
                     </dd>
                     </dd>

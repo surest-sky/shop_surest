@@ -11,9 +11,6 @@
 - zgldh/qiniu-laravel-storage：
 
 - predis
-## 使用的相关扩展
-
-- layui 、layedit
 
 - 
 

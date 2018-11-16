@@ -95,6 +95,7 @@ Route::group(['middleware'=>'web'],function (){
         Route::put('/me/address', 'MeController@update')->name('me.address.update');
 
 
+
     });
 
 
@@ -189,6 +190,19 @@ Route::group(['middleware'=>'web'],function (){
                     Route::get('/banner/store/{id?}', 'BannerController@add')->name('banner.add');
                     Route::post('/banner/store', 'BannerController@create')->name('banner.create');
                     Route::delete('/banner','BannerController@delete')->name('banner.delete');
+
+
+                    /**
+                     * 订单模块管理
+                     */
+                    Route::get('/order', 'OrderController@list')->name('order');
+                    Route::get('/order/{id}', 'OrderController@show')->name('order.show');
+                    Route::post('/order/ship', 'OrderController@ship')->name('order.ship');
+//                    Route::post('/product/store', 'ProductController@create')->name('product.create');
+
+
+                    Route::get('/express', 'ExpressController@import')->name('import');
+
 
                 });
             });
