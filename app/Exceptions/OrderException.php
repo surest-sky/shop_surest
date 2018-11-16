@@ -16,7 +16,6 @@ class OrderException extends BaseException
     {
         parent::__construct($errorInfo);
         $this->report();
-        $this->render();
 
     }
 
@@ -25,18 +24,13 @@ class OrderException extends BaseException
      */
     public function report()
     {
-        $logger = new BaseLoghandler(config('log.sys'));
+
+        $logger = new BaseLoghandler(config('log.order'));
         $logger->write($this->message);
     }
 
-
     public function render()
     {
-        return response()->view(
-            'error.show',
-            [
-                'message' => '订单异常，请重试'
-            ]
-        );
+        
     }
 }

@@ -62,10 +62,10 @@
 
                                                 <div class="row row-tb-10">
                                                     <div class="col-xs-12  col-md-6">
-                                                        <button type="button" data-no="{{ $order->no }}" class="btn btn-success btn-block btn-sm">微信支付</button>
+                                                        <a  href="" type="button" data-no="{{ $order->no }}" class="btn btn-success btn-block btn-sm">微信支付</a>
                                                     </div>
                                                     <div class="col-xs-12  col-md-6">
-                                                        <button type="button" data-no="{{ $order->no }}" class="btn btn-info btn-block btn-sm">支付宝支付</button>
+                                                        <a href="{{ route('pay.alipay', ['id' => $order->id]) }}" type="button" data-no="{{ $order->no }}" class="btn btn-info btn-block btn-sm">支付宝支付</a>
                                                     </div>
                                                 </div>
                                             @endif

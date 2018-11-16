@@ -11,10 +11,14 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\OrderException;
 use App\Models\Cart;
+use App\Http\Traits\OrderAlipayTrait;
 
 class Order extends Model
 {
     use SoftDeletes;
+
+    use OrderAlipayTrait;
+
     const REFUND_STATUS_PENDING = 'pending';
     const REFUND_STATUS_APPLIED = 'applied';
     const REFUND_STATUS_PROCESSING = 'processing';
@@ -253,7 +257,6 @@ class Order extends Model
         $second = $expir % 60;
 
         return '剩余：' . $minute .'分钟 - ' . $second . '秒' . ' 将关闭订单';
-
     }
 
 }

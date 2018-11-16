@@ -44,7 +44,7 @@
                                                         </td>
                                                         <td>{{ $order->total_price }}</td>
                                                         <td style="color: red;">{{ $order->status }}</td>
-                                                        <td><a href="{{ route('order.show',['id' => $order->id]) }}ca" class="btn btn-success btn-block btn-sm">查看</a></td>
+                                                        <td><a href="{{ route('order.show',['id' => $order->id]) }}" class="btn btn-success btn-block btn-sm">查看</a></td>
                                                 </tr>
                                                 @endforeach
                                                 </tbody>

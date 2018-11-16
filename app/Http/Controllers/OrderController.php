@@ -16,7 +16,6 @@ class OrderController extends Controller
     public function list()
     {
         $orders = Auth::user()->orders;
-
         return view('order.list',compact('orders'));
     }
     

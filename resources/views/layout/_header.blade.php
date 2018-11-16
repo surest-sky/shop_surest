@@ -23,6 +23,8 @@
                                 <ul>
                                     <li><a href="{{ route('me.address') }}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我的收货地址</font></font></a>
                                     </li>
+                                    <li><a href="{{ route('order.list') }}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我的订单</font></font></a>
+                                    </li>
                                 </ul>
                             </li>
                             <li id="logout-click"><a href="javascript:;"><i class="fa fa-sign-out"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>注销</font></a>
