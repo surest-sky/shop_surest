@@ -40,7 +40,7 @@
                                         <div class="col-sm-12 col-md-12">
                                             <div class="col-sm-6 col-md-6">
                                                 <label class="sr-only"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">手机号码/邮箱</font></font></label>
-                                                <input value="{{ old('name') ?? '' }}" id="account" type="text" name="model" class="form-control input-lg" placeholder="手机号码/邮箱">
+                                                <input value="{{ old('model') ?? '' }}" id="account" type="text" name="model" class="form-control input-lg" placeholder="手机号码/邮箱">
                                                 <input type="hidden" name="key" id="key"  value="{{ old('key') ?? session('key') ?? '' }}">
                                             </div>
                                             <div class="col-sm-3 col-md-3">

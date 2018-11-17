@@ -10,9 +10,7 @@ class WishController extends Controller
 {
     public function list()
     {
-        $uid = Auth::id();
-
-        $products = Wish::getProducts($uid);
+        $products = Wish::getProducts();
 
         return view('wish.list', compact('products') );
     }

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Handle\ExpressHandler;
+use App\Redis\ExpressCache;
 
 class Express extends Model
 {
@@ -16,10 +16,8 @@ class Express extends Model
         return self::query()->select('serial','name')->get();
     }
 
-    public static function getDetail($data)
+    public static function getDetail($order)
     {
-        $handler = new ExpressHandler();
-        $result = $handler->getOrderTracesByJson($data['serial'],$data['no']);
-        return $result;
+        return ExpressCache::getValue($order->id);
     }
 }

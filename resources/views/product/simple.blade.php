@@ -79,7 +79,7 @@
                                     <form class="horizontal-form pt-30" action="#">
                                         <div class="row row-v-10">
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control" placeholder="姓名" value="{{ Auth::user()->name }}">
+                                                <input type="text" class="form-control" placeholder="姓名" value="{{ Auth::user()->name ?? '' }}">
                                             </div>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control" placeholder="邮件" value="{{ Auth::user()->email ?? '' }}">

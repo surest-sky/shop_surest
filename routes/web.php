@@ -52,6 +52,11 @@ Route::group(['middleware'=>'web'],function (){
 
     Route::post('/logout','Auth\LoginController@logout')->name('logout');
 
+    Route::post('/subscriber','SubscriberController@store')->name('subscriber');
+
+
+
+
 
 
     # 必须登录的情况下使用
@@ -76,6 +81,7 @@ Route::group(['middleware'=>'web'],function (){
         Route::get('/order', 'OrderController@list')->name('order.list');
         Route::get('/order/{id}', 'OrderController@show')->name('order.show');
         Route::post('/order/create', 'OrderController@create')->name('order.create');
+        Route::post('/order/refund', 'OrderController@refund')->name('order.refund');
 
 
         Route::get('/alipay/return','PayController@alipayReturn')->name('pay.alipay.return'); # 前端回调页面
@@ -198,6 +204,7 @@ Route::group(['middleware'=>'web'],function (){
                     Route::get('/order', 'OrderController@list')->name('order');
                     Route::get('/order/{id}', 'OrderController@show')->name('order.show');
                     Route::post('/order/ship', 'OrderController@ship')->name('order.ship');
+                    Route::post('/order/refund', 'OrderController@refund')->name('order.refund');
 //                    Route::post('/product/store', 'ProductController@create')->name('product.create');
 
 

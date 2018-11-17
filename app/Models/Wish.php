@@ -66,8 +66,13 @@ class Wish extends Model
         }
     }
 
-    public static function getProducts($uid)
+    public static function getProducts()
     {
-        return self::where('user_id',$uid)->first()->products();
+        $uid = \Auth::id();
+        if( $wish = self::where('user_id',$uid)->first() ) {
+            $products = $wish->products();
+            return $products;
+        }
+        return collect([]);
     }
 }

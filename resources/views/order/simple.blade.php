@@ -18,6 +18,15 @@
 
                     <div class="page-sidebar col-xs-12 col-sm-12 col-md-12">
 
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul style="color: red;">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <!-- Blog Sidebar -->
                         <aside class="sidebar blog-sidebar">
                             <div class="row row-tb-10">
@@ -25,8 +34,8 @@
                                     <!-- Recent Posts -->
                                     <div class="widget checkout-widget panel p-20">
                                         <div class="widget-body">
-                                            <table class="table">
-                                                <tbody>
+                                            <table class="table" border="1">
+                                                <tbody >
                                                 <tr>
                                                     <th colspan="3">订单号 : {{ $order->no }}</th>
                                                 </tr>
@@ -36,8 +45,8 @@
                                                     @else
                                                     <th>订单状态 : <i style="color: #ff472a;">{{ $order->status }}</i></th>
                                                     @endif
-                                                    <th>支付状态 : <i style="color: #ff472a;">{{ $order->pay_status }}</i></th>
-                                                    <th>物流状态 : <i style="color: #ff472a;">{{ $order->ship_status }}</i></th>
+                                                    <th>支付状态 : <i style="color: #ff472a;">{{ $order->payOrStatus }}</i></th>
+                                                    <th>物流状态 : <i style="color: #ff472a;">{{ $order->shipOrStatus }}</i></th>
                                                 </tr>
                                                 <tr>
                                                     <th>商品名称</th>
@@ -52,17 +61,59 @@
                                                 </tr>
                                                 @endforeach
                                                 <tr>
-                                                    <th>收货地址： {{ $order->address }}</th>
+                                                    <th>物流信息： {{ $order->address }}</th>
                                                     <th colspan="1">商品总量: {{ sprintf('%d',$order->total_count) }}</th>
                                                     <th colspan="2">商品总价: {{ $order->total_price }}</th>
                                                 </tr>
-                                                @if($data = $order->ship_data)
-                                                    <tr>
-                                                        <th>收货地址： {{ $data }}</th>
+
+                                                {{-- 检查是否能退款 --}}
+                                                @if($order->refund_status == \App\Models\Order::REFUND_STATUS_PENDING &&
+                                                    $order->pay_status == \App\Models\Order::PAY_STATUS_DELIVERED )
+                                                    <form action="{{ route('order.refund',['id' => $order->id]) }}" method="post">
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <div class="form-group">
+                                                                    <input type="text" name="refund_reason" id="" placeholder="请输入退款理由" class="form-control">
+                                                                </div>
+                                                            </td>
+                                                            <td colspan="1">
+                                                                <button type="submit" id="refund" class="btn btn-success btn-block btn-sm">申请退款</button>
+                                                            </td>
+                                                        </tr>
+                                                    </form>
+                                                @else
+                                                    <tr style="font-weight: bold">
+                                                        <td>退款信息 </td>
+                                                        <td>退款理由： {{ $order->refund_reason ?? '' }}</td>
+                                                        <td>退款状态: {{ \App\Models\Order::$refundStatusMap[$order->refund_status] }}</td>
                                                     </tr>
                                                 @endif
+
+
+                                                {{-- 物流信息存在的情况下 --}}
+                                                @if($data = $order->shipOrdata)
+                                                    <tr>
+                                                        <th colspan="3">收货地址： {{ $data['company'] . '-' . $data['no'] }}</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3">
+                                                            <ul class="layui-timeline">
+                                                                @foreach($result as $value)
+                                                                    <li class="layui-timeline-item">
+                                                                            <span>{{ $value['AcceptTime'] }}</span>
+                                                                            <p>{{ $value['AcceptStation'] }}</p>
+                                                                        <hr>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+
                                                 </tbody>
                                             </table>
+
+                                            {{-- 订单未关闭的情况下 --}}
                                             @if(!$order->closed)
 
                                                 <div class="row row-tb-10">
@@ -91,8 +142,5 @@
     </main>
 @stop
 @section('script')
-    <script>
-        // $('table>tbody').find('odd')
-    </script>
 @stop
 

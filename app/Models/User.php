@@ -30,6 +30,10 @@ class User extends Authenticatable
         'name', 'email', 'password','avatar','phone','w_id','q_id','x_id','active','salt'
     ];
 
+    public $appends = [
+        'wishCount'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -50,6 +54,9 @@ class User extends Authenticatable
 
     public function getWishCountAttribute()
     {
+        if( !$this->wishes ) {
+            return 0;
+        }
         $ids = $this->wishes->product_ids;
         $ids = json_decode($ids,true);
         return count($ids);

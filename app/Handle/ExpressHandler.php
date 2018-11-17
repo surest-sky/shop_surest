@@ -35,7 +35,7 @@ class ExpressHandler
 
         $result = json_decode($result,true);
 
-        return $result['Traces'];
+        return $result;
     }
 
     /**

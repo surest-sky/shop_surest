@@ -13,7 +13,7 @@ use App\Notifications\OrderToMail;
 class PayController extends Controller
 {
     /**
-     * 支付报支付处理
+     * 支付宝支付处理
      * @param Request $request
      * @param Order $order
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -42,6 +42,7 @@ class PayController extends Controller
         # 发送给用户一个消息，叫他准备支付
         Order::sendInfo($order,'创建订单成功，待支付');
 
+        # 发起字符
         return app('alipay')->web($data);
 
     }

@@ -17,6 +17,9 @@
                     ID
                 </th>
                 <th>
+                    订单用户
+                </th>
+                <th>
                     订单号
                 </th>
                 <th>
@@ -46,6 +49,9 @@
                         {{ $loop->index+1 }}
                     </td>
                     <td>
+                        {{ $order->user->name }}
+                    </td>
+                    <td>
                         {{ $order->no }}
                     </td>
                     <td>
@@ -60,17 +66,6 @@
                     <td >
                         {{ $order->refundOrstatus }}
                     </td>
-                    {{--<td class="td-status">--}}
-                        {{--@if($product->actived)--}}
-                            {{--<span class="layui-btn layui-btn-normal layui-btn-mini">--}}
-                                {{--已上架--}}
-                            {{--</span>--}}
-                        {{--@else--}}
-                            {{--<span class="layui-btn layui-btn-disabled layui-btn-mini">--}}
-                                {{--已下架--}}
-                            {{--</span>--}}
-                        {{--@endif--}}
-                    {{--</td>--}}
                     <td>
 
                     </td>

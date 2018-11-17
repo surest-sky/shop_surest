@@ -237,151 +237,53 @@
                     </div>
                 </section>
 
-
-                {{-- 最新文章 --}}
-                <section class="section latest-news-area blog-area blog-grid blog-3-col ptb-30">
-                    <header class="panel ptb-15 prl-20 pos-r mb-30">
-                        <h3 class="section-title font-18">最新文章</h3>
-                        <a href="blog_classic_right_sidebar.html" class="btn btn-o btn-xs pos-a right-10 pos-tb-center">Visit
-                            相关博文</a>
-                    </header>
-
-                    <div class="row row-tb-20">
-
-                        <!-- Blog Post -->
-                        <div class="blog-post col-xs-12 col-sm-6 col-md-4">
-                            <article class="entry panel">
-                                <figure class="entry-media post-thumbnail embed-responsive embed-responsive-16by9"
-                                        data-bg-img="assets/images/blog/post_01.jpg">
-                                    <div class="entry-date">
-                                        <h4>13</h4>
-                                        <h6>JUN</h6>
-                                    </div>
-                                </figure>
-                                <div class="entry-wrapper pt-20 pb-10 prl-20">
-                                    <header class="entry-header">
-                                        <h4 class="entry-title mb-10 mb-md-15 font-xs-16 font-sm-18 font-md-16 font-lg-16">
-                                            <a href="blog_single_standard.html">Restaurant Employer Read Clients Orders
-                                                On His iPad</a>
-                                        </h4>
-                                        <div class="entry-meta mb-10">
-                                            <ul class="tag-info list-inline">
-                                                <li><i class="icon fa fa-user"></i> By : John Doe</li>
-                                                <li><i class="icon fa fa-comments"></i>14 Comments</li>
-                                            </ul>
-                                        </div>
-                                    </header>
-                                    <div class="entry-content">
-                                        <p class="entry-summary">Vivamus sem massa, cursus at mollis eu, euismod id
-                                            risus. Vestibulum nunc ante, sagittis ut nisl at, porta porttitor justo. Nam
-                                            imperdiet im...</p>
-                                    </div>
-                                    <footer class="entry-footer text-right">
-                                        <a href="blog_single_standard.html" class="more-link btn btn-link">Continue
-                                            reading <i class="icon fa fa-long-arrow-right"></i></a>
-                                    </footer>
-                                </div>
-                            </article>
-                        </div>
-                        <!-- End Blog Post -->
-
-                        <!-- Blog Post -->
-                        <div class="blog-post col-xs-12 col-sm-6 col-md-4">
-                            <article class="entry panel">
-                                <figure class="entry-media embed-responsive embed-responsive-16by9">
-                                    <iframe src="" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                                    <div class="entry-date">
-                                        <h4>13</h4>
-                                        <h6>JUN</h6>
-                                    </div>
-                                </figure>
-                                <div class="entry-wrapper pt-20 pb-10 prl-20">
-                                    <header class="entry-header">
-                                        <h4 class="entry-title mb-10 mb-md-15 font-xs-16 font-sm-18 font-md-16 font-lg-16">
-                                            <a href="blog_single_vimeo.html">Amazing Classic Interior Design With
-                                                Perfect Lighting</a>
-                                        </h4>
-                                        <div class="entry-meta mb-10">
-                                            <ul class="tag-info list-inline">
-                                                <li><i class="icon fa fa-user"></i> By : John Doe</li>
-                                                <li><i class="icon fa fa-comments"></i> 14 Comments</li>
-                                            </ul>
-                                        </div>
-                                    </header>
-                                    <div class="entry-content">
-                                        <p class="entry-summary">Vivamus sem massa, cursus at mollis eu, euismod id
-                                            risus. Vestibulum nunc ante, sagittis ut nisl at, porta porttitor justo. Nam
-                                            imperdiet im...</p>
-                                    </div>
-                                    <footer class="entry-footer text-right">
-                                        <a href="blog_single_vimeo.html" class="more-link btn btn-link">Continue reading
-                                            <i class="icon fa fa-long-arrow-right"></i></a>
-                                    </footer>
-                                </div>
-                            </article>
-                        </div>
-                        <!-- End Blog Post -->
-
-                        <!-- Blog Post -->
-                        <div class="blog-post col-xs-12 col-sm-6 col-md-4">
-                            <article class="entry panel">
-                                <figure class="entry-media embed-responsive embed-responsive-16by9">
-                                    <iframe src="" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                                    <div class="entry-date">
-                                        <h4>13</h4>
-                                        <h6>JUN</h6>
-                                    </div>
-                                </figure>
-                                <div class="entry-wrapper pt-20 pb-10 prl-20">
-                                    <header class="entry-header">
-                                        <h4 class="entry-title mb-10 mb-md-15 font-xs-16 font-sm-18 font-md-16 font-lg-16">
-                                            <a href="blog_single_youtube.html">English Breakfast Tea With Tasty Donut
-                                                Desserts</a>
-                                        </h4>
-                                        <div class="entry-meta mb-10">
-                                            <ul class="tag-info list-inline">
-                                                <li><i class="icon fa fa-user"></i> By : John Doe</li>
-                                                <li><i class="icon fa fa-comments"></i> 14 Comments</li>
-                                            </ul>
-                                        </div>
-                                    </header>
-                                    <div class="entry-content">
-                                        <p class="entry-summary">Vivamus sem massa, cursus at mollis eu, euismod id
-                                            risus. Vestibulum nunc ante, sagittis ut nisl at, porta porttitor justo. Nam
-                                            imperdiet im...</p>
-                                    </div>
-                                    <footer class="entry-footer text-right">
-                                        <a href="blog_single_youtube.html" class="more-link btn btn-link">Continue
-                                            reading <i class="icon fa fa-long-arrow-right"></i></a>
-                                    </footer>
-                                </div>
-                            </article>
-                        </div>
-                        <!-- End Blog Post -->
-
-                    </div>
-                </section>
-
-
                 <section class="section subscribe-area ptb-40 t-center">
                     <div class="newsletter-form">
                         <h4 class="mb-20"><i class="fa fa-envelope-o color-green mr-10"></i>订阅我们</h4>
                         <p class="mb-20 color-mid">我们将每天9.00给您发一篇最新的资讯文章或者商品</p>
-                        <form method="post" action="#">
-                            @csrf
                             <div class="input-group mb-10">
-                                <input type="email" class="form-control bg-white" placeholder="邮箱地址" required="required">
+                                <input type="email" value="{{ \Auth::user()->email ?? '' }}"
+                                       class="form-control bg-white" id="sub_email" placeholder="邮箱地址" required="required">
                                 <span class="input-group-btn">
-                                        <button class="btn" type="submit">订阅我们</button>
-                                    </span>
+                                    <button class="btn" type="button" id="subscribers">订阅我们</button>
+                                </span>
                             </div>
-                        </form>
                         <p class="color-muted"><small>我们绝不会外泄您的邮箱</small> </p>
                     </div>
                 </section>
             </div>
         </div>
 
-
     </main>
+@stop
+
+@section('script')
+    <script>
+        $('#subscribers').on('click',function () {
+            var email = $('#sub_email').val();
+            $.ajax({
+                url: '{{ route('subscriber') }}',
+                type: 'post',
+                data: {
+                    email: email
+                },
+                success: function (data,status,res) {
+                    if( res.status == 200 ) {
+                        swal('订阅成功，请查看邮箱','','success');
+                    }else{
+                        swal(data.msg,'','error');
+                    }
+                },
+                error: function (data) {
+                    if(typeof data.responseJSON.msg != undefined ) {
+                        console.log(data.responseJSON.msg)
+                        swal(data.responseJSON.msg,'','error');
+                    }else{
+                        swal('系统错误','','error');
+                    }
+
+                }
+            })
+        })
+    </script>
 @stop

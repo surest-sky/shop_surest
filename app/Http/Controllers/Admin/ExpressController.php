@@ -9,6 +9,10 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ExpressController extends Controller
 {
+    /**
+     * 导入快递公司信息
+     * @return string
+     */
     public function import()
     {
         $filePath = '/123.xlsx';

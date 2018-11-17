@@ -31,8 +31,6 @@ trait OrderHanlerTrait
     # 推送到异步队列 ， 执行销量增加
     public function incrCount($order)
     {
-
-
         $productSkus = collect($order->extra['product_skus']);
 
         $ids = $productSkus->pluck('count','product_id');
@@ -48,5 +46,34 @@ trait OrderHanlerTrait
 
         # 推送到异步队列 实现异步增加销售量
         IncrProductCount::dispatch($ids);
+    }
+
+    public static function refundHandler($order)
+    {
+        $refund_no = Order::getOrderRefundNo();
+
+        switch ($order->pay_method){
+            case '支付宝' :
+                $ret = app('alipay')->refund([
+                    'out_trade_no' => $refund_no,
+                    'trade_no' => $order->pay_no,
+                    'refund_amount' => $order->total_price
+                ]);
+
+                # 退款成功 : https://docs.open.alipay.com/common/105806
+                if( $ret['code'] && $ret['code'] == '10000' ) {
+                    $order->refund_status = Order::REFUND_STATUS_SUCCESS;
+                    $order->save();
+                    return true;
+                }else{
+                    $order->refund_status = Order::REFUND_STATUS_FAILED;
+                    $order->refund_err = [
+                        $ret['msg'],$ret['code']
+                    ];
+                    $order->save();
+                    return false;
+                }
+            break;
+        }
     }
 }

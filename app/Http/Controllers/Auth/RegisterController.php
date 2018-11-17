@@ -27,12 +27,8 @@ class RegisterController extends Controller
     /**
      * 处理注册逻辑
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        session()->flash('verify','验证码错误');
-
-        return redirect()->back();
-
         $key = $request->key;
         $captcha = $request->captcha;
         $name = $request->name;

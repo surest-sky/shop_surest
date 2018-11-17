@@ -67,13 +67,14 @@ class Order extends Model
 
     public $casts = [
         'extra' => 'json',
+        'refund_err' => 'json',
     ];
 
     public $appends = [
         'refundOrStatus',
         'ShipOrStatus',
         'PayOrStatus',
-        'shipOrdata'
+        'shipOrdata',
     ];
 
     public function user()
@@ -157,6 +158,15 @@ class Order extends Model
         return $no;
     }
 
+    public static function getOrderRefundNo()
+    {
+        do{
+            $no = orderNo();
+        }while(Order::where('refund_no',$no)->count());
+
+        return $no;
+    }
+
     public static function getProductInfo($result,$address,$data)
     {
         $arr = [];
@@ -189,7 +199,6 @@ class Order extends Model
         $carts = Cart::where('user_id',\Auth::id())->whereIn('product_sku_id',$result['ids'])->get()->pluck('id')->toArray();
 
         Cart::destroy($carts);
-
 
         return $arr;
 
@@ -248,33 +257,40 @@ class Order extends Model
     }
 
 
-
+    # 订单详情
     public function getExtraAttribute($value)
     {
         return json_decode($value,true);
     }
 
 
+    # 支付状态
     public function getPayOrStatusAttribute()
     {
         $value = $this->pay_status;
         return self::$payStatusMap[$value];
     }
 
+    # 退款状态
     public function getRefundOrStatusAttribute()
     {
         $value = $this->refund_status;
         return self::$refundStatusMap[$value];
     }
 
+    # 物流状态
     public function getShipOrStatusAttribute()
     {
         $value = $this->ship_status;
         return self::$shipStatusMap[$value];
     }
 
+    # 物流信息
     public function getShipOrdataAttribute()
     {
+        if(!$this->ship_data) {
+            return false;
+        }
         $data = explode('-',$this->ship_data);
         $company = \App\Models\Express::where('serial',$data[0])->select('name')->first()->name;
         return [
@@ -289,7 +305,7 @@ class Order extends Model
     {
         # 当支付已经关闭的时候，查看订单状态
         if( $this->closed ) {
-            return $this->pay_status;
+            return $this->payOrStatus;
         }
         $expir = strtotime($this->expir_at) - time();
 

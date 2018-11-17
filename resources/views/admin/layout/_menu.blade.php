@@ -34,33 +34,6 @@
                         </a>
                     </dd>
                     </dd>
-                    <dd class="">
-                    <dd class="">
-                        <a href="javascript:;" _href="{{ route('admin.banner') }}">
-                            <cite>推荐位管理</cite>
-                        </a>
-                    </dd>
-                    </dd>
-                    <dd class="">
-                    <dd class="">
-                        <a href="javascript:;" _href="./welcome.html">
-                            <cite>类型管理（待开发）</cite>
-                        </a>
-                    </dd>
-                    </dd>
-                    <dd class="">
-                    <dd class="">
-                        <a href="javascript:;" _href="./welcome.html">
-                            <cite>类型属性（待开发）</cite>
-                        </a>
-                    </dd>
-                    </dd>
-                    <dd class="">
-                    <dd class="">
-                        <a href="javascript:;" _href="./category.html">
-                            <cite>产品分类</cite>
-                        </a>
-                    </dd>
                     </dd>
                 </dl>
             </li>
@@ -71,8 +44,8 @@
                 <dl class="layui-nav-child">
                     <dd class="">
                     <dd class="">
-                        <a href="javascript:;" _href="./banner-list.html">
-                            <cite>轮播列表</cite>
+                        <a href="javascript:;" _href="{{ route('admin.banner') }}">
+                            <cite>轮播管理</cite>
                         </a>
                     </dd>
                     </dd>
