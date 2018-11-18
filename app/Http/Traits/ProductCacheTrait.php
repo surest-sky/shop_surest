@@ -60,7 +60,7 @@ trait ProductCacheTrait
      */
     public static function getFileProduct()
     {
-        $products = Cache::get('product_index');
+        $products = Cache::get(Product::key);
         if( !$products ){
             $products = self::setFileProduct();
         }
@@ -80,7 +80,7 @@ trait ProductCacheTrait
             ->get();
 
         $products = serialize($products);
-        Cache::put('product_index',$products,$expirAt);
+        Cache::put(Product::key,$products,$expirAt);
         return $products;
     }
 

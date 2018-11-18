@@ -80,6 +80,7 @@
 
             </tbody>
         </table>
+        @include('admin.common._page',['datas'=>$users , 'datasAll' => $usersAll])
     </div>
 @stop
 

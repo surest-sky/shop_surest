@@ -57,7 +57,6 @@ class OrderController extends Controller
         # 库存信息获取
         $result = Order::checkStock($data);
 
-
         if( !$result['stock'] ) {
             session()->flash('status',$result['name'] . '库存不足');
              return redirect()->route('order.list');

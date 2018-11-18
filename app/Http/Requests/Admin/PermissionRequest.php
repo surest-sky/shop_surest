@@ -26,15 +26,18 @@ class PermissionRequest extends FormRequest
     {
         return [
             'name' => ['required','between:2,15'],
-            'description' => ['required','between:2,15'],
+            'description' => ['required'],
             'route' => ['required',new IsRoute]
         ];
     }
 
-    public function attributes()
+    public function messages()
     {
         return [
-            'route' => '路由'
+            'route' => '路由',
+            'name.required' => '权限名称不符合规则',
+            'name.between' => '权限名称不符合规则',
+            'description.required' => '描述信息不符合规则'
         ];
     }
 }

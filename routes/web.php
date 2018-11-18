@@ -38,6 +38,8 @@ Route::group(['middleware'=>'web'],function (){
         Route::post('/forget','Auth\ForgetController@store')->name('forget.store');
     });
 
+
+    Route::get('/test/sub','TestController@sub')->name('sub');
     /**
      * 注册注销相关
      */
@@ -128,9 +130,10 @@ Route::group(['middleware'=>'web'],function (){
             // 必须登录状态下才能进入
             Route::group(['middleware' => ['auth.admin']], function () {
 
+
+                Route::get('/', 'IndexController@index')->name('index');
                 // 权限控制路由
                 Route::group(['middleware'=>'admin.permission'],function (){
-                    Route::get('/', 'IndexController@index')->name('index');
                     Route::get('/welcome', 'IndexController@welcome')->name('welcome');;
 
                     /**

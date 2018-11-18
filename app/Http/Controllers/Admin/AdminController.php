@@ -89,10 +89,7 @@ class AdminController extends BaseController
 
         // 添加操作
         $name = $request->name;
-        if( !(int)Role::where('name',$name)->count() ){
-            session()->flash('status','权限名字已经存在');
-            return redirect()->back();
-        }
+
         $description = $request->description;
         $role = Role::create(compact('name','description'));
 
@@ -142,12 +139,14 @@ class AdminController extends BaseController
     {
         $id = $request->id;
 
+        $list = getRouteList();
         if( $id ) {
             if( $permission = Permission::find($id) ){
-                return view('admin.admins.permission_edit',compact('permission'));
+                return view('admin.admins.permission_edit',compact('permission','list'));
             }
         }
-        return view('admin.admins.permission_edit');
+
+        return view('admin.admins.permission_edit',compact('list'));
     }
 
     public function permissionStore(PermissionRequest $request)
@@ -213,8 +212,6 @@ class AdminController extends BaseController
         // 当id 存在的时候表明要编辑更新
         if( $id && $admin = Admin::find($id) ){
             $admin_roles = $admin->getRoleNames()->toArray(); // 当前用户的角色名字
-
-            $admin->assignRole('网站运营');
 
             $roles = Role::query()->select('name','id')->get();
 
@@ -331,9 +328,9 @@ class AdminController extends BaseController
     public function isAdmin($admin)
     {
         if( $admin->name == config('main.admin') ){
-            return false;
-        }
             return true;
+        }
+            return false;
     }
 
 }

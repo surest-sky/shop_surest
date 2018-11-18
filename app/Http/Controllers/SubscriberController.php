@@ -31,11 +31,12 @@ class SubscriberController extends Controller
         try{
             $emailMdel->notify( new SubsriberToMail());
         }catch (\Exception $e) {
+            $emailMdel->closed = 1;
+            $emailMdel->save();
             return response()->json([
                 'msg' => '您的邮箱地址我们无法到达哦'
             ],404);
         }
-
     }
 
 }

@@ -27,10 +27,16 @@
 
                 <div class="layui-form-item">
                     <label for="name" class="layui-form-label">
-                        <span class="x-red">*</span>Http - Url
+                        <span class="x-red">*</span>路由 - Url
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="name" name="route" required="" lay-verify="required" value="{{ old('route') ?? $permission->route ?? ''}}" autocomplete="off" class="layui-input" placeholder="模块/控制器/位置">
+                        <div class="layui-input-inline" style="width:180px;text-align: left">
+                            <select name="route">
+                                @foreach($list as $simple)
+                                    <option @if( old('route')== $simple ) selected @endif value="{{ $simple }}">{{ $simple }}</option>
+                                @endforeach
+                            </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="顶级分类" value="顶级分类" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="0" class="layui-this">顶级分类</dd><dd lay-value="新闻" class="">新闻</dd><dd lay-value="新闻子类1" class="">--新闻子类1</dd><dd lay-value="新闻子类2" class="">--新闻子类2</dd><dd lay-value="产品" class="">产品</dd><dd lay-value="产品子类1" class="">--产品子类1</dd><dd lay-value="产品子类2" class="">--产品子类2</dd></dl></div>
+                        </div>
                         <input type="hidden" name="id" value="{{ $permission->id ?? ''}}">
                     </div>
                 </div>

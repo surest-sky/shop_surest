@@ -6,6 +6,9 @@
             <form action="{{ route('admin.admins.role.store') }}" method="post" class="layui-form layui-form-pane">
 
                 <div class="layui-form-item">
+                    @if($status = session('status') )
+                        <button class="layui-btn layui-btn-danger layui-btn-radius">{{ $status }}</button>
+                    @endif
                 @if ($errors->any())
                     @foreach ($errors->all() as $error)
                         <button class="layui-btn layui-btn-danger layui-btn-radius">{{ $error }}</button>

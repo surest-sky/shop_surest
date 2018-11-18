@@ -107,9 +107,11 @@ class Order extends Model
      * @param $data
      * @return Order
      */
-    public static function createNewOrder($result,$data)
+    public static function
+    createNewOrder($result,$data)
     {
         DB::beginTransaction();
+
         try {
 
             $order = new Order();
@@ -133,16 +135,15 @@ class Order extends Model
             $order->expir_at = Carbon::now()->addMinutes(30); # 有效期30分钟
             $order->user_id = \Auth::id();
             $order->save();
-
             DB::commit();
 
             return $order;
 
 
         }catch (\Exception $e) {
-            DB::rollback();
 
-            new OrderException([
+            DB::rollback();
+            throw new OrderException([
                 'message' => '订单创建失败：no - ' . $no . $e->getMessage()
             ]);
         }

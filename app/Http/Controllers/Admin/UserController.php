@@ -15,8 +15,9 @@ class UserController extends Controller
     // 渲染用户视图
     public function list()
     {
-        $users = User::getUserAll();
-        return view('admin.users.list', compact('users'));
+        $users = User::getUsersAll();
+        $usersAll = User::getUsersAll(false);
+        return view('admin.users.list', compact('users','usersAll'));
     }
 
     // 添加用户

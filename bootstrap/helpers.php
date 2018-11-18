@@ -64,7 +64,17 @@ function getRouteList(){
     foreach ($routes as $k=>$value){
         array_push($list,$value->uri);
     }
-    return $list;
+    $len = count($list);
+    $arr = [];
+    for ($i=0; $i<$len; $i++ ) {
+        if( preg_match('#admin/[a-z]+#',$list[$i])){
+            preg_match_all('#admin/[a-z]+#',$list[$i],$match);
+            array_push($arr,$match[0][0]);
+        }
+    }
+    $list = array_unique($arr);
+    array_push($list,'*');
+    return collect($list);
 }
 
 function checkAddress($val) {

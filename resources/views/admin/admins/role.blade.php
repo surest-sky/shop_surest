@@ -115,6 +115,9 @@
                          }
                     },
                     error: function (error) {
+                        if( error.status == 403 ){
+                            layer.msg('权限不够!',{icon:1,time:1000});
+                        }
                         layer.msg('系统错误!',{icon:1,time:1000});
                     }
                 });

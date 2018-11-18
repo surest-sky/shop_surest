@@ -16,7 +16,7 @@ class OrderException extends BaseException
     {
         parent::__construct($errorInfo);
         $this->report();
-
+        $this->render();
     }
 
     /**
@@ -31,6 +31,11 @@ class OrderException extends BaseException
 
     public function render()
     {
-        
+        return response()->view(
+            'error.show',
+            [
+                'msg' => '订单创建异常'
+            ]
+        );
     }
 }

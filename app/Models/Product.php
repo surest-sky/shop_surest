@@ -17,6 +17,8 @@ class Product extends Model
 
     const type = 'DESC';
 
+    const key = 'product_list';
+
     /**
      * 获取所有的商品数据
      * @param bool $page true = 分页数据获取 false = 获取全部数据
@@ -214,5 +216,14 @@ class Product extends Model
             'endPage' => $endPage,
             'current' => $currentPage
         ];
+    }
+
+    /**
+     * 获取商品的最近信息 （5条）
+     */
+    public static function getSubscription($len=5)
+    {
+        $products = self::query()->orderBy('created_at','DESC')->limit(5)->get();
+        return $products;
     }
 }

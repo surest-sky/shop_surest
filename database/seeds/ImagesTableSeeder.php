@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\ProductSku;
+use App\Models\Product;
 use App\Models\Image;
 
 class ImagesTableSeeder extends Seeder
@@ -14,11 +15,18 @@ class ImagesTableSeeder extends Seeder
     public function run()
     {
         $skuIds = ProductSku::all()->pluck('id')->toArray();
+        $productIds = Product::all()->pluck('id')->toArray();
 
         foreach ($skuIds as $id){
             Image::create([
                 'src' => $this->getSrc(),
                 'product_sku_id' => $id
+            ]);
+        }
+        foreach ($productIds as $id){
+            Image::create([
+                'src' => $this->getSrc(),
+                'product_id' => $id
             ]);
         }
     }

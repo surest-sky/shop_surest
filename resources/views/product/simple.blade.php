@@ -15,7 +15,7 @@
                                         <div id="product_slider" class="flexslider">
                                             <ul class="slides">
                                                 <li>
-                                                    <img id="image" style="max-width: 620px; max-height: 800px" alt="{{ $product->name }}" src="{{ $product->image->src }}">
+                                                    <img id="image" style="max-width: 620px; max-height: 800px" alt="{{ $product->name }}" src="{{ $product->image->src ?? '' }}">
                                                 </li>
                                             </ul>
                                         </div>
@@ -160,7 +160,7 @@
                                                         @foreach($product->productSkus as $sku)
                                                             <li onclick="select_sku(this,{{ $sku->id }})" @if($loop->index+1 == 1) class="active" @endif
                                                             title="{{ $sku->description }}"
-                                                                data-img="{{ $sku->image->src }}"
+                                                                data-img="{{ $sku->image->src ?? '' }}"
                                                                 data-price="{{ $sku->price }}"
                                                             >{{ $sku->name }}</li>
                                                         @endforeach
@@ -202,19 +202,19 @@
                                     <div class="col-xs-12">
                                         <!-- Best Rated Deals -->
                                         <div class="widget best-rated-deals panel pt-20 prl-20">
-                                            <h3 class="widget-title h-title">Best Rated Deals</h3>
+                                            <h3 class="widget-title h-title">推荐商品</h3>
                                             <div class="widget-body ptb-30">
 
                                                 @foreach($goods as $good)
                                                     <div class="media">
                                                         <div class="media-left">
                                                             <a href="{{ route('product.show',['id' => $good->id]) }}">
-                                                                <img class="media-object" src="{{ $good->image->src }}" alt="Thumb" width="80">
+                                                                <img class="media-object" src="{{ $good->image->src ?? '' }}" alt="Thumb" width="80">
                                                             </a>
                                                         </div>
                                                         <div class="media-body">
                                                             <h6 class="mb-5">
-                                                                <a href="{{ route('product.show',['id' => $product->id]) }}">{{ $good->name }}</a>
+                                                                <a href="{{ route('product.show',['id' => $good->id]) }}">{{ $good->name }}</a>
                                                             </h6>
                                                             <div class="mb-5">
                                                             <span class="rating">

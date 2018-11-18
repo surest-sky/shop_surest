@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Http\Traits\UserHandlerTrait;
+use App\Http\Traits\UserAdminTrait;
 
 class User extends Authenticatable
 {
@@ -12,6 +13,8 @@ class User extends Authenticatable
     use UserHandlerTrait;
 
     use Notifiable;
+
+    use UserAdminTrait;
 
     const TYPE_WEIBO = 'weibo';
     const TYPE_QQ = 'qq';
@@ -123,5 +126,5 @@ class User extends Authenticatable
         return $this->belongsTo(Address::class , 'user_id' , 'id');
     }
 
-    
+
 }

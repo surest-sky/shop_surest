@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Rules;
+namespace App\Rules\Admin;
 
 use Illuminate\Contracts\Validation\Rule;
+use App\Models\Role;
 
-class IsRoute implements Rule
+class RoleIsExist implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,12 +26,10 @@ class IsRoute implements Rule
      */
     public function passes($attribute, $value)
     {
-        $list = getRouteList();
-
-        if( $list->contains($value ) ){
+        if( !Role::where('name',$value)->count() ){
             return true;
         }
-            return false;
+        return false;
     }
 
     /**
@@ -40,6 +39,6 @@ class IsRoute implements Rule
      */
     public function message()
     {
-        return '您当前所填写的路由不存在';
+        return '角色名字已经存在.';
     }
 }

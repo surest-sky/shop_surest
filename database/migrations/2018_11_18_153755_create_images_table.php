@@ -16,8 +16,12 @@ class CreateImagesTable extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
             $table->string('src');
-            $table->integer('product_id')->nullable();
-            $table->integer('product_sku_id')->nullable();
+            $table->integer('product_id')->nullable()->unsigned();
+            $table->integer('product_sku_id')->nullable()->unsigned();
+            $table->foreign('product_id')->references('id')
+                ->on('products')->onDelete('cascade');
+            $table->foreign('product_sku_id')->references('id')
+                ->on('product_skus')->onDelete('cascade');
             $table->timestamps();
         });
     }
