@@ -32,7 +32,7 @@
                                             data-bg-img="{{ $banner->image }}">
                                         <div class="label-discount top-10 right-10">{{ $banner->cName }}</div>
                                         <ul class="deal-actions top-10 left-10">
-                                            <li class="like-deal">
+                                            <li class="like-deal" data-id="{{ $banner->product->id }}">
                                                     <span>
 			                        <i class="fa fa-heart"></i>
 			                    </span>
@@ -44,11 +44,6 @@
                                                     <a target="_blank" href="#"><i class="fa fa-wechat"></i></a>
                                                 </div>
                                                 <span><i class="fa fa-share-alt"></i></span>
-                                            </li>
-                                            <li>
-                                                    <span>
-			                        <i class="fa fa-camera"></i>
-			                    </span>
                                             </li>
                                         </ul>
                                         <div class="deal-about p-20 pos-a bottom-0 left-0">
@@ -91,7 +86,7 @@
                                             data-bg-img="{{ $product->image->src ?? '' }}">
                                         <div class="label-discount left-20 top-15">{{ str_limit($product->category->name,4,'..') }}</div>
                                         <ul class="deal-actions top-15 right-20">
-                                            <li class="like-deal"><span><i class="fa fa-heart"></i></span>
+                                            <li class="like-deal" data-id="{{ $product->id }}"><span><i class="fa fa-heart"></i></span>
                                             </li>
                                             <li class="share-btn">
                                                 <div class="share-tooltip fade">
@@ -215,6 +210,30 @@
                         swal('系统错误','','error');
                     }
 
+                }
+            })
+        })
+
+        $('.like-deal').on('click',function () {
+            var $id = $(this).attr('data-id');
+
+            if( $id.length == 0) {
+                swal('错误操作','','error');
+            }
+            $.ajax({
+                url: '{{ route('wish.add') }}',
+                type: 'post',
+                data: {
+                    id: $id
+                },
+                success: function (data,text,status) {
+                    swal('喜欢成功','','success');
+                    var n = $('#wish_count').text();
+                    $('#wish_count').html(parseInt(n)+1);
+                },
+                error: function (error) {
+                   $msg = error.responseJSON.message;
+                    swal($msg,'','error');
                 }
             })
         })

@@ -58,7 +58,7 @@ class BannerController extends Controller
 
         Banner::setCacheBanner();
 
-        session()->flash('status','创建成功');
+        session()->flash('success','创建成功');
 
         return redirect()->back();
     }

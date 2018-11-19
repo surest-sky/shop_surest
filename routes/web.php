@@ -73,6 +73,7 @@ Route::group(['middleware'=>['web','actived']],function (){
 
         # 删除收藏
         Route::delete('/wish','WishController@delete')->name('wish.delete');
+        Route::post('/wish','WishController@add')->name('wish.add');
 
 
         # 购物车

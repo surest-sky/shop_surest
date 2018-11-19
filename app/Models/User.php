@@ -61,7 +61,7 @@ class User extends Authenticatable
             return 0;
         }
         $ids = $this->wishes->product_ids;
-        $ids = json_decode($ids,true);
+
         return count($ids);
     }
 

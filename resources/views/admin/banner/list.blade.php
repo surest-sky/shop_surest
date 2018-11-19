@@ -13,6 +13,9 @@
     </div>
     <div class="x-body">
         <form class="layui-form x-center" method="post" action="{{ route('admin.banner.create') }}" style="width:50%" >
+            @if( $status = session('success') )
+                <button class="layui-btn layui-btn-success layui-btn-radius">{{ $status }}</button>
+            @endif
             @if( $status = session('status') )
                 <button class="layui-btn layui-btn-danger layui-btn-radius">{{ $status }}</button>
             @endif

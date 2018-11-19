@@ -63,7 +63,9 @@ trait BannerCacheTrait
         if( !$banners ){
             $banners = self::setFileBanner();
         }
+        $banners = self::setFileBanner();
         $banners = unserialize($banners);
+
         return $banners;
     }
 

@@ -5,12 +5,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-4 is-hidden-sm-down">
-                    <ul class="nav-top nav-top-left list-inline t-left">
-                        <li><a href="terms_conditions.html"><i class="fa fa-question-circle"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">折扣指南</font></font></a>
-                        </li>
-                        <li><a href="faq.html"><i class="fa fa-support"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">客户协助</font></font></a>
-                        </li>
-                    </ul>
                 </div>
                 <div class="col-sm-12 col-md-8">
                     <ul class="nav-top nav-top-right list-inline t-xs-center t-md-right">
@@ -97,7 +91,7 @@
                             <div class="header-wishlist ml-20">
                                 <div>
                                     @if( $user = Auth::user() )
-                                        <span class="cart-number" style="background-color: #2ed87b" >{{ $user->wishCount }}</span>
+                                        <span class="cart-number" id="wish_count" style="background-color: #2ed87b" >{{ $user->wishCount }}</span>
                                     @else
                                         <span class="cart-number">0</span>
                                     @endif

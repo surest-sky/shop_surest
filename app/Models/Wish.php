@@ -12,6 +12,10 @@ class Wish extends Model
         'product_id'
     ];
 
+    public $casts = [
+        'product_ids' => 'json'
+    ];
+
 
     /**
      * 通过关联取出 收藏表的数据
@@ -20,7 +24,6 @@ class Wish extends Model
     public function products()
     {
         $productIds = $this->product_ids;
-        $productIds = json_decode($productIds,true);
 
         $products = [];
 
@@ -56,7 +59,7 @@ class Wish extends Model
             $pids = $pids->diff($pid)->toArray();
 
             $wish = self::where('user_id',$uid)->first();
-            $wish->product_ids = json_encode($pids);
+            $wish->product_ids = $pids;
             $wish->save();
             return true;
         }catch (\Exception $e){
