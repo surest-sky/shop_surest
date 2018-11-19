@@ -3,23 +3,22 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Redis;
 
-class clearLogin extends Command
+class getActiveUser extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'me:clearLogin';
+    protected $signature = 'test:getActiveUser';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = '清除每日登录的用户登录时间';
+    protected $description = '测试使用： 获取活跃用户的信息';
 
     /**
      * Create a new command instance.
@@ -38,7 +37,6 @@ class clearLogin extends Command
      */
     public function handle()
     {
-        $key = config('rket.login_key');
-        Redis::del($key);
+        dd($ids = \App\Redis\ActiveUserCache::getActiveUser(5));
     }
 }

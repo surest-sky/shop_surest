@@ -310,9 +310,12 @@ class Order extends Model
         if( $this->closed ) {
             return $this->payOrStatus;
         }
+
         $expir = strtotime($this->expir_at) - time();
 
         if( $expir < 0 ) {
+            $this->closed = 1;
+            $this->save();
             return '已关闭';
         }
 

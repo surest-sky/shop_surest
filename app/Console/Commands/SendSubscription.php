@@ -13,7 +13,7 @@ class SendSubscription extends Command
      *
      * @var string
      */
-    protected $signature = 'sub:send';
+    protected $signature = 'me:subSend';
 
     /**
      * The console command description.

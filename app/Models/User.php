@@ -18,7 +18,7 @@ class User extends Authenticatable
 
     const TYPE_WEIBO = 'weibo';
     const TYPE_QQ = 'qq';
-    const TYPE_WECHAT = 'weixin';
+    const TYPE_WECHAT = 'wechat';
     const FIELD = [
         self::TYPE_WEIBO => 'w_id',
         self::TYPE_QQ => 'q_id',
@@ -30,7 +30,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','avatar','phone','w_id','q_id','x_id','active','salt'
+        'name', 'email', 'password','avatar','phone','w_id','q_id','x_id','active','salt','type'
     ];
 
     public $appends = [
@@ -128,13 +128,19 @@ class User extends Authenticatable
 
     public static function getActiveUsers($len)
     {
-        $users = \App\Redis\ActiveUserCache::getActiveUser(10);
+        $users = \App\Redis\ActiveUserCache::getActiveUser($len);
         if( !$users ) {
             return [];
         }
         $ids = array_keys($users);
 
-        $users = self::query()->whereIn('id',$ids)->select('name','id','avatar')->get();
+        $users = [];
+
+        # 从缓存中获取活跃用户
+        foreach ($ids as $id) {
+            array_push($users,\App\Redis\ActiveUserCache::getUserDetail($id));
+        }
+
         return $users;
     }
 

@@ -55,7 +55,7 @@
                                                 </tr>
                                                 @foreach($extra['product_skus'] as $productSku)
                                                 <tr>
-                                                    <td><a href="{{ route('product.show',['id'=>$productSku['id']]) }}">{{ $productSku['name'] }}</a></td>
+                                                    <td><a href="{{ route('product.show',['id'=>$productSku['product_id']]) }}">{{ $productSku['name'] }}</a></td>
                                                     <td>{{ $productSku['price'] }} * {{ $productSku['count'] }}</td>
                                                     <td>无</td>
                                                 </tr>

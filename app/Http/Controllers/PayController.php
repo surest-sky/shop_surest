@@ -55,7 +55,7 @@ class PayController extends Controller
     {
         $data = app('alipay')->verify();
 
-        dd($data);
+        return view('error.show',['msg'=>'支付成功']);
     }
 
     /**

@@ -35,6 +35,7 @@ class OrderController extends Controller
         }
 
         $extra = $order->extra;
+
         # 快递讯息
         $result = Express::getDetail($order);
 

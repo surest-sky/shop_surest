@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Product::observe(ProductOberver::class);
-        \Debugbar::disable();
+        \Debugbar::enable();
 
 
         # 向容器中注入一个容器
@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             }
 
             $config['return_url'] = route('pay.alipay.return');
-            $config['notify_url'] = 'http://requestbin.leo108.com/19hgqf61'; #route('pay.alipay.notify');
+            $config['notify_url'] = 'http://requestbin.leo108.com/1drdi441'; #route('pay.alipay.notify');
             # curl -X POST http://shop.surest.cn/alipay/notify -d
 
             return Pay::alipay($config);

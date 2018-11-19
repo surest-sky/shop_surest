@@ -159,10 +159,10 @@
                             <a href="javascript:;" class="panel is-block">
                                 <div class="embed-responsive embed-responsive-4by3">
                                     <div class="store-logo">
-                                        <img src="{{ $user->avatar }}" alt="">
+                                        <img src="{{ $user['avatar'] }}" alt="">
                                     </div>
                                 </div>
-                                <h6 class="store-name ptb-10">{{ $user->name }}</h6>
+                                <h6 class="store-name ptb-10">{{ $user['name'] }}</h6>
                             </a>
                         </div>
                         @endforeach

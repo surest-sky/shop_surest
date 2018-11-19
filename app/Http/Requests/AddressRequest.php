@@ -32,4 +32,14 @@ class AddressRequest extends FormRequest
             'detail' => ['required','between:2,20']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name' => '收货人姓名',
+            'phone' => '收货人手机号码',
+            'address' => '收货地址',
+            'detail' => '详细地址'
+        ];
+    }
 }

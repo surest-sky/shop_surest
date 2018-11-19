@@ -20,7 +20,15 @@ class ActiveUserCache
     public static function setActiveUser($id,$grade)
     {
         $key  = config('rket.active_key');
-        # sort - set
+        $keyUserInfo  = config('rket.active_info_key');
+
+        # 检查活跃的用户里面是否已经写入数据，如果存在则忽略
+        if( !Redis::zrank($key,$id) ) {
+            $user = \App\Models\User::where('id',$id)->select('name','id','avatar')->first();
+            Redis::hmset($keyUserInfo.$id,'name',$user->name,'avatar',$user->avatar,'id',$id);
+        }
+
+        #
         return Redis::zincrby($key,$grade,$id);
     }
 
@@ -36,6 +44,22 @@ class ActiveUserCache
             return false;
         }
         return $users;
+    }
+
+    /**
+     * 删除活跃用户的信息
+     */
+    public static function delActiveUser()
+    {
+        $key  = config('rket.active_key');
+        Redis::del($key);
+    }
+
+
+    public static function getUserDetail($id)
+    {
+        $keyUserInfo  = config('rket.active_info_key');
+        return Redis::hgetAll($keyUserInfo.$id);
     }
 
 

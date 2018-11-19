@@ -32,8 +32,8 @@ trait UserHandlerTrait
 
     /**
      * 第三方登录操作
-     * @param $uid
-     * @param $type
+     * @param $uid integer 微博的唯一id
+     * @param $type string 字段
      * @param $userInfo
      */
     public static function kindStore($uid,$type,$userInfo)
@@ -61,6 +61,15 @@ trait UserHandlerTrait
      */
     public static function createUser($userInfo,$field)
     {
+        switch ($field) {
+            case User::FIELD['weibo']:
+                return self::WeiBoHandler($userInfo,$field);
+                break;
+        }
+
+    }
+
+    public static function WeiBoHandler($userInfo,$field){
         try{
             DB::beginTransaction();
             $arr = [
@@ -68,9 +77,10 @@ trait UserHandlerTrait
                 $field => $userInfo['id'],
                 'avatar' => $userInfo['avatar_hd'] ?? 'https://laravel-china.org/users/5758',
                 'actived' => '1',
+                'type' => User::TYPE_WEIBO
             ];
 
-            $user = User::create($arr);
+            return $user = User::create($arr);
             DB::commit();
             return $user;
         }catch (\Exception $e){

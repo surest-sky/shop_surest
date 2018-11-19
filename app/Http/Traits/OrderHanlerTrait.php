@@ -29,7 +29,7 @@ trait OrderHanlerTrait
     }
 
     # 推送到异步队列 ， 执行销量增加
-    public function incrCount($order)
+    public static function incrCount($order)
     {
         $productSkus = collect($order->extra['product_skus']);
 

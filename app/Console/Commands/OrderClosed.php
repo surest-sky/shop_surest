@@ -7,14 +7,14 @@ use App\Models\Order;
 use Carbon\Carbon;
 use App\Jobs\IncrProductStock;
 
-class CheckOrder extends Command
+class OrderClosed extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'order:closed';
+    protected $signature = 'me:orderClosed';
 
     /**
      * The console command description.
