@@ -126,5 +126,17 @@ class User extends Authenticatable
         return $this->belongsTo(Address::class , 'user_id' , 'id');
     }
 
+    public static function getActiveUsers($len)
+    {
+        $users = \App\Redis\ActiveUserCache::getActiveUser(10);
+        if( !$users ) {
+            return [];
+        }
+        $ids = array_keys($users);
+
+        $users = self::query()->whereIn('id',$ids)->select('name','id','avatar')->get();
+        return $users;
+    }
+
 
 }

@@ -149,91 +149,24 @@
                 <section class="section stores-area stores-area-v1 ptb-30">
                     <header class="panel ptb-15 prl-20 pos-r mb-30">
                         <h3 class="section-title font-18">活跃用户</h3>
-                        <a href="stores_01.html" class="btn btn-o btn-xs pos-a right-10 pos-tb-center">所有用户</a>
                     </header>
                     <div class="popular-stores-slider owl-slider" data-loop="true" data-autoplay="true"
                          data-smart-speed="1000" data-autoplay-timeout="10000" data-margin="20" data-items="2"
                          data-xxs-items="2" data-xs-items="2" data-sm-items="3" data-md-items="5" data-lg-items="6">
+
+                        @foreach($users as $user)
                         <div class="store-item t-center">
-                            <a href="store_single_01.html" class="panel is-block">
+                            <a href="javascript:;" class="panel is-block">
                                 <div class="embed-responsive embed-responsive-4by3">
                                     <div class="store-logo">
-                                        <img src="assets/images/brands/brand_01.jpg" alt="">
+                                        <img src="{{ $user->avatar }}" alt="">
                                     </div>
                                 </div>
-                                <h6 class="store-name ptb-10">Amazon</h6>
+                                <h6 class="store-name ptb-10">{{ $user->name }}</h6>
                             </a>
                         </div>
-                        <div class="store-item t-center">
-                            <a href="store_single_01.html" class="panel is-block">
-                                <div class="embed-responsive embed-responsive-4by3">
-                                    <div class="store-logo">
-                                        <img src="assets/images/brands/brand_02.jpg" alt="">
-                                    </div>
-                                </div>
-                                <h6 class="store-name ptb-10">Ashford</h6>
-                            </a>
-                        </div>
-                        <div class="store-item t-center">
-                            <a href="store_single_01.html" class="panel is-block">
-                                <div class="embed-responsive embed-responsive-4by3">
-                                    <div class="store-logo">
-                                        <img src="assets/images/brands/brand_03.jpg" alt="">
-                                    </div>
-                                </div>
-                                <h6 class="store-name ptb-10">DELL</h6>
-                            </a>
-                        </div>
-                        <div class="store-item t-center">
-                            <a href="store_single_01.html" class="panel is-block">
-                                <div class="embed-responsive embed-responsive-4by3">
-                                    <div class="store-logo">
-                                        <img src="assets/images/brands/brand_04.jpg" alt="">
-                                    </div>
-                                </div>
-                                <h6 class="store-name ptb-10">Card Cash</h6>
-                            </a>
-                        </div>
-                        <div class="store-item t-center">
-                            <a href="store_single_01.html" class="panel is-block">
-                                <div class="embed-responsive embed-responsive-4by3">
-                                    <div class="store-logo">
-                                        <img src="assets/images/brands/brand_05.jpg" alt="">
-                                    </div>
-                                </div>
-                                <h6 class="store-name ptb-10">Finish Line</h6>
-                            </a>
-                        </div>
-                        <div class="store-item t-center">
-                            <a href="store_single_01.html" class="panel is-block">
-                                <div class="embed-responsive embed-responsive-4by3">
-                                    <div class="store-logo">
-                                        <img src="assets/images/brands/brand_06.jpg" alt="">
-                                    </div>
-                                </div>
-                                <h6 class="store-name ptb-10">JC Penny</h6>
-                            </a>
-                        </div>
-                        <div class="store-item t-center">
-                            <a href="store_single_01.html" class="panel is-block">
-                                <div class="embed-responsive embed-responsive-4by3">
-                                    <div class="store-logo">
-                                        <img src="assets/images/brands/brand_07.jpg" alt="">
-                                    </div>
-                                </div>
-                                <h6 class="store-name ptb-10">Callaway Golf</h6>
-                            </a>
-                        </div>
-                        <div class="store-item t-center">
-                            <a href="store_single_01.html" class="panel is-block">
-                                <div class="embed-responsive embed-responsive-4by3">
-                                    <div class="store-logo">
-                                        <img src="assets/images/brands/brand_08.jpg" alt="">
-                                    </div>
-                                </div>
-                                <h6 class="store-name ptb-10">Car Toys</h6>
-                            </a>
-                        </div>
+                        @endforeach
+
                     </div>
                 </section>
 

@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Banner;
+use App\Models\User;
 
 class IndexController extends Controller
 {
@@ -23,6 +24,8 @@ class IndexController extends Controller
 
         $banners = Banner::getCacheBanner()->take(4);
 
-        return view('index.index',compact('categories','products','banners'));
+        $users = User::getActiveUsers(10);
+
+        return view('index.index',compact('categories','products','banners','users'));
     }
 }
