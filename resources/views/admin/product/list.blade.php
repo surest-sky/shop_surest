@@ -130,7 +130,7 @@
             var index = layer.open({
                 type: 2,
                 content: url,
-                area: ['320px', '800px'],
+                area: ['320px', '600px'],
                 maxmin: true
             });
             layer.full(index);

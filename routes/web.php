@@ -13,7 +13,7 @@
 
 
 
-Route::group(['middleware'=>'web'],function (){
+Route::group(['middleware'=>['web','actived']],function (){
 
     Route::get('/','IndexController@index')->name('index');
 
@@ -40,6 +40,8 @@ Route::group(['middleware'=>'web'],function (){
 
 
     Route::get('/test/sub','TestController@sub')->name('sub');
+    Route::get('/test/form','TestController@form')->name('test.form');
+    Route::get('/test/store','TestController@store')->name('test.store');
     /**
      * 注册注销相关
      */
@@ -101,8 +103,6 @@ Route::group(['middleware'=>'web'],function (){
         # 处理收货地址
         Route::post('/me/address', 'MeController@create')->name('me.address.create');
         Route::put('/me/address', 'MeController@update')->name('me.address.update');
-
-
 
     });
 
@@ -207,7 +207,7 @@ Route::group(['middleware'=>'web'],function (){
                     Route::get('/order', 'OrderController@list')->name('order');
                     Route::get('/order/{id}', 'OrderController@show')->name('order.show');
                     Route::post('/order/ship', 'OrderController@ship')->name('order.ship');
-                    Route::post('/order/refund', 'OrderController@refund')->name('order.refund');
+                    Route::post('/order/refund', 'OrderController@refund')->name('order.refund'); # 退款
 //                    Route::post('/product/store', 'ProductController@create')->name('product.create');
 
 

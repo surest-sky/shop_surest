@@ -33,6 +33,9 @@ trait OrderAlipayTrait
             # 邮件通知
             Order::sendInfo($order,'订单支付成功');
 
+            # 给予用户登录的创建订单分数*4
+            event(new \App\Events\ActiveUser($order->user_id,10));
+
             # 销量增加
             Order::incrCount($order);
             

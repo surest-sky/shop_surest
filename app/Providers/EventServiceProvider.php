@@ -20,6 +20,10 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Database\Events\QueryExecuted' => [
             'App\Listeners\SqlListener',
         ],
+        'App\Events\ActiveUser' => [
+            'App\Listeners\AvtiveUserListener'
+        ]
+
     ];
 
     /**

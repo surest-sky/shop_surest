@@ -107,8 +107,7 @@ class Order extends Model
      * @param $data
      * @return Order
      */
-    public static function
-    createNewOrder($result,$data)
+    public static function createNewOrder($result,$data)
     {
         DB::beginTransaction();
 
@@ -136,6 +135,9 @@ class Order extends Model
             $order->user_id = \Auth::id();
             $order->save();
             DB::commit();
+
+            # 给予用户的创建订单分数*4
+            event(new \App\Events\ActiveUser($order->user_id,4));
 
             return $order;
 
