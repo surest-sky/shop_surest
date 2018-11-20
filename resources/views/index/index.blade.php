@@ -56,7 +56,7 @@
 			                        <i class="fa fa-star-o"></i>
 			                    </span>
                                                 <span class="rating-reviews color-light">
-			                    	( <span class="rating-count">{{ $banner->product->review_count }}</span> Reviews )
+			                    	( <span class="rating-count">{{ $banner->product->review_count }}</span> 条评论 )
                                                     </span>
                                             </div>
                                             <h3 class="deal-title mb-10 ">
@@ -213,29 +213,6 @@
                 }
             })
         })
-
-        $('.like-deal').on('click',function () {
-            var $id = $(this).attr('data-id');
-
-            if( $id.length == 0) {
-                swal('错误操作','','error');
-            }
-            $.ajax({
-                url: '{{ route('wish.add') }}',
-                type: 'post',
-                data: {
-                    id: $id
-                },
-                success: function (data,text,status) {
-                    swal('喜欢成功','','success');
-                    var n = $('#wish_count').text();
-                    $('#wish_count').html(parseInt(n)+1);
-                },
-                error: function (error) {
-                   $msg = error.responseJSON.message;
-                    swal($msg,'','error');
-                }
-            })
-        })
     </script>
+    @include('layout._extend_js')
 @stop

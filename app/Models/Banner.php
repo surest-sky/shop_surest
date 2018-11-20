@@ -2,14 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Http\Traits\BannerCacheTrait;
 
-class Banner extends Model
+class Banner extends BaseModel
 {
     use BannerCacheTrait;
 
     public $guarded = [];
+
+    const key = 'banner';
+
+    public $appends = [
+        'image',
+        'cName'
+    ];
 
     public function product()
     {

@@ -38,7 +38,7 @@
                                             data-bg-img="{{ $product->image->src ?? '' }}">
                                         <div class="label-discount left-20 top-15">{{ str_limit($product->category->name,4,'..') }}</div>
                                         <ul class="deal-actions top-15 right-20">
-                                            <li class="like-deal"><span><i class="fa fa-heart"></i></span>
+                                            <li class="like-deal" data-id="{{ $product->id }}"><span><i class="fa fa-heart"></i></span>
                                             </li>
                                             <li class="share-btn">
                                                 <div class="share-tooltip fade">
@@ -126,4 +126,6 @@
             window.location = '?sort='+$(this).val();
         })
     </script>
+
+    @include('layout._extend_js')
 @stop

@@ -25,7 +25,9 @@ class CategoryController extends Controller
         if( !$products = Category::getCategoryByProduct($id) ){
             return view('error.404','未找到分类');
         }
+
         $sort = $request->sort ?? 'new';
+
         $products = $product->productSort($products,$sort);
 
         $currentPage = $request->current ?? 1;

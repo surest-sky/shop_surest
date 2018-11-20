@@ -69,7 +69,7 @@ class Product extends Model
      */
     public function image()
     {
-        return $this->hasOne(Image::class,'product_id','id');
+        return $this->hasOne(Image::class,'product_id','id')->select('id','src','product_id');
     }
 
     /**
@@ -79,7 +79,7 @@ class Product extends Model
      */
     public function category()
     {
-        return $this->belongsTo(Category::class,'category_id','id');
+        return $this->belongsTo(Category::class,'category_id','id')->select('id','name');
     }
 
     /**

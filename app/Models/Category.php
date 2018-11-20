@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Http\Traits\CategoryCacheTrait;
 
-class Category extends Model
+class Category extends BaseModel
 {
     use CategoryCacheTrait;
+
+    const key = 'category';
 
     public static function getCategoryAll($bol=true)
     {
@@ -31,6 +32,7 @@ class Category extends Model
     {
         return $this->hasMany(Product::class,'category_id','id');
     }
+
 
     public function getPcountAttribute()
     {

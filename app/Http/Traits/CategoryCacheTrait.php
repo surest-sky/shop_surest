@@ -22,28 +22,27 @@ trait CategoryCacheTrait
      */
     public static function getCacheCategory()
     {
-        # 检测是否使用redis缓存
-        if( self::isRedis() ){
-            return self::getRedisCategory();
-        }else{
-            return self::getFileCategory();
-        }
+        return self::getRedisCategory();
     }
 
-    public function setCacheCategory()
-    {
-        # 检测是否使用redis缓存
-        if( self::isRedis() ){
-            return self::setRedisCategory();
-        }else{
-            return self::setFileCategory();
-        }
-    }
     /**
      * 从redis中获取缓存
      */
     public static function getRedisCategory()
     {
+        # 获取所有分类
+        # 分类数据包含字段 分类id ， 分类下关联的商品数量，分类名称
+
+        $categories = Redis::HGETALL(Category::key);
+
+        if( empty($categories) ) {
+            # 写数据
+            $categories = self::setRedisCategory();
+        }
+
+        $categories = call_user_func('collect',array_map('unserialize',$categories));
+
+        return $categories;
 
     }
 
@@ -52,80 +51,24 @@ trait CategoryCacheTrait
      */
     public static function setRedisCategory()
     {
-
-    }
-
-    /**
-     * 从文件中缓存缓存
-     */
-    public static function getFileCategory()
-    {
-        $key = self::getCategoryKey();
-        $categories = Cache::get($key);
-        if( !$categories ){
-            $categories = self::setFileCategory();
+        $categories = Category::with(['product.image','product.category'])->withOnly('product',['category_id','name'] )->select('id','name')->get();
+        foreach ($categories as $category) {
+            Redis::HSET(Category::key,$category->id,serialize($category));
         }
-        $categories = unserialize($categories);
-        return $categories;
+
+        return Redis::HGETALL(Category::key);
     }
 
     /**
-     * 设置文件缓存
-     */
-    public static function setFileCategory()
-    {
-        $key = self::getCategoryKey();
-        # 获取所有的分类数据
-        $expirAt = Carbon::now()->addDays(10);
-        $categories = Category::with(['product'])->orderBy('created_at','DESC')
-            ->get();
-
-        $categories = serialize($categories);
-        Cache::put($key,$categories,$expirAt);
-        return $categories;
-    }
-
-    /**
-     * 获取某个分类下的商品数据
-     * @param $id int 分类id
-     * @return CategoryCacheTrait[]|\Illuminate\Database\Eloquent\Collection|mixed|string
+     * 分类id
+     * @param $id
      */
     public static function getCategoryByProduct($id)
     {
-        $key = self::getByProductKey($id);
-        $products = Cache::get($key);
-        if( !$products ){
-            $products = self::setCategoryByProduct($id);
-        }
-        $products = unserialize($products);
-        return $products;
-    }
+        $products = Redis::hget(Category::key,$id);
 
-    public static function setCategoryByProduct($id)
-    {
-        $key = self::getByProductKey($id);
-        $expirAt = Carbon::now()->addDays(10);
-        $products = Product::with(['image','category'])->orderBy('created_at','DESC')->where('category_id',$id)
-                      ->get();
-        $products = serialize($products);
-        Cache::put($key,$products,$expirAt);
+        $products =  call_user_func('unserialize',$products);
 
-        return $products;
-    }
-
-
-    public static function isRedis()
-    {
-        return (boolean)config('main.redis_open');
-    }
-
-    public static function getByProductKey($id)
-    {
-        return 'category_by_product' . $id;
-    }
-
-    public static function getCategoryKey()
-    {
-        return 'category_index';
+        return $products->product;
     }
 }

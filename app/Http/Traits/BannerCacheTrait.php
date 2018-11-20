@@ -9,8 +9,7 @@
 namespace App\Http\Traits;
 
 use App\Models\Banner;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 
 trait BannerCacheTrait
 {
@@ -21,28 +20,26 @@ trait BannerCacheTrait
     public static function getCacheBanner()
     {
         # 检测是否使用redis缓存
-        if( self::isRedis() ){
-            return self::getRedisBanner();
-        }else{
-            return self::getFileBanner();
-        }
+        return self::getRedisBanner();
     }
 
-    public static function setCacheBanner()
-    {
-        # 检测是否使用redis缓存
-        if( self::isRedis() ){
-            return self::setRedisBanner();
-        }else{
-            return self::setFileBanner();
-        }
-    }
     /**
      * 从redis中获取缓存
      */
     public static function getRedisBanner()
     {
+        # 获取所有轮播图数据
 
+        $banners = Redis::HGETALL(Banner::key);
+
+        if( empty($banners) ) {
+            # 写数据
+            $banners = self::setRedisBanner();
+        }
+
+        $banners = call_user_func('collect',array_map('unserialize',$banners));
+
+        return $banners;
     }
 
     /**
@@ -50,50 +47,15 @@ trait BannerCacheTrait
      */
     public static function setRedisBanner()
     {
+        $banners = Banner::with(['product.image','product.category'])
+            ->withOnly('product',['name','rating','review_count','price','category_id'])
+            ->select('id','description','product_id')
+            ->get();
 
-    }
-
-    /**
-     * 从文件中缓存缓存
-     */
-    public static function getFileBanner()
-    {
-        $key = self::getBannerKey();
-        $banners = Cache::get($key);
-        if( !$banners ){
-            $banners = self::setFileBanner();
+        foreach ($banners as $banner) {
+            Redis::HSET(Banner::key,$banner->id,serialize($banner));
         }
-        $banners = self::setFileBanner();
-        $banners = unserialize($banners);
 
-        return $banners;
-    }
-
-    /**
-     * 设置文件缓存
-     */
-    public static function setFileBanner()
-    {
-        $key = self::getBannerKey();
-        # 获取所有的分类数据
-        $expirAt = Carbon::now()->addDays(10);
-        $banners = Banner::with(['product','product.category','product.image'])->orderBy('created_at','desc')->get();
-
-        $banners = serialize($banners);
-        Cache::put($key,$banners,$expirAt);
-        return $banners;
-    }
-
-
-
-    public static function isRedis()
-    {
-        return (boolean)config('main.redis_open');
-    }
-
-
-    public static function getBannerKey()
-    {
-        return 'banner_index';
+        return Redis::HGETALL(Banner::key);
     }
 }
