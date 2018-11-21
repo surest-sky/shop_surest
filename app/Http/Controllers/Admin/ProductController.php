@@ -19,6 +19,9 @@ use App\Services\ProductService;
 use App\Models\Image;
 use App\Exceptions\ModelException;
 use App\Http\Traits\ProductCacheTrait;
+use Mockery\Exception;
+use App\Scope\ProductScope;
+use App\Models\ProductSku;
 
 class ProductController
 {
@@ -32,13 +35,13 @@ class ProductController
         return view('admin.product.list',compact('products','productsAll'));
     }
 
-    // 添加用户
+    // 添加商品
     public function addOrEdit(Request $request)
     {
         $product = null;
         $id = $request->id ?? null;
         if( $id ) {
-            $product = Product::with(['image','category','productSkus.image'])->find($id);
+            $product = Product::withoutGlobalScope(ProductScope::class)->with(['image','category','productSkus.image'])->find($id);
         }
         $categoies = Category::all();
         return view('admin.product.add_edit',compact('product','id','categoies'));
@@ -95,6 +98,8 @@ class ProductController
                 'product_id' => $pid
             ]);
 
+            $id = [];
+
             # 写入sku
             $skus = $productService->getSkusParms($request,$product->id);
 
@@ -110,16 +115,18 @@ class ProductController
                 'product_sku_id' => $id[1],
             ]);
 
-            # 写入缓存
-            self::setCacheProduct();
-
             \DB::commit();
+
+            # 创建商品触缓存
+            Category::setCategorySimple($product->category_id);
 
             return response()->view('admin.error.title',['msg'=>'创建成功,请刷新']);
         }catch (\Exception $e){
             \DB::rollback();
+
+            throw new Exception($e->getMessage());
             throw new ModelException([
-                'message' => "写入商品数据异常" . $e->getMessage()
+                'message' => "写入商品数据异常" . $e->getMessage() . $e->getLine()
             ]);
 
         }
@@ -131,13 +138,14 @@ class ProductController
             \DB::BeginTransaction();
             # 商品id
             $id = $request->id;
-            if( !$id || !$product = Product::find($id) ) {
+            if( !$id || !$product = Product::withoutGlobalScope(ProductScope::class)->where('id',$id)->first() ) {
                 session()->flash('status','商品不存在');
                 return redirect()->back();
             }
 
             #先更新商品的数据
             $result = $productService->getParams($request);
+
             Product::where('id',$id)->update($result);
 
             # 写入商品的图片数据
@@ -148,9 +156,17 @@ class ProductController
                 'src' => $img
             ]);
 
+            # 写入sku
+            $skus = $productService->getSkusParms($request,$product->id);
+
+
+            $id = [];
 
             $id[0] = $product->productSkus->first()->id;
             $id[1] = $product->productSkus->last()->id;
+
+            ProductSku::where('id',$id[0])->update($skus[1]);
+            ProductSku::where('id',$id[1])->update($skus[2]);
 
             Image::where('product_sku_id',$id[0])->update([
                 'src' => $request->skus['new1']['skuImg']
@@ -160,10 +176,13 @@ class ProductController
                 'src' => $request->skus['new2']['skuImg'],
             ]);
 
-            # 写入缓存
-            self::setCacheProduct();
-
             \DB::commit();
+
+            # 触发商品缓存
+            Product::setSimpleByCacheProduct($product->id);
+
+            # 创建发了关联 - 商品触缓存
+            Category::setCategorySimple($product->category_id);
 
             return response()->view('admin.error.title',['msg'=>'更新成功,请刷新']);
 

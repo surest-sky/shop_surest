@@ -18,4 +18,11 @@ class CartObserver
         $id = $cart->user_id;
         Cart::setRedisCart($id);
     }
+
+    public function created(Cart $cart)
+    {
+        # 删除后则更新缓存
+        $id = $cart->user_id;
+        Cart::setRedisCart($id);
+    }
 }

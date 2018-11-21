@@ -11,9 +11,10 @@ class ProductController extends Controller
     public function show(Request $request)
     {
         $pid = $request->id;
-        if( !$pid || !$product = Product::getSimpleProductOrComment($pid) ) {
+        if( !$pid || !$product = Product::getSimpleProduct($pid) ) {
             return view('error.404',['msg'=>'商品不存在']);
         }
+
         $cid = $product->category->id;
 
         # 推荐

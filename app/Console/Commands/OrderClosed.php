@@ -44,15 +44,7 @@ class OrderClosed extends Command
         foreach ($orders as $order) {
             $order->closed = '1';
             $order->save();
-        }
-
-        $extras = $orders->pluck('extra');
-
-        foreach ($extras as $extra) {
-            # key 是商品的id
-            # value 是待还会去的销量库存
-            $ids = collect($extra['product_skus'])->pluck('count','id')->toArray();
-            IncrProductStock::dispatch($ids);
+            IncrProductStock::dispatch($order);
         }
 
     }

@@ -2,17 +2,30 @@
 /**
  * Created by PhpStorm.
  * User: surest.cn
- * Date: 2018/11/9
- * Time: 16:47
+ * Date: 2018/11/21
+ * Time: 23:55
  */
 
 namespace App\Observers;
 
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\Image;
 
-class ProductOberver
+class ProductObserver
 {
+
+    public function deleted(Product $product)
+    {
+        Product::remove($product->category_id);
+    }
+
+    public function updated(Product $product)
+    {
+        # 创建商品触缓存
+        Category::setCategorySimple($product->category_id);
+    }
+
     public function deleting(Product $product)
     {
         $id = $product->id;
@@ -29,4 +42,6 @@ class ProductOberver
         }
 
     }
+
+
 }

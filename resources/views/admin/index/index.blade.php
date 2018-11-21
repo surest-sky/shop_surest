@@ -30,7 +30,7 @@
                 </ul>
                 <div class="layui-tab-content site-demo site-demo-body">
                     <div class="layui-tab-item layui-show">
-                        <iframe frameborder="0" src="{{ route('admin.welcome') }}" class="x-iframe"></iframe>
+                        欢迎进入管理系统
                     </div>
                 </div>
             </div>

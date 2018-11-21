@@ -60,7 +60,7 @@ class OrderController extends Controller
 
         if( !$result['stock'] ) {
             session()->flash('status',$result['name'] . '库存不足');
-             return redirect()->route('order.list');
+            return redirect()->route('cart');
         }
 
         $order = Order::createNewOrder($result,$data);

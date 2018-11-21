@@ -46,6 +46,7 @@ trait CartCacheTrait
     }
 
     /**
+     * 用户id
      * 设置redis缓存
      */
     public static function setRedisCart($id)

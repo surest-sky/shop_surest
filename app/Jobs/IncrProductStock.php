@@ -15,15 +15,15 @@ class IncrProductStock implements ShouldQueue
 
     public $tries = 2;
 
-    protected $ids;
+    protected $order;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($ids)
+    public function __construct($order)
     {
-        $this->ids = $ids;
+        $this->order = $order;
     }
 
     /**
@@ -33,10 +33,17 @@ class IncrProductStock implements ShouldQueue
      */
     public function handle()
     {
+
+        # key 是商品的id
+        # value 是待还会去的销量库存
+        $extra = $this->order->extra;
+
+        $ids = collect($extra['product_skus'])->pluck('count','id')->toArray();
+
         # key 代表商品sku - id
         # value 代表库存
 
-        foreach ($this->ids as $key=>$value) {
+        foreach ($ids as $key=>$value) {
             $product = ProductSku::where('id',$key)->select('id')->first();
             $product->increment('stock',$value);
         }

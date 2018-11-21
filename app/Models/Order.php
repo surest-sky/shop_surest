@@ -134,6 +134,7 @@ class Order extends Model
             $order->expir_at = Carbon::now()->addMinutes(30); # 有效期30分钟
             $order->user_id = \Auth::id();
             $order->save();
+
             DB::commit();
 
             # 给予用户的创建订单分数*4
@@ -181,7 +182,6 @@ class Order extends Model
         # 排他锁，保持获取的库存一致
         $productSkus = ProductSku::with('product')->whereIn('id',$result['ids'])->lockForUpdate()->get();
 
-
         # 减库存
         foreach ($productSkus as $key=>$productSku) {
 
@@ -194,9 +194,6 @@ class Order extends Model
             $arr['product_skus'][$key]['count'] = $data[$productSku->id];
             $arr['product_skus'][$key]['price'] = $productSku->price;
         }
-
-        # 重新写缓存
-        Product::setCacheProduct();
 
         # 清除购物车
         $carts = Cart::where('user_id',\Auth::id())->whereIn('product_sku_id',$result['ids'])->get()->pluck('id')->toArray();
@@ -316,6 +313,7 @@ class Order extends Model
         if( $expir < 0 ) {
             $this->closed = 1;
             $this->save();
+            \App\Jobs\IncrProductStock::dispatch($this);
             return '已关闭';
         }
 

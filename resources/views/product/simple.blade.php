@@ -35,106 +35,106 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12">
-                                <div class="posted-review panel p-30">
-                                    <h3 class="h-title">{{ $product->comments->count() }} 评论</h3>
+                            {{--<div class="col-xs-12">--}}
+                                {{--<div class="posted-review panel p-30">--}}
+                                    {{--<h3 class="h-title">{{ $product->comments->count() }} 评论</h3>--}}
 
-                                    @foreach($product->comments as $comment)
-                                    <div class="review-single pt-30">
-                                        <div class="media">
-                                            <div class="media-left">
-                                                <img class="media-object mr-10 radius-4" src="{{ $comment->user->avatar }}" width="90" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="review-wrapper clearfix">
-                                                    <ul class="list-inline">
-                                                        <li>
-                                                            <span class="review-holder-name h5">{{ $comment->user->name }}</span>
-                                                        </li>
-                                                        <li>
-                                                            <div class="rating">
-                                                                    <span class="rating-stars" data-rating="5">
-										                        <i class="fa fa-star-o"></i>
-										                        <i class="fa fa-star-o"></i>
-										                        <i class="fa fa-star-o"></i>
-										                        <i class="fa fa-star-o"></i>
-										                        <i class="fa fa-star-o"></i>
-										                    </span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <p class="review-date mb-5">{{ $comment->create_at }}</p>
-                                                    <p class="copy">{{ $comment->content }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
+                                    {{--@foreach($product->comments as $comment)--}}
+                                    {{--<div class="review-single pt-30">--}}
+                                        {{--<div class="media">--}}
+                                            {{--<div class="media-left">--}}
+                                                {{--<img class="media-object mr-10 radius-4" src="{{ $comment->user->avatar }}" width="90" alt="">--}}
+                                            {{--</div>--}}
+                                            {{--<div class="media-body">--}}
+                                                {{--<div class="review-wrapper clearfix">--}}
+                                                    {{--<ul class="list-inline">--}}
+                                                        {{--<li>--}}
+                                                            {{--<span class="review-holder-name h5">{{ $comment->user->name }}</span>--}}
+                                                        {{--</li>--}}
+                                                        {{--<li>--}}
+                                                            {{--<div class="rating">--}}
+                                                                    {{--<span class="rating-stars" data-rating="5">--}}
+										                        {{--<i class="fa fa-star-o"></i>--}}
+										                        {{--<i class="fa fa-star-o"></i>--}}
+										                        {{--<i class="fa fa-star-o"></i>--}}
+										                        {{--<i class="fa fa-star-o"></i>--}}
+										                        {{--<i class="fa fa-star-o"></i>--}}
+										                    {{--</span>--}}
+                                                            {{--</div>--}}
+                                                        {{--</li>--}}
+                                                    {{--</ul>--}}
+                                                    {{--<p class="review-date mb-5">{{ $comment->create_at }}</p>--}}
+                                                    {{--<p class="copy">{{ $comment->content }}</p>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--@endforeach--}}
 
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="post-review panel p-20">
-                                    <h3 class="h-title">发送评论</h3>
-                                    <form class="horizontal-form pt-30" action="#">
-                                        <div class="row row-v-10">
-                                            <div class="col-sm-6">
-                                                <input type="text" class="form-control" placeholder="姓名" value="{{ Auth::user()->name ?? '' }}">
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input type="text" class="form-control" placeholder="邮件" value="{{ Auth::user()->email ?? '' }}">
-                                            </div>
-                                            <div class="col-xs-12">
-                                                <ul class="select-rate list-inline ptb-20">
-                                                    <li><span>你的评分: </span>
-                                                    </li>
-                                                    <li>
-                                                            <span class="rating" role="button">
-			                                        <i class="fa fa-star"></i>
-			                                    </span>
-                                                    </li>
-                                                    <li>
-                                                            <span class="rating" role="button">
-			                                        <i class="fa fa-star"></i>
-			                                        <i class="fa fa-star"></i>
-			                                    </span>
-                                                    </li>
-                                                    <li>
-                                                            <span class="rating" role="button">
-			                                        <i class="fa fa-star"></i>
-			                                        <i class="fa fa-star"></i>
-			                                        <i class="fa fa-star"></i>
-			                                    </span>
-                                                    </li>
-                                                    <li>
-                                                            <span class="rating" role="button">
-			                                        <i class="fa fa-star"></i>
-			                                        <i class="fa fa-star"></i>
-			                                        <i class="fa fa-star"></i>
-			                                        <i class="fa fa-star"></i>
-			                                    </span>
-                                                    </li>
-                                                    <li>
-                                                            <span class="rating" role="button">
-			                                        <i class="fa fa-star"></i>
-			                                        <i class="fa fa-star"></i>
-			                                        <i class="fa fa-star"></i>
-			                                        <i class="fa fa-star"></i>
-			                                        <i class="fa fa-star"></i>
-			                                    </span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-xs-12">
-                                                <textarea class="form-control" placeholder="你的评论" rows="6"></textarea>
-                                            </div>
-                                            <div class="col-xs-12 text-right">
-                                                <button type="submit" class="btn mt-20">发送评论</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-xs-12">--}}
+                                {{--<div class="post-review panel p-20">--}}
+                                    {{--<h3 class="h-title">发送评论</h3>--}}
+                                    {{--<form class="horizontal-form pt-30" action="#">--}}
+                                        {{--<div class="row row-v-10">--}}
+                                            {{--<div class="col-sm-6">--}}
+                                                {{--<input type="text" class="form-control" placeholder="姓名" value="{{ Auth::user()->name ?? '' }}">--}}
+                                            {{--</div>--}}
+                                            {{--<div class="col-sm-6">--}}
+                                                {{--<input type="text" class="form-control" placeholder="邮件" value="{{ Auth::user()->email ?? '' }}">--}}
+                                            {{--</div>--}}
+                                            {{--<div class="col-xs-12">--}}
+                                                {{--<ul class="select-rate list-inline ptb-20">--}}
+                                                    {{--<li><span>你的评分: </span>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li>--}}
+                                                            {{--<span class="rating" role="button">--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                    {{--</span>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li>--}}
+                                                            {{--<span class="rating" role="button">--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                    {{--</span>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li>--}}
+                                                            {{--<span class="rating" role="button">--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                    {{--</span>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li>--}}
+                                                            {{--<span class="rating" role="button">--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                    {{--</span>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li>--}}
+                                                            {{--<span class="rating" role="button">--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                        {{--<i class="fa fa-star"></i>--}}
+			                                    {{--</span>--}}
+                                                    {{--</li>--}}
+                                                {{--</ul>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="col-xs-12">--}}
+                                                {{--<textarea class="form-control" placeholder="你的评论" rows="6"></textarea>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="col-xs-12 text-right">--}}
+                                                {{--<button type="submit" class="btn mt-20">发送评论</button>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</form>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                         </div>
                     </div>
                     <div class="page-sidebar col-md-4 col-sm-5 col-xs-12">
@@ -153,6 +153,8 @@
                                                 <ul class="deal-meta list-inline mb-10 color-mid">
                                                     <li><i class="ico fa fa-shopping-basket mr-10"></i>{{ $product->sold_count }} 人购买了</li>
                                                     <br>
+                                                    <li>剩余：<span id="p_stock">{{ $product->productSkus->first()->stock }}</span> 件 </li>
+                                                    <br>
                                                     <li>请选择一个商品： </li>
                                                 </ul>
                                                 <div class="price mb-20">
@@ -162,6 +164,7 @@
                                                             title="{{ $sku->description }}"
                                                                 data-img="{{ $sku->image->src ?? '' }}"
                                                                 data-price="{{ $sku->price }}"
+                                                                data-stock="{{ $sku->stock }}"
                                                             >{{ $sku->name }}</li>
                                                         @endforeach
                                                         <input type="hidden" name="skuId" value="{{ $product->productSkus->first()->id }}">
@@ -178,26 +181,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <!-- Subscribe Widget -->
-                                        <div class="widget subscribe-widget panel pt-20 prl-20">
-                                            <h3 class="widget-title h-title">发送邮件</h3>
-                                            <div class="widget-content ptb-30">
-
-                                                <p class="color-mid mb-20">订阅我们</p>
-                                                <form method="post" action="#">
-                                                    <div class="input-group">
-                                                        <input type="email" class="form-control" placeholder="你的邮件地址">
-                                                        <span class="input-group-btn">
-                                        		        	<button class="btn" type="submit">订阅</button>
-                                        		    	</span>
-                                                    </div>
-                                                </form>
-
-                                            </div>
-                                        </div>
-                                        <!-- End Subscribe Widget -->
                                     </div>
                                     <div class="col-xs-12">
                                         <!-- Best Rated Deals -->
@@ -257,11 +240,14 @@
             $(obj).addClass('active');
             var $src = $(obj).attr('data-img');
             var $price = $(obj).attr('data-price');
+            var $stock = $(obj).attr('data-stock');
 
             $('.slides #image').attr('src',$src);
 
+            $('#p_stock').text($stock);
             $(obj).parent().find('input[name=skuId]').val(id);
             $('#price').html($price);
+
         }
 
         $('.buy').on('click',function () {

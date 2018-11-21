@@ -67,6 +67,7 @@
         function product_del(obj,id)
         {
             var r=confirm("是真的要删除它吗")
+            var count = $('#wish_count').text();
             if (r==true)
             {
                 $.ajax({
@@ -76,12 +77,12 @@
                     data: {
                         _method: 'delete',
                         id: id,
-
                     },
                     success: function (data, text, response) {
                         if (response.status == 200) {
                             swal('删除成功','','success');
                             $(obj).parents("tr").remove();
+                            $('#wish_count').text(parseInt(count)-1);
                         } else {
                             swal('系统错误','','error');
                         }

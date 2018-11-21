@@ -18,6 +18,10 @@ trait AddressCacheTrait
         return self::getAddressByUser($id);
     }
 
+    /**
+     * @param $id integer 用户id
+     * @return mixed
+     */
     public static function getAddressByUser($id)
     {
         $addresses = Redis::hget(Address::key,$id);
@@ -33,7 +37,7 @@ trait AddressCacheTrait
 
     public static function setAddressByUser($id)
     {
-        $addresses = Address::where('user_id',$id)->select('id','phone','address','detail')->get();
+        $addresses = Address::where('user_id',$id)->select('id','phone','address','detail','name')->get();
 
         Redis::hset(Address::key,$id,serialize($addresses));
 

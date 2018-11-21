@@ -24,8 +24,12 @@
                             </div>
                         @endif
 
-                        @if($status = session('$status') )
-                            {{ $status }}
+                        @if($status = session('status') )
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {{ $status }}
+                                </ul>
+                            </div>
                         @endif
 
                         <div class="container">

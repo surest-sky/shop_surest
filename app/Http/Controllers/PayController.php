@@ -66,6 +66,8 @@ class PayController extends Controller
     {
         try {
             $data = app('alipay')->verify();
+
+            # 支付成功
             Order::apliy_success($data->out_trade_no,$data->trade_no,$data->timestamp);
 
             # 写日志

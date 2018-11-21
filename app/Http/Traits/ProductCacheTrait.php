@@ -32,7 +32,7 @@ trait ProductCacheTrait
 
             Redis::PEXPIRE(Product::key,\Carbon\Carbon::now()->addDays(1)->timestamp);
 
-            $products = Redis::get(Product::key);
+            $products = Redis::get($key);
         }
 
         $products = call_user_func('unserialize',$products);
@@ -43,25 +43,54 @@ trait ProductCacheTrait
 
     public static function simpleByCacheProduct($id)
     {
-        $key = Product::simpleKey;
+        $key = Product::simpleKey.$id;
 
         $product = Redis::get($key);
 
+
         if( !$product ) {
-            $product = Product::with(['image','category','productSkus'])
-                ->orderBy('created_at','DESC')
-                ->where('id',$id)
-                ->first();
-
-            if($product) {
-                Redis::set($key,serialize($product));
-
-                Redis::PEXPIRE(Product::key,\Carbon\Carbon::now()->addDays(3)->timestamp);
-
-                $product = Redis::get(Product::key);
-            }
+            $product = self::setSimpleByCacheProduct($id);
         }
 
         return $product ? call_user_func('unserialize',$product) : false;
     }
+
+    public static function setSimpleByCacheProduct($id)
+    {
+        $key = Product::simpleKey.$id;
+
+        $product = Product::with(['image','category','productSkus','productSkus.image'])
+            ->where('id',$id)
+            ->first();
+
+        if($product) {
+            Redis::set($key,serialize($product));
+
+            Redis::PEXPIRE($key,\Carbon\Carbon::now()->addDays(3)->timestamp);
+
+            $product = Redis::get($key);
+        }else{
+            $product = null;
+        }
+            return $product;
+    }
+
+    public static function setPartByCacheProduct($ids)
+    {
+        $ids = collect($ids)->pluck('product_id')->toArray();
+
+        foreach ($ids as $id) {
+            self::setSimpleByCacheProduct($id);
+        }
+    }
+
+    public static function remove($pid)
+    {
+        $key = Product::simpleKey.$pid;
+
+        if( self::simpleByCacheProduct($pid) ) {
+            Redis::del($key);
+        }
+    }
+
 }

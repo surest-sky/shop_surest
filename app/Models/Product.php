@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\Traits\ProductCacheTrait;
+use App\Scope\ProductScope;
 
 class Product extends Model
 {
@@ -21,15 +22,21 @@ class Product extends Model
 
     const latest = 'product_latest';
 
-    const simpleKey = 'simple_key';
+    const simpleKey = 'simple_key_';
 
-    const len = 8;
+    const len = 9;
 
     public $hidden = [
         'updated_at'
         ,'actived'
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new ProductScope);
+    }
     /**
      * 获取所有的商品数据
      * @param bool $page true = 分页数据获取 false = 获取全部数据
@@ -52,23 +59,23 @@ class Product extends Model
      */
     public static function getPageProduct()
     {
-        $products = self::with(['productSkus','category','comments.user'])->orderBy('created_at',self::type)
+        $products = self::withoutGlobalScope(ProductScope::class)->with(['productSkus','category','comments.user'])->orderBy('created_at',self::type)
                     ->paginate(self::total);
 
         return $products;
     }
 
     /**
-     * 从缓存中获取所有的商品
+     * 获取所有的商品
      * @return Product[]|Collection|mixed|string|void
      */
     public static function getAllProduct()
     {
-        $products = self::getCacheProduct();
+        $products = self::withoutGlobalScope(ProductScope::class)->get();
         return $products;
     }
 
-    public static function getSimpleProductOrComment($pid)
+    public static function getSimpleProduct($pid)
     {
         $product = self::simpleByCacheProduct($pid);
         return $product;
@@ -122,7 +129,7 @@ class Product extends Model
      */
     public static function getGoodsProductOnCategory($cid,$pid)
     {
-        $products = self::getCacheProduct();
+        $products = Category::getCategoryByProduct($cid);
 
         $products = $products->where('category_id',$cid)->whereNotIn('id',$pid)->sortByDesc('sold_count')->take(10);
 

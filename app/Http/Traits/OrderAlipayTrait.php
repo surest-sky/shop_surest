@@ -36,6 +36,9 @@ trait OrderAlipayTrait
             # 给予用户登录的创建订单分数*4
             event(new \App\Events\ActiveUser($order->user_id,10));
 
+            # 支付成功，重新写商品的缓存
+
+
             # 销量增加
             Order::incrCount($order);
             

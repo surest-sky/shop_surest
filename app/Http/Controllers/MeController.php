@@ -22,11 +22,16 @@ class MeController extends Controller
     public function address()
     {
         $uid = Auth::id();
-        $addresses = Address::where('user_id',$uid)->get();
+        $addresses = Address::getAddress($uid);
 
         return view('me.address',compact('addresses'));
     }
 
+    /**
+     * 渲染 收货地址编辑页面
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function add_edit(Request $request)
     {
         $id = $request->id;
@@ -37,6 +42,11 @@ class MeController extends Controller
     }
 
 
+    /**
+     * 创建一个收货地址
+     * @param AddressRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function create(AddressRequest $request)
     {
         $data = Address::setData($request);
@@ -48,6 +58,12 @@ class MeController extends Controller
         return redirect()->route('me.address');
     }
 
+    /**
+     * 更新一个收货地址
+     * @param AddressRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(AddressRequest $request)
     {
         $data = Address::setData($request);
@@ -70,12 +86,18 @@ class MeController extends Controller
 
     }
 
+    /**
+     * 删除一个收货地址
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function delete(Request $request)
     {
         $aId = $request->id;
+        $uid = Auth::id();
 
-        if( $address = Address::find($aId) ) {
-            $this->authorize('delete',$address);
+        if( $address = Address::where('user_id',$uid)->where('id',$aId)->first() ) {
 
             $address->delete();
 
@@ -85,8 +107,6 @@ class MeController extends Controller
                 'code' => 1000
             ],200);
         }
-
-
 
         return response()->json([
             'msg' => '未找到或者其他原因',

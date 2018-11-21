@@ -50,11 +50,11 @@
                     <label class="layui-form-label">是否上架</label>
                     <div class="layui-input-block">
                         @if( old('actived') ?? $product->actived ?? '' )
-                            <input type="radio" name="actived" value="0" title="下架">
                             <input type="radio" name="actived" value="1" title="上架" checked>
+                            <input type="radio" name="actived" value="0" title="下架">
                         @else
-                            <input type="radio" name="actived" value="0" title="下架" checked>
                             <input type="radio" name="actived" value="1" title="上架">
+                            <input type="radio" name="actived" value="0" title="下架" checked>
                         @endif
                     </div>
                 </div>

@@ -62,6 +62,9 @@ class WishController extends Controller
                 $wish->product_ids = $ids;
                 $wish->save();
 
+                # 给予收藏的创分数*2
+                event(new \App\Events\ActiveUser($wish->user_id,2));
+
                 return response()->json([
                     'message' => '喜欢成功'
                 ], 200);

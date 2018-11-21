@@ -20,39 +20,12 @@
                                             <li>
                                                 <span class="icon lnr lnr-map-marker"></span>
                                                 <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">地址</font></font></h5>
-                                                <p class="color-mid"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Comre，404 Design Street，墨尔本，澳大利亚</font></font></p>
                                             </li>
                                             <li>
                                                 <span class="icon lnr lnr-envelope"></span>
                                                 <h5><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">电子邮件</font></font></h5>
                                                 <p class="color-mid"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ $user->email ?? '未绑定' }}</font></font></p>
                                             </li>
-                                        </ul>
-                                        <ul class="social-icons social-icons--colored list-inline">
-                                            <li>第三方登录绑定： </li>
-                                            <li class="social-icons__item">
-                                                <a href="#"><i class="fa fa-wechat"></i></a>
-                                            </li>
-                                            <li class="social-icons__item">
-                                                <a href="#"><i class="fa fa-weibo"></i></a>
-                                            </li>
-                                            <li class="social-icons__item">
-                                                <a href="#"><i class="fa fa-qq"></i></a>
-                                            </li>
-                                        </ul>
-                                        <br>
-                                        <ul class="social-icons social-icons--colored list-inline">
-                                            <li>我的绑定： </li>
-                                            @if ($user->logins)
-                                            @foreach($user->logins as $type)
-                                                <li class="social-icons__item">
-                                                    <a href="#" onclick="alert('你已经绑定')"><i class="fa fa-{{ $type }}"></i></a>
-                                                </li>
-                                            @endforeach
-                                                <li class="social-icons__item">
-                                                    暂未绑定
-                                                </li>
-                                            @endif
                                         </ul>
                                         <br>
                                         <ul>
@@ -71,17 +44,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">电子邮件地址</font></font></label>
-                                            <input type="email" class="form-control" required="required" value="{{ $user->email }}">
+                                            <input type="email" disabled class="form-control" required="required" value="{{ $user->email }}">
                                         </div>
-                                        <div class="form-group">
-                                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">现在的密码</font></font></label>
-                                            <input type="password" name="password" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">修改的密码</font></font></label>
-                                            <input type="password" name="comfigm_password" class="form-control">
-                                        </div>
-                                        <button type="submit" class="btn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">提交</font></font></button>
                                     </form>
                                 </div>
                             </div>

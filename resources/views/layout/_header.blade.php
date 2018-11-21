@@ -55,14 +55,11 @@
                         <div class="col-sm-8">
                             <form class="search-form">
                                 <div class="input-group">
-                                    <input type="text" class="form-control input-lg search-input" placeholder="Enter Keywork Here ..." required="required">
+                                    <input type="text" disabled class="form-control input-lg search-input" placeholder="请输入您的搜索内容" required="required">
                                     <div class="input-group-btn">
                                         <div class="input-group">
                                             <select class="form-control input-lg search-select">
                                                 <option><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选择您的类别</font></font></option>
-                                                <option><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">交易</font></font></option>
-                                                <option><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">优惠券</font></font></option>
-                                                <option><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">折扣</font></font></option>
                                             </select>
                                             <div class="input-group-btn">
                                                 <button type="submit" class="btn btn-lg btn-search btn-block">
@@ -93,7 +90,7 @@
                                     @if( $user = Auth::user() )
                                         <span class="cart-number" id="wish_count" style="background-color: #2ed87b" >{{ $user->wishCount }}</span>
                                     @else
-                                        <span class="cart-number">0</span>
+                                        <span class="cart-number" id="wish_count">0</span>
                                     @endif
                                 </div>
                                 <a href="{{ route('wish') }}">

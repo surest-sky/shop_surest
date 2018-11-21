@@ -51,7 +51,9 @@ trait CategoryCacheTrait
      */
     public static function setRedisCategory()
     {
-        $categories = Category::with(['product.image','product.category'])->withOnly('product',['category_id','name'] )->select('id','name')->get();
+        $categories = Category::with(['product.image','product.category','product'])
+            ->select('id','name')
+            ->get();
         foreach ($categories as $category) {
             Redis::HSET(Category::key,$category->id,serialize($category));
         }
@@ -67,10 +69,25 @@ trait CategoryCacheTrait
      */
     public static function getCategoryByProduct($id)
     {
-        $products = Redis::hget(Category::key,$id);
+        if( !$products = Redis::hget(Category::key,$id) ) {
+            return false;
+        }
 
         $products =  call_user_func('unserialize',$products);
 
         return $products->product;
+    }
+
+
+    /**
+     * 修改指定分类的商品数据
+     */
+    public static function setCategorySimple($cid)
+    {
+        $category = Category::with(['product.image','product.category','product'])
+            ->where('id',$cid)
+            ->first();
+
+        Redis::HSET(Category::key,$category->id,serialize($category));
     }
 }

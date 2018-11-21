@@ -56,3 +56,33 @@
 [2018-11-19 15:56:41][7Sz4CYvvujdc77cIfOt8jchbvhtrmNEr] Processing: App\Jobs\IncrProductCount
 [2018-11-19 15:56:41][7Sz4CYvvujdc77cIfOt8jchbvhtrmNEr] Processed:  App\Jobs\IncrProductCount
 [2018-11-19 15:56:42][U4lKYhlklnM8TZY7XLfSDYtqCS19yFfC] Processed:  App\Notifications\OrderToMail
+[2018-11-21 18:52:23][H3wLN4gCCNtTudCEbqA2q8cfXkIfxMxh] Processing: App\Mail\SubscriptionMail
+[2018-11-21 18:52:23][ct5gWtUCkXE3wnRrxLEJye1sjAiparBI] Processing: App\Mail\SubscriptionMail
+[2018-11-21 18:52:23][qSCaO1Nu4QSqpmbM1glmDKSMHqycocjU] Processing: App\Mail\SubscriptionMail
+[2018-11-21 18:52:26][ct5gWtUCkXE3wnRrxLEJye1sjAiparBI] Processed:  App\Mail\SubscriptionMail
+[2018-11-21 18:52:26][qSCaO1Nu4QSqpmbM1glmDKSMHqycocjU] Processed:  App\Mail\SubscriptionMail
+[2018-11-21 18:52:26][H3wLN4gCCNtTudCEbqA2q8cfXkIfxMxh] Processed:  App\Mail\SubscriptionMail
+[2018-11-21 19:03:08][4v60UHJJBBs1ZO9kCzVENNfaUSPEmFjs] Processing: App\Mail\SubscriptionMail
+[2018-11-21 19:03:08][mHEbDBeMjgvjidv7LvJECjDpkOEywDyo] Processing: App\Mail\SubscriptionMail
+[2018-11-21 19:03:08][zxjrgZhC99aHFuvsh5zQE7eINuUNSfm7] Processing: App\Mail\SubscriptionMail
+[2018-11-21 19:03:08][fjiyp9to0a67QdHhomhYg8CS4G96CmQ6] Processing: App\Mail\SubscriptionMail
+[2018-11-21 19:03:09][mHEbDBeMjgvjidv7LvJECjDpkOEywDyo] Processed:  App\Mail\SubscriptionMail
+[2018-11-21 19:03:09][4v60UHJJBBs1ZO9kCzVENNfaUSPEmFjs] Processed:  App\Mail\SubscriptionMail
+[2018-11-21 19:03:10][fjiyp9to0a67QdHhomhYg8CS4G96CmQ6] Processed:  App\Mail\SubscriptionMail
+[2018-11-21 19:03:10][zxjrgZhC99aHFuvsh5zQE7eINuUNSfm7] Processed:  App\Mail\SubscriptionMail
+[2018-11-21 21:43:56][Cq0x2pjmUoYvIe2hu9SKHYfX6XiYT4zu] Processing: App\Jobs\SendMailJob
+[2018-11-21 21:43:58][Cq0x2pjmUoYvIe2hu9SKHYfX6XiYT4zu] Processed:  App\Jobs\SendMailJob
+[2018-11-22 02:40:16][wpqtt3MYQJQbwk3QMKi0pvSQocn5EOxu] Processing: App\Jobs\IncrProductStock
+[2018-11-22 02:40:16][aXrdF1JT8shoB7zRkYZM5znEHhG6JqUL] Processing: App\Jobs\IncrProductStock
+[2018-11-22 02:40:16][tjvI8dlqB7WpWhzxnkNhoIggOJAW09Bc] Processing: App\Jobs\IncrProductStock[2018-11-22 02:40:16][hCmiCwFOUKn2XOAbrCFycJLfZ3UAXC2K] Processing: App\Jobs\IncrProductStock
+
+[2018-11-22 02:40:16][aXrdF1JT8shoB7zRkYZM5znEHhG6JqUL] Processed:  App\Jobs\IncrProductStock
+[2018-11-22 02:40:16][gWfOIubJJ6oRpjyklBATOxtnVsIc8fCj] Processing: App\Jobs\IncrProductStock
+[2018-11-22 02:40:16][gWfOIubJJ6oRpjyklBATOxtnVsIc8fCj] Processed:  App\Jobs\IncrProductStock
+[2018-11-22 02:40:16][dt4t4ogrLbKBHD7xvZP2JOBkV5w7qb2T] Processing: App\Jobs\IncrProductStock[2018-11-22 02:40:16][wpqtt3MYQJQbwk3QMKi0pvSQocn5EOxu] Processed:  App\Jobs\IncrProductStock
+
+[2018-11-22 02:40:16][Rv9XDL0a1cv1VjFDDKr3u8Cnf0Jpc1lB] Processing: App\Jobs\IncrProductStock
+[2018-11-22 02:40:16][dt4t4ogrLbKBHD7xvZP2JOBkV5w7qb2T] Processed:  App\Jobs\IncrProductStock
+[2018-11-22 02:40:16][Rv9XDL0a1cv1VjFDDKr3u8Cnf0Jpc1lB] Processed:  App\Jobs\IncrProductStock
+[2018-11-22 02:40:16][tjvI8dlqB7WpWhzxnkNhoIggOJAW09Bc] Processed:  App\Jobs\IncrProductStock
+[2018-11-22 02:40:16][hCmiCwFOUKn2XOAbrCFycJLfZ3UAXC2K] Processed:  App\Jobs\IncrProductStock

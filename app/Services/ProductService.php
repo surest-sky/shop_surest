@@ -25,7 +25,7 @@ class ProductService
             'description' => $request->description,
             'category_id' => $request->category,
             'actived' => $request->actived,
-            'sold_count' => $this->getStock($request->skus),
+            'sold_count' => 0,
             'price' => $this->getMinPrice($request->skus),
         ];
 
