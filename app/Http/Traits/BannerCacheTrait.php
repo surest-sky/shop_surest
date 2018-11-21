@@ -55,6 +55,7 @@ trait BannerCacheTrait
         foreach ($banners as $banner) {
             Redis::HSET(Banner::key,$banner->id,serialize($banner));
         }
+        Redis::PEXPIRE(Banner::key,\Carbon\Carbon::now()->addDays(7)->timestamp);
 
         return Redis::HGETALL(Banner::key);
     }

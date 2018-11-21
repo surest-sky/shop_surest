@@ -34,7 +34,7 @@ class User extends Authenticatable
     ];
 
     public $appends = [
-        'wishCount'
+        'wishCount',
     ];
 
     /**
@@ -57,12 +57,13 @@ class User extends Authenticatable
 
     public function getWishCountAttribute()
     {
-        if( !$this->wishes ) {
+        $wishes = \App\Models\Wish::getWishByUser(\Auth::id());
+        if( !$wishes || empty($wishes) ) {
             return 0;
         }
-        $ids = $this->wishes->product_ids;
+        $count = $wishes->count();
 
-        return count($ids);
+        return $count;
     }
 
     /**

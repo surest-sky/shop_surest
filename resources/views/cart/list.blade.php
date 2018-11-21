@@ -4,14 +4,13 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/select-searchable/jquery.searchableSelect.css') }}">
 @stop
 
-@section('title','我的愿望清单')
+@section('title','我的购物车')
 
 @section('main')
     <main id="mainContent" class="main-content">
         <div class="page-container">
             <div class="container">
                 <div class="cart-area ptb-60">
-
                     <form action="{{ route('order.create') }}" method="post">
                         @csrf()
 

@@ -4,9 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Traits\CartCacheTrait;
 
 class Cart extends BaseModel
 {
+
+    use CartCacheTrait;
+
+    const key = 'cart';
+
     protected $guarded = [];
 
     public function productSku()
@@ -22,6 +28,11 @@ class Cart extends BaseModel
 
         $carts = self::with(['productSku','productSku.image','productSku.product.category'])->where('user_id',$user->id)->get();
 
+        return $carts;
+    }
+
+    public static function getCartByUser($id) {
+        $carts =  self::getCacheCart($id);
         return $carts;
     }
 
@@ -55,12 +66,12 @@ class Cart extends BaseModel
     public static function remove($pid)
     {
         $uid = Auth::id();
+
         if( $simple = self::where('id',$pid)->orWhere('user_id',$uid)->first() ){
             $simple->delete();
             return true;
         }
 
-        dd($simple);
         return false;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use App\Http\Traits\AddressCacheTrait;
 
 class Address extends Model
 {
@@ -17,6 +18,10 @@ class Address extends Model
         'update_at'
     ];
     use SoftDeletes;
+
+    use AddressCacheTrait;
+
+    const key = 'address';
 
     public static function setData($request)
     {
@@ -35,13 +40,6 @@ class Address extends Model
     public function getAddressesAttribute($value)
     {
         return $this->address . '-' . $this->detail;
-    }
-
-    public static function getAddress()
-    {
-        $id = \Auth::id();
-
-        return Address::where('user_id',$id)->get();
     }
 
 }

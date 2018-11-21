@@ -11,11 +11,13 @@ class CartController extends Controller
 {
     public function list()
     {
-        $carts = Cart::getCartByProductSku();
+        $id = \Auth::id();
+
+        $carts = Cart::getCacheCart($id);
 
         $totalPrice = $this->totalAllPrice($carts);
 
-        $addresses = Address::getAddress();
+        $addresses = Address::getAddress($id);
 
         return view('cart.list',compact('carts','totalPrice','addresses'));
     }

@@ -56,6 +56,8 @@ trait CategoryCacheTrait
             Redis::HSET(Category::key,$category->id,serialize($category));
         }
 
+        Redis::PEXPIRE(Category::key,\Carbon\Carbon::now()->addDays(7)->timestamp);
+
         return Redis::HGETALL(Category::key);
     }
 

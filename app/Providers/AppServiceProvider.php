@@ -7,6 +7,8 @@ use App\Observers\ProductOberver;
 use App\Models\Product;
 use Monolog\Logger;
 use Yansongda\Pay\Pay;
+use App\Models\Cart;
+use App\Observers\CartObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Product::observe(ProductOberver::class);
+        Cart::observe(CartObserver::class);
         \Debugbar::enable();
 
 

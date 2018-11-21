@@ -80,7 +80,7 @@
                                     <span class="icon lnr lnr-cart"></span>
                                     <div>
                                         @if( $user = Auth::user() )
-                                            <span class="cart-number" style="background-color: #2ed87b">{{ $user->carts->count() }}</span>
+                                            <span class="cart-number" style="background-color: #2ed87b">{{ \App\Models\Cart::getCartByUser($user->id)->count() }}</span>
                                         @else
                                             <span class="cart-number">0</span>
                                         @endif

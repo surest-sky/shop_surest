@@ -3,10 +3,9 @@
 namespace App\Models;
 
 use App\Exceptions\SysException;
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Product;
+use App\Http\Traits\WishCacheTrait;
 
-class Wish extends Model
+class Wish extends BaseModel
 {
     public $fillable = [
         'product_id'
@@ -16,39 +15,9 @@ class Wish extends Model
         'product_ids' => 'json'
     ];
 
+    use WishCacheTrait;
 
-    /**
-     * 通过关联取出 收藏表的数据
-     * @return array|\Illuminate\Support\Collection
-     */
-    public function products()
-    {
-        $productIds = $this->product_ids;
-
-        $products = [];
-
-        $productAll = Product::getCacheProduct();
-
-        foreach ($productIds as $id) {
-            if( $product = $productAll->find($id) ) {
-                array_push($products,$product);
-            }
-        }
-        $products = collect($products);
-
-        return $products;
-    }
-
-
-    /**
-     * 更新愿望商品
-     * @param array $ids
-     * @return bool|void
-     */
-//    public function update($ids)
-//    {
-//
-//    }
+    const key = 'wish';
 
     public static function remove($pid)
     {
@@ -71,11 +40,8 @@ class Wish extends Model
 
     public static function getProducts()
     {
-        $uid = \Auth::id();
-        if( $wish = self::where('user_id',$uid)->first() ) {
-            $products = $wish->products();
-            return $products;
-        }
-        return collect([]);
+        $id = \Auth::id();
+        $products  = self::getWishCache($id);
+        return $products;
     }
 }
