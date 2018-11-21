@@ -20,7 +20,8 @@ class IndexController extends Controller
         # 获取分类
         $categories = Category::getByCategory();
 
-        $products = Product::getProductsAll(false)->take(6);
+        # 最新的商品
+        $products = Product::latestProduct();
 
         $banners = Banner::getCacheBanner()->take(4);
 

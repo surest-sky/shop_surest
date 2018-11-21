@@ -19,6 +19,17 @@ class Product extends Model
 
     const key = 'product_list';
 
+    const latest = 'product_latest';
+
+    const simpleKey = 'simple_key';
+
+    const len = 8;
+
+    public $hidden = [
+        'updated_at'
+        ,'actived'
+    ];
+
     /**
      * 获取所有的商品数据
      * @param bool $page true = 分页数据获取 false = 获取全部数据
@@ -59,7 +70,7 @@ class Product extends Model
 
     public static function getSimpleProductOrComment($pid)
     {
-        $product = self::with('comments')->where('id',$pid)->first();
+        $product = self::simpleByCacheProduct($pid);
         return $product;
     }
     /**

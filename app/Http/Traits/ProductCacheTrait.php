@@ -15,77 +15,53 @@ use App\Models\Product;
 
 trait ProductCacheTrait
 {
-
-    /**
-     * 从redis中获取数据
-     */
-    public static function getCacheProduct()
+    public static function latestProduct()
     {
-        # 检测是否使用redis缓存
-        if( self::isRedis() ){
-            return self::getRedisProduct();
-        }else{
-            return self::getFileProduct();
+        $key = Product::latest;
+        $len = Product::len;
+
+        $products = Redis::get($key);
+
+        if( !$products ) {
+            $products = Product::with(['image','category'])
+                ->orderBy('created_at','DESC')
+                ->limit($len)
+                ->get();
+
+            Redis::set($key,serialize($products));
+
+            Redis::PEXPIRE(Product::key,\Carbon\Carbon::now()->addDays(1)->timestamp);
+
+            $products = Redis::get(Product::key);
         }
-    }
 
-    public static function setCacheProduct()
-    {
-        # 检测是否使用redis缓存
-        if( self::isRedis() ){
-            return self::ssetFileProduct();
-        }else{
-            return self::setFileProduct();
-        }
-    }
+        $products = call_user_func('unserialize',$products);
 
-    /**
-     * 从redis中获取缓存
-     */
-    public static function getRedisProduct()
-    {
-
-    }
-
-    /**
-     * 设置redis缓存
-     */
-    public static function setRedisProduct()
-    {
-
-    }
-
-    /**
-     * 从文件中缓存缓存
-     */
-    public static function getFileProduct()
-    {
-        $products = Cache::get(Product::key);
-        if( !$products ){
-            $products = self::setFileProduct();
-        }
-        $products = unserialize($products);
         return $products;
     }
 
-    /**
-     * 设置文件缓存
-     */
-    public static function setFileProduct()
-    {
-        # 获取所有的分类数据
-        $expirAt = Carbon::now()->addDays(10);
-        $products = Product::with(['productSkus.image','category','image'])->orderBy('created_at','DESC')
-            ->where('actived',1)
-            ->get();
 
-        $products = serialize($products);
-        Cache::put(Product::key,$products,$expirAt);
-        return $products;
-    }
-
-    public static function isRedis()
+    public static function simpleByCacheProduct($id)
     {
-        return (boolean)config('main.redis_open');
+        $key = Product::simpleKey;
+
+        $product = Redis::get($key);
+
+        if( !$product ) {
+            $product = Product::with(['image','category','productSkus'])
+                ->orderBy('created_at','DESC')
+                ->where('id',$id)
+                ->first();
+
+            if($product) {
+                Redis::set($key,serialize($product));
+
+                Redis::PEXPIRE(Product::key,\Carbon\Carbon::now()->addDays(3)->timestamp);
+
+                $product = Redis::get(Product::key);
+            }
+        }
+
+        return $product ? call_user_func('unserialize',$product) : false;
     }
 }
