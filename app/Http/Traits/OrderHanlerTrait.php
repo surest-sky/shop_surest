@@ -63,6 +63,7 @@ trait OrderHanlerTrait
                 # 退款成功 : https://docs.open.alipay.com/common/105806
                 if( $ret['code'] && $ret['code'] == '10000' ) {
                     $order->refund_status = Order::REFUND_STATUS_SUCCESS;
+                    $order->out_refund_no = $refund_no;
                     $order->save();
                     return true;
                 }else{
@@ -74,6 +75,26 @@ trait OrderHanlerTrait
                     return false;
                 }
             break;
+            case '微信' :
+                app('wechat')->refund([
+                    'out_trade_no' => $order->no,
+                    'total_fee' => $order->total_price * 100,
+                    'refund_fee' => $order->total_price * 100,
+                    'out_refund_no' => $refund_no,
+
+                    // 这里是异步调用 ， 不会立即返回退款成功的信息
+                    'notify_url' => return_notify_url()// 退款后的回调
+                ]);
+
+                // 将订单状态改成退款中
+                $order->update([
+                    'refund_no' => $refund_no,
+                    'refund_status' => Order::REFUND_STATUS_PROCESSING,
+                ]);
+
+                return true;
+                break;
+
         }
     }
 }

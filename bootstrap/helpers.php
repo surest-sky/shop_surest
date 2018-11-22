@@ -106,3 +106,17 @@ function rand_avatar() {
     return $str;
 }
 
+
+# 定制化支付回调
+function return_notify_url($pay_method='') {
+    switch ($pay_method){
+        case 'wechat' :
+            return App()->environment('production') ? route('pay.wechat.notify')  : 'http://requestbin.leo108.com/1h5v1451';
+            break;
+        case 'alipay' :
+            return App()->environment('production') ? route('pay.alipay.notify') : "http://requestbin.leo108.com/1h5v1451"; // 验证是否请求正确
+            break;
+        default :
+            return App()->environment('production') ? route('payment.wechat.refund_notify') : "http://requestbin.leo108.com/1h5v1451";  // 退款
+    }
+}

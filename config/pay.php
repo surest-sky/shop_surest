@@ -12,11 +12,11 @@ return [
     ],
 
     'wechat' => [
-        'app_id'      => '',
-        'mch_id'      => '',
-        'key'         => '',
-        'cert_client' => '',
-        'cert_key'    => '',
+        'app_id'      => 'wx5076396338a51e6a', // 公众号appid
+        'mch_id'      => '1514065751',   // 商户id
+        'key'         => 'jiujiangmenghangwangluokeji16020', // api 密钥
+        'cert_client' => resource_path('wechat_pay/apiclient_cert.pem'),
+        'cert_key'    => resource_path('wechat_pay/apiclient_key.pem'),
         'log'         => [
             'file' => storage_path('logs/wechat_pay.log'),
         ],

@@ -118,7 +118,7 @@
 
                                                 <div class="row row-tb-10">
                                                     <div class="col-xs-12  col-md-6">
-                                                        <a  href="" type="button" data-no="{{ $order->no }}" class="btn btn-success btn-block btn-sm">微信支付</a>
+                                                        <a id="wx_pay" href="javascript:;" type="button" data-no="{{ $order->no }}" data-id="{{ $order->id }}" class="btn btn-success btn-block btn-sm">微信支付</a>
                                                     </div>
                                                     <div class="col-xs-12  col-md-6">
                                                         <a href="{{ route('pay.alipay', ['id' => $order->id]) }}" type="button" data-no="{{ $order->no }}" class="btn btn-info btn-block btn-sm">支付宝支付</a>
@@ -142,5 +142,19 @@
     </main>
 @stop
 @section('script')
+    <script>
+        $('#wx_pay').on('click',function () {
+            var id = $(this).attr('data-id');
+
+            swal({
+                title: '微信支付',
+                text: '支付完成后请刷新查看',
+                imageUrl: '{{ route('pay.wechat', ['id' => $order->id]) }}',
+                imageWidth: 200,
+                imageHeight: 200,
+                animation: false
+            })
+        })
+    </script>
 @stop
 

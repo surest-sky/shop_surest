@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         Address::observe(AddressObserver::class);
         Banner::observe(BannerObserver::class);
         Address::observe(AddressObserver::class);
-        \Debugbar::enable();
+        \Debugbar::disable();
 
 
         # 向容器中注入一个容器
@@ -48,21 +48,26 @@ class AppServiceProvider extends ServiceProvider
             }
 
             $config['return_url'] = route('pay.alipay.return');
-            $config['notify_url'] = 'http://requestbin.leo108.com/1drdi441'; #route('pay.alipay.notify');
-            # curl -X POST http://shop.surest.cn/alipay/notify -d
+            $config['notify_url'] = return_notify_url('alipay');
 
             return Pay::alipay($config);
         });
 
-    }
+        # 向容器中注入一个容器
+        $this->app->singleton('wechat',function (){
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
+            $config = config('pay.wechat');
+
+            if (app()->environment() !== 'production') {
+                $config['log']['level'] = Logger::DEBUG;
+            } else {
+                $config['log']['level'] = Logger::WARNING;
+            }
+            $config['notify_url'] = return_notify_url('wechat');
+
+            // 调用 Yansongda\Pay 来创建一个微信支付对象
+            return Pay::wechat($config);
+        });
+
     }
 }

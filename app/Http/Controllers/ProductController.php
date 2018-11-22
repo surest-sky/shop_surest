@@ -33,7 +33,6 @@ class ProductController extends Controller
 
         $currentPage = $request->current ?? 1;
 
-
         # 分页数据组装
         $result = $product->productPage($products,$currentPage);
 

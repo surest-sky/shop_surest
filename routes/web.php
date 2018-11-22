@@ -24,7 +24,7 @@ Route::group(['middleware'=>['web','actived']],function (){
         Route::get('/weibo/login','Auth\LoginWeiboController@login')->name('login.weibo');
         Route::get('/weibo/user','Auth\LoginWeiboController@user')->name('login.weibo.user');
 
-        Route::get('/qq/handler','Auth\LoginQqController@loginToRedirect')->name('login');
+        Route::get('/qq/handler','Auth\LoginQqController@loginToRedirect')->name('login.qq');
         Route::get('/qq/login','Auth\LoginQqController@login')->name('login.handler');
 
         /**
@@ -95,9 +95,11 @@ Route::group(['middleware'=>['web','actived']],function (){
         Route::get('/alipay/return','PayController@alipayReturn')->name('pay.alipay.return'); # 前端回调页面
         Route::get('/alipay/{id}','PayController@payByAlipay')->name('pay.alipay');
 
+        Route::get('/wechat/{id}','PayController@payByWechat')->name('pay.wechat');
 
         # 个人资料页面
         Route::get('/me', 'MeController@index')->name('me.index');
+
 
         # 收货地址
         Route::get('/me/address', 'MeController@address')->name('me.address');
@@ -111,7 +113,14 @@ Route::group(['middleware'=>['web','actived']],function (){
     });
 
 
-    Route::post('/alipay/notify','PayController@alipayNotify')->name('pay.alipay.notify'); # 服务端回调页面
+    Route::post('/alipay/notify','PayController@alipayNotify')->name('pay.alipay.notify'); # 支付宝支付成功服务端回调页面
+
+    Route::post('/wechat/notify','PayController@wechatNotify')->name('pay.wechat.notify'); # 微信支付成功服务端回调页面
+
+    Route::post('/wechat/refund/notify','PayController@wechatRefundNotify')->name('pay.wechat.refund'); # 服务端回调页面
+
+
+
 
     /**
      * 杂项

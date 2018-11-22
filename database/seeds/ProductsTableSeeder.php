@@ -14,7 +14,7 @@ class ProductsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        factory(App\Models\Product::class)->times(50)->create()
+        factory(App\Models\Product::class)->times(80)->create()
             ->each(function ($product) use ($faker){
                 $temp = [];
                 for($i=0; $i<3; $i++){

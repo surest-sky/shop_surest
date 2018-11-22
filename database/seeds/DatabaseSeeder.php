@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
          $this->call(UsersTableSeeder::class);      # 创建会员用户
          $this->call(CategoryTableSeeder::class);     # 创建分类相关数据
          $this->call(ProductsTableSeeder::class);   # 创建商品数据
-         $this->call(ProductSkusTableSeeder::class); # 创建sku商品数据
          $this->call(ImagesTableSeeder::class);     # 创建图片相关数据
          $this->call(SubscribersTableSeeder::class);     # 创建订阅用户相关数据
          $this->call(WishTableSeeder::class); # 创建收藏列表数据
