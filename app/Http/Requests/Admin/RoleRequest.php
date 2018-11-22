@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests\Admin;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Rule;
-use App\Rules\IdIsRequired;
 use App\Rules\IdIsExist;
-use App\Rules\Admin\RoleIsExist;
+use App\Rules\IdIsRequired;
+use Illuminate\Foundation\Http\FormRequest;
 
 
 class RoleRequest extends FormRequest
@@ -30,8 +28,9 @@ class RoleRequest extends FormRequest
     {
         return [
             'id' => [new IdIsExist],
-            'name' => ['required','between:2,10',new RoleIsExist],
+            'name' => ['required','between:2,10','unique:roles,name,' . $this->id],
             'ids' => ['required','array',new IdIsRequired],
+            'description' => ['required'],
         ];
     }
 

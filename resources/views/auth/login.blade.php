@@ -56,7 +56,7 @@
                                     <a href="{{ route('login.weibo') }}" class="btn btn-lg btn-block btn-social btn-facebook"><i class="fa fa-weibo"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">微博登录</font></font></a>
                                 </div>
                                 <div class="mb-20">
-                                    <a href="{{ route('login') }}" class="btn btn-lg btn-block btn-social btn-twitter"><i class="fa fa-qq"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">QQ登录</font></font></a>
+                                    <a href="{{ route('login.qq') }}" class="btn btn-lg btn-block btn-social btn-twitter"><i class="fa fa-qq"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">QQ登录</font></font></a>
                                 </div>
                                 <div class="mb-20">
                                     <button class="btn btn-lg btn-block btn-social btn-google-plus"><i class="fa fa-wechat"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">微信登录</font></font></button>
@@ -66,7 +66,7 @@
                                     <label class="color-mid" for="remember_social"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">记住登录。</font></font></label>
                                 </div>
                                 <div class="text-center color-mid"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                            需要一个账户 ？</font></font><a href="{{ route('login.qq') }}" class="color-green"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建帐号</font></font></a>
+                                            需要一个账户 ？</font></font><a href="{{ route('register') }}" class="color-green"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建帐号</font></font></a>
                                 </div>
                             </div>
                         </div>

@@ -60,6 +60,12 @@ class AdminController extends BaseController
         return view('admin.admins.role_edit',compact('permissions'));
     }
 
+    /**
+     * 角色管理
+     * @param RoleRequest $request
+     * @return \Illuminate\Http\Response
+     * @throws SysException
+     */
     public function roleStore(RoleRequest $request)
     {
         $id = $request->id;
@@ -140,6 +146,7 @@ class AdminController extends BaseController
         $id = $request->id;
 
         $list = getRouteList();
+
         if( $id ) {
             if( $permission = Permission::find($id) ){
                 return view('admin.admins.permission_edit',compact('permission','list'));

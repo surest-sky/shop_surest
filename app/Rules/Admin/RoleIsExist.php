@@ -39,6 +39,6 @@ class RoleIsExist implements Rule
      */
     public function message()
     {
-        return '角色名字已经存在.';
+        return '角色名字已经存在';
     }
 }

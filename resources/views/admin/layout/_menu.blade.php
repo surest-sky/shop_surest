@@ -100,9 +100,6 @@
                     </dd>
                 </dl>
             </li>
-
-            <li class="layui-nav-item" style="height: 30px; text-align: center">
-            </li>
         </ul>
     </div>
 

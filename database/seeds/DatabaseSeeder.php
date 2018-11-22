@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
          $this->call(SubscribersTableSeeder::class);     # 创建订阅用户相关数据
          $this->call(WishTableSeeder::class); # 创建收藏列表数据
          $this->call(BannerTableSeeder::class); # 创建收藏列表数据
+         $this->call(PermissionTableSeeder::class); # 创建权限列表数据
     }
 }

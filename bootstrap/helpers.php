@@ -94,6 +94,7 @@ function orderNo() {
 }
 
 function rand_avatar() {
+
     # 随机生成一个8-10位的qq号码
     $i = 2;
     $str = '1';

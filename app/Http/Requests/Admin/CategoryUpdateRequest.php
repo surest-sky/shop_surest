@@ -23,7 +23,6 @@ class CategoryUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        dd($this->id);
         return [
             'id' => 'required|integer',
             'name' => 'required|unique:categories,name,' . $this->id
