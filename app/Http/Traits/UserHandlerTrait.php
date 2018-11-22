@@ -43,7 +43,7 @@ trait UserHandlerTrait
         // 查询数据库中是否有这个用户
         $user = User::getUserInfo($uid,$field);
 
-        if( empty($user) ) {
+        if( !$user || empty($user) ) {
             new Registered($user= self::createUser($userInfo,$field));
         }
 
@@ -79,9 +79,9 @@ trait UserHandlerTrait
                 'actived' => '1',
                 'type' => User::TYPE_WEIBO
             ];
+            DB::commit();
 
             return $user = User::create($arr);
-            DB::commit();
             return $user;
         }catch (\Exception $e){
             DB::rollback();

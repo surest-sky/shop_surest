@@ -92,3 +92,17 @@ function orderNo() {
     $orderSn = $yCode[intval(date('Y')) - 2011] . strtoupper(dechex(date('m'))) . date('d') . substr(time(), -5) . substr(microtime(), 2, 5) . sprintf('%02d', rand(0, 99));
     return $orderSn;
 }
+
+function rand_avatar() {
+    # 随机生成一个8-10位的qq号码
+    $i = 2;
+    $str = '1';
+
+    while ($i<10) {
+        $str .= mt_rand(1,10);
+        $i++;
+    }
+    $str = sprintf('http://q1.qlogo.cn/g?b=qq&nk=%d&s=640',$str);
+    return $str;
+}
+

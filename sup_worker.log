@@ -86,3 +86,5 @@
 [2018-11-22 02:40:16][Rv9XDL0a1cv1VjFDDKr3u8Cnf0Jpc1lB] Processed:  App\Jobs\IncrProductStock
 [2018-11-22 02:40:16][tjvI8dlqB7WpWhzxnkNhoIggOJAW09Bc] Processed:  App\Jobs\IncrProductStock
 [2018-11-22 02:40:16][hCmiCwFOUKn2XOAbrCFycJLfZ3UAXC2K] Processed:  App\Jobs\IncrProductStock
+[2018-11-22 13:03:08][DaA1L1o4BuMmtUyskjYezkTWnLlcKXSc] Processing: App\Jobs\SendMailJob
+[2018-11-22 13:03:09][DaA1L1o4BuMmtUyskjYezkTWnLlcKXSc] Processed:  App\Jobs\SendMailJob

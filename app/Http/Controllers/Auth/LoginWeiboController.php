@@ -39,6 +39,7 @@ class LoginWeiboController extends BaseController
     public function user($access_token,$uid)
     {
         $userInfo = $this->getUserInfo($access_token,$uid);
+
         // 执行登录操作
         return User::kindStore($uid,'weibo',$userInfo);
     }

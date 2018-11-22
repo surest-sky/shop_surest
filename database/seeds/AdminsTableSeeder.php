@@ -16,5 +16,9 @@ class AdminsTableSeeder extends Seeder
             'password' => eny('123456',$code),
             'salt' => $code
         ]);
+
+        $admin = \App\Models\Admin::find(1);
+        $admin->name = 'admin';
+        $admin->save();
     }
 }

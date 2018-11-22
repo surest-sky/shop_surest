@@ -3,23 +3,22 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Redis;
 
-class clearLogin extends Command
+class InitCacheCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'me:clear-active-user';
+    protected $signature = 'install:cache';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = '清除每日登录的用户登录时间';
+    protected $description = '优化系列的加载';
 
     /**
      * Create a new command instance.
@@ -38,7 +37,13 @@ class clearLogin extends Command
      */
     public function handle()
     {
-        $key = config('rket.login_key');
-        Redis::del($key);
+        # 清除相关的缓存
+        \Artisan::call('install:clear');
+
+        \Artisan::call('config:cache');
+        \Artisan::call('route:cache');
+
+        $this->info('优化相关的配置项完成');
+
     }
 }

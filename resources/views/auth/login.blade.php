@@ -66,7 +66,7 @@
                                     <label class="color-mid" for="remember_social"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">记住登录。</font></font></label>
                                 </div>
                                 <div class="text-center color-mid"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                            需要一个账户 ？</font></font><a href="{{ route('auth.login') }}" class="color-green"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建帐号</font></font></a>
+                                            需要一个账户 ？</font></font><a href="{{ route('login') }}" class="color-green"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建帐号</font></font></a>
                                 </div>
                             </div>
                         </div>

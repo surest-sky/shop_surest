@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
 
         factory('App\Models\User', 20)->create()->each(function ($user) use ($factory) {
             $name = $factory->name;
-
             $user->name = $name;
             $user->save();
         });

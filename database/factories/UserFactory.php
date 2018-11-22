@@ -20,6 +20,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => eny('123456',$salt),
         'salt' => $salt,
+        'avatar' => rand_avatar(),
         'remember_token' => str_random(10),
     ];
 });

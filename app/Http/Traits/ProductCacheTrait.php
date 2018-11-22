@@ -17,6 +17,7 @@ trait ProductCacheTrait
 {
     public static function latestProduct()
     {
+
         $key = Product::latest;
         $len = Product::len;
 
@@ -27,12 +28,15 @@ trait ProductCacheTrait
                 ->orderBy('created_at','DESC')
                 ->limit($len)
                 ->get();
+            if( $products ) {
+                Redis::set($key,serialize($products));
 
-            Redis::set($key,serialize($products));
+                Redis::PEXPIRE(Product::key,\Carbon\Carbon::now()->addDays(1)->timestamp);
 
-            Redis::PEXPIRE(Product::key,\Carbon\Carbon::now()->addDays(1)->timestamp);
-
-            $products = Redis::get($key);
+                $products = Redis::get($key);
+            }else{
+                return call_user_func('collect',[]);
+            }
         }
 
         $products = call_user_func('unserialize',$products);
