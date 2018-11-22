@@ -65,8 +65,10 @@ trait UserHandlerTrait
             case User::FIELD['weibo']:
                 return self::WeiBoHandler($userInfo,$field);
                 break;
+            case User::FIELD['qq']:
+                return self::LoginHander($userInfo,$field);
+                break;
         }
-
     }
 
     public static function WeiBoHandler($userInfo,$field){
@@ -82,7 +84,30 @@ trait UserHandlerTrait
             DB::commit();
 
             return $user = User::create($arr);
-            return $user;
+
+        }catch (\Exception $e){
+            DB::rollback();
+            throw new SysException([
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+
+    public static function LoginHander($userInfo,$field)
+    {
+        try{
+            DB::beginTransaction();
+            $arr = [
+                'name' => $userInfo->nickname,
+                $field => $userInfo->id,
+                'avatar' => $userInfo->avatar ?? 'https://laravel-china.org/users/5758',
+                'actived' => '1',
+                'type' => User::TYPE_QQ
+            ];
+            DB::commit();
+            return $user = User::create($arr);
+
         }catch (\Exception $e){
             DB::rollback();
             throw new SysException([

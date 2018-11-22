@@ -22,7 +22,11 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\ActiveUser' => [
             'App\Listeners\AvtiveUserListener'
-        ]
+        ],
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            // add your listeners (aka providers) here
+            'SocialiteProviders\\QQ\\QqExtendSocialite@handle',
+        ],
 
     ];
 

@@ -164,6 +164,8 @@ return [
 
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        \SocialiteProviders\Manager\ServiceProvider::class
+
     ],
 
     /*

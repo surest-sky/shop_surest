@@ -24,6 +24,9 @@ Route::group(['middleware'=>['web','actived']],function (){
         Route::get('/weibo/login','Auth\LoginWeiboController@login')->name('login.weibo');
         Route::get('/weibo/user','Auth\LoginWeiboController@user')->name('login.weibo.user');
 
+        Route::get('/qq/handler','Auth\LoginQqController@loginToRedirect')->name('login');
+        Route::get('/qq/login','Auth\LoginQqController@login')->name('login.handler');
+
         /**
          * 忘记密码
          */

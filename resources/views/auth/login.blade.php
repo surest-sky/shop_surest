@@ -56,7 +56,7 @@
                                     <a href="{{ route('login.weibo') }}" class="btn btn-lg btn-block btn-social btn-facebook"><i class="fa fa-weibo"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">微博登录</font></font></a>
                                 </div>
                                 <div class="mb-20">
-                                    <button class="btn btn-lg btn-block btn-social btn-twitter"><i class="fa fa-qq"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">QQ登录</font></font></button>
+                                    <a href="{{ route('login') }}" class="btn btn-lg btn-block btn-social btn-twitter"><i class="fa fa-qq"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">QQ登录</font></font></a>
                                 </div>
                                 <div class="mb-20">
                                     <button class="btn btn-lg btn-block btn-social btn-google-plus"><i class="fa fa-wechat"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">微信登录</font></font></button>
