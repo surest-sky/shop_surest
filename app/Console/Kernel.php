@@ -23,19 +23,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        # 调度清除缓存， 每隔五天
+        # 调度清除缓存+重新计算活跃用户， 每隔五天
         $schedule->command('install:clear')
                  ->weekly()
                  ->weekdays()
                  ->at('24.00')
-                 ->before(function (){
-
+                 ->after(function (){
+                     (new \App\Models\Adminer())->notify(new \App\Notifications\MsgToMailNotification('清除所有缓存的命令'));
                  });
-
-        # 推送一个邮件告诉我发生了什么事情
-        $schedule->command('send:me');
-
-
     }
 
     /**

@@ -20,8 +20,8 @@ class CreatePermissionTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('guard_name');
+            $table->string('route');
             $table->string('description')->nullable();
-            $table->string('type');
             $table->timestamps();
         });
 

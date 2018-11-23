@@ -13,6 +13,9 @@ class OrderToMail extends Notification implements ShouldQueue
     use Queueable;
 
     protected $order;
+
+    public $tries = 2;
+
     protected $msg;
     /**
      * Create a new notification instance.

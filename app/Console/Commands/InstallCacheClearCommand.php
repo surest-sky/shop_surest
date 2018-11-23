@@ -46,6 +46,7 @@ class InstallCacheClearCommand extends Command
 
         # 清除页面中的缓存
         Redis::del(\App\Models\Product::key);
+        Redis::del(\App\Models\Product::latest);
         Redis::del(\App\Models\Banner::key);
         Redis::del(\App\Models\Category::key);
 

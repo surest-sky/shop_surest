@@ -59,7 +59,8 @@ class InsatllInitCommand extends Command
 
         $progress->advance();
 
-        \Artisan::call('install:cache');
+        # 清除缓存
+        \Artisan::call('install:clear');
 
         $progress->finish();
 

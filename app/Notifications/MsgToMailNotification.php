@@ -9,9 +9,11 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 class MsgToMailNotification extends Notification
 {
-    use Queueable;
 
     protected $msg;
+
+    public $tries = 2;
+
     /**
      * Create a new notification instance.
      *
