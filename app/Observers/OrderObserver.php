@@ -16,8 +16,9 @@ class OrderObserver
     public function saved(Order $order)
     {
         $productSkus = $order->extra;
+        $skus = $productSkus['product_skus'];
 
         # 重新写缓存
-        Product::setPartByCacheProduct($productSkus['product_skus']);
+        Product::setPartByCacheProduct($skus);
     }
 }

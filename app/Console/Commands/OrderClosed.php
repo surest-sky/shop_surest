@@ -10,7 +10,7 @@ use App\Jobs\IncrProductStock;
 class OrderClosed extends Command
 {
     /**
-     * The name and signature of the console command.
+     * 这个命令可忽略
      *
      * @var string
      */

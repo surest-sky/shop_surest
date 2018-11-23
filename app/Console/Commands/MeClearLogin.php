@@ -3,24 +3,23 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SubscriptionMail;
+use Illuminate\Support\Facades\Redis;
 
-class SendSubscription extends Command
+class MeClearLogin extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'me:subSend';
+    protected $signature = 'me:clear_active_user';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = '给订阅用户发送最近的商品信息';
+    protected $description = '清除每日登录的用户登录时间';
 
     /**
      * Create a new command instance.
@@ -39,12 +38,7 @@ class SendSubscription extends Command
      */
     public function handle()
     {
-        $users = \App\Models\Subscriber::getSubscription()->pluck('email');
-
-        foreach ($users as $user) {
-            Mail::to($user)->queue(new SubscriptionMail());
-        }
-
+        $key = config('rket.login_key');
+        Redis::del($key);
     }
-
 }

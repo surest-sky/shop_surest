@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Redis;
 
-class cacheClearCommand extends Command
+class InstallCacheClearCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -44,11 +44,20 @@ class cacheClearCommand extends Command
         \Artisan::call('route:clear');
         \Artisan::call('cache:clear');
 
+        # 清除页面中的缓存
         Redis::del(\App\Models\Product::key);
         Redis::del(\App\Models\Banner::key);
         Redis::del(\App\Models\Category::key);
 
-        \Artisan::call('me:clear-active-user');
+        # 这里由于之前设计的原因，我单个商品采用的是 key-vlaue的方式进行保存的，保存时间的 1 天
+        # 当你在本地安装了这个 web 并且访问了的话，会有商品数据缓存
+        # 我这里将对他们进行删除，默认商品id 1 - 1000 ， 循环1000次
+        for ($i=1; $i<1000; $i++) {
+            Redis::del(\App\Models\Product::simpleKey . $i);
+        }
+
+        # 清除活跃用户
+        \Artisan::call('me:clear_active_user');
 
         # 提示信息
         $this->info('清除相关系列缓存完成');

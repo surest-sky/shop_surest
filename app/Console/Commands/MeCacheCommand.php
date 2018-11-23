@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class InitCacheCommand extends Command
+class MeCacheCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'install:cache';
+    protected $signature = 'me:cache';
 
     /**
      * The console command description.
@@ -37,6 +37,10 @@ class InitCacheCommand extends Command
      */
     public function handle()
     {
+        # ---------------
+        # 这里是优化配置加载，如在开发环境请勿操作
+        # ---------------
+
         # 清除相关的缓存
         \Artisan::call('install:clear');
 

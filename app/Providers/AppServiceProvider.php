@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         Address::observe(AddressObserver::class);
         Banner::observe(BannerObserver::class);
         Address::observe(AddressObserver::class);
-        \Debugbar::disable();
+        \Debugbar::enabled();
 
 
         # 向容器中注入一个容器

@@ -17,13 +17,24 @@ class Kernel extends ConsoleKernel
     ];
 
     /**
-     * Define the application's command schedule.
-     *
+     * 命令调度
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
+        # 调度清除缓存， 每隔五天
+        $schedule->command('install:clear')
+                 ->weekly()
+                 ->weekdays()
+                 ->at('24.00')
+                 ->before(function (){
+
+                 });
+
+        # 推送一个邮件告诉我发生了什么事情
+        $schedule->command('send:me');
+
 
     }
 
