@@ -17,6 +17,7 @@ use App\Observers\WishObserver;
 use Illuminate\Support\ServiceProvider;
 use Monolog\Logger;
 use Yansongda\Pay\Pay;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
         Address::observe(AddressObserver::class);
         \Debugbar::enabled();
 
+        Schema::defaultStringLength(191);
 
         # 向容器中注入一个容器
         $this->app->singleton('alipay',function (){

@@ -117,9 +117,7 @@ Route::group(['middleware'=>['web','actived']],function (){
 
     Route::post('/wechat/notify','PayController@wechatNotify')->name('pay.wechat.notify'); # 微信支付成功服务端回调页面
 
-    Route::post('/wechat/refund/notify','PayController@wechatRefundNotify')->name('pay.wechat.refund'); # 服务端回调页面
-
-
+    Route::post('/wechat/refund/notify','PayController@wechatRefundNotify')->name('pay.wechat.refund'); # 微信退款服务端回调页面
 
 
     /**

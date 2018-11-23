@@ -13,7 +13,8 @@
 <!-- ––––––––––––––––––––––––––––––––––––––––– -->
 
 <!-- Bootstrap -->
-<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+{{--<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">--}}
+<link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
 
 <!-- Font Awesome -->
 <link href="{{ asset('assets/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
