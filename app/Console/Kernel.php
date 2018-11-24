@@ -27,10 +27,17 @@ class Kernel extends ConsoleKernel
         $schedule->command('install:clear')
                  ->weekly()
                  ->weekdays()
-                 ->at('24.00')
+                 ->at('23.00')
                  ->after(function (){
                      (new \App\Models\Adminer())->notify(new \App\Notifications\MsgToMailNotification('清除所有缓存的命令'));
                  });
+
+        $schedule->command('me:subSend')
+            ->dailyAt('23.00')
+//            ->everyMinute()
+            ->after(function (){
+                (new \App\Models\Adminer())->notify(new \App\Notifications\MsgToMailNotification('给用户发送了订阅信息'));
+            });
     }
 
     /**

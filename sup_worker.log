@@ -154,3 +154,72 @@
 [2018-11-23 15:00:58][oH6w2AWYSSZ6VPlN9BcMQgh91G6kmMnO] Failed:     App\Notifications\MsgToMailNotification
 [2018-11-23 15:01:22][HMBf9trTwDX0zKxoCgDaSkhLAqOTox2e] Processing: App\Notifications\MsgToMailNotification
 [2018-11-23 15:01:22][HMBf9trTwDX0zKxoCgDaSkhLAqOTox2e] Failed:     App\Notifications\MsgToMailNotification
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+Parse error: syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/vagrant/m_shop/app/Console/Kernel.php on line 37
+
+
+
+In ManagesFrequencies.php line 163:
+                                                                               
+  Too few arguments to function Illuminate\Console\Scheduling\Event::dailyAt(  
+  ), 0 passed in /home/vagrant/m_shop/app/Console/Kernel.php on line 36 and e  
+  xactly 1 expected                                                            
+                                                                               
+
+In ManagesFrequencies.php line 163:
+                                                                               
+  Too few arguments to function Illuminate\Console\Scheduling\Event::dailyAt(  
+  ), 0 passed in /home/vagrant/m_shop/app/Console/Kernel.php on line 36 and e  
+  xactly 1 expected                                                            
+                                                                               
+
+In ManagesFrequencies.php line 163:
+                                                                               
+  Too few arguments to function Illuminate\Console\Scheduling\Event::dailyAt(  
+  ), 0 passed in /home/vagrant/m_shop/app/Console/Kernel.php on line 36 and e  
+  xactly 1 expected                                                            
+                                                                               
+
