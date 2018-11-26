@@ -12,5 +12,4 @@ npm-debug.log
 yarn-error.log
 .env
 .phpunit.result.cache
-/resources/assets/S-shop
-/resources/assets/X-admin
+/resources/wechat_pay

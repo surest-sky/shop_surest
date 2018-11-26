@@ -16,6 +16,11 @@ class LoginWinxinController extends Controller
 
     protected $state;
 
+    /**
+     * 传入一个
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function login(Request $request)
     {
         if( $request->key && ($openid = $this->setAndGetUser($request->key))){
@@ -29,10 +34,13 @@ class LoginWinxinController extends Controller
             }
         }
 
-        dd($request->all());
         return view('error.show',['msg' => '非法操作哦']);
     }
 
+    /**
+     * 获取登陆二维码和当前用户的唯一标识符
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getCodeAndState()
     {
         $stateCode = $this->state = userId();

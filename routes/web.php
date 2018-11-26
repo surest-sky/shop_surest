@@ -19,6 +19,7 @@ Route::group(['middleware'=>['web','actived']],function (){
 
     Route::middleware(['guest'])->group(function (){
 
+        # 登陆模块
         Route::get('/login','Auth\LoginController@login')->name('login');
         Route::post('/login','Auth\LoginController@store')->name('login.store');
         Route::get('/weibo/login','Auth\LoginWeiboController@login')->name('login.weibo');
@@ -27,6 +28,7 @@ Route::group(['middleware'=>['web','actived']],function (){
         Route::get('/qq/handler','Auth\LoginQqController@loginToRedirect')->name('login.qq');
         Route::get('/qq/login','Auth\LoginQqController@login')->name('login.handler');
 
+        # 微信登陆模块
         Route::get('/wx/data','Auth\LoginWinxinController@getCodeAndState')->name('wx.data');
         Route::get('/wx/code','Auth\LoginWinxinController@getCode')->name('wx.code');
         Route::get('/wx/store','Auth\LoginWinxinController@loginStore')->name('wx.store');
@@ -47,7 +49,7 @@ Route::group(['middleware'=>['web','actived']],function (){
         Route::post('/forget','Auth\ForgetController@store')->name('forget.store');
     });
 
-
+    # 测试相关模块
     Route::get('/test/sub','TestController@sub')->name('sub');
     Route::get('/test/form','TestController@form')->name('test.form');
     Route::get('/test/store','TestController@store')->name('test.store');

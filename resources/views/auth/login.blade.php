@@ -90,7 +90,9 @@
                             showCloseButton: true,
                             showCancelButton: true,
                             html:
-                                '<h2>登录成功将自动跳转</h2><br><h4>此为模拟登录</h4>',
+                                '<h2>登录成功将自动跳转</h2><br><h4>此为模拟登录</h4>' +
+                                    '<h3>登陆之前，请先关注我的测试公众号</h3>' +
+                                    '<img src="{{ asset('assets/images/wx.png') }}" alt="">',
                         })
                         running(data.stateCode);
                     }else{
