@@ -93,6 +93,17 @@ function orderNo() {
     return $orderSn;
 }
 
+function userId() {
+    $yCode = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','a','d','e','c','y','u');
+    $i = 0;
+    $id = '';
+    while ($i<3) {
+        $i++;
+        $id .= $yCode[random_int(0,count($yCode)-1)].substr(time(),-2,2);
+    }
+    return $id;
+}
+
 function rand_avatar() {
 
     # 随机生成一个8-10位的qq号码

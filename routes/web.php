@@ -27,6 +27,12 @@ Route::group(['middleware'=>['web','actived']],function (){
         Route::get('/qq/handler','Auth\LoginQqController@loginToRedirect')->name('login.qq');
         Route::get('/qq/login','Auth\LoginQqController@login')->name('login.handler');
 
+        Route::get('/wx/data','Auth\LoginWinxinController@getCodeAndState')->name('wx.data');
+        Route::get('/wx/code','Auth\LoginWinxinController@getCode')->name('wx.code');
+        Route::get('/wx/store','Auth\LoginWinxinController@loginStore')->name('wx.store');
+        Route::post('/wx/read','Auth\LoginWinxinController@readWxInfo')->name('wx.read');
+        Route::get('/wx/login','Auth\LoginWinxinController@login')->name('wx.login');
+
         /**
          * 忘记密码
          */
@@ -45,7 +51,11 @@ Route::group(['middleware'=>['web','actived']],function (){
     Route::get('/test/sub','TestController@sub')->name('sub');
     Route::get('/test/form','TestController@form')->name('test.form');
     Route::get('/test/store','TestController@store')->name('test.store');
+    Route::get('/test/qcode','TestController@qcode')->name('qcode');
+    Route::get('/test/show','TestController@show')->name('qcode.show');
+    Route::get('/test/qcodeStore','TestController@qcodeStore')->name('qcodeStore');
     /**
+     *
      * 注册注销相关
      */
     # 注册

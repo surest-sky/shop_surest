@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Logs\BaseLoghandler;
 use App\Notifications\OrderToMail;
 use Endroid\QrCode\QrCode;
+
 class PayController extends Controller
 {
     /**

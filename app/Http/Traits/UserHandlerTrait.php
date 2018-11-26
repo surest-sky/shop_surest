@@ -36,7 +36,7 @@ trait UserHandlerTrait
      * @param $type string 字段
      * @param $userInfo
      */
-    public static function kindStore($uid,$type,$userInfo)
+    public static function kindStore($uid,$type,$userInfo,$isWx)
     {
         $field = User::FIELD[$type];
 
@@ -47,9 +47,13 @@ trait UserHandlerTrait
             new Registered($user= self::createUser($userInfo,$field));
         }
 
-        Auth::login($user,true);
+        if( $isWx ) {
+            return $user->id;
+        }else{
+            Auth::login($user,true);
 
-        return redirect()->route('index');
+            return redirect()->route('index');
+        }
     }
 
 
@@ -66,8 +70,10 @@ trait UserHandlerTrait
                 return self::WeiBoHandler($userInfo,$field);
                 break;
             case User::FIELD['qq']:
-                return self::LoginHander($userInfo,$field);
+                return self::LoginHandler($userInfo,$field);
                 break;
+            case User::FIELD['weixin']:
+                return self::WeixinHandler($userInfo,$field);
         }
     }
 
@@ -94,7 +100,7 @@ trait UserHandlerTrait
     }
 
 
-    public static function LoginHander($userInfo,$field)
+    public static function LoginHandler($userInfo,$field)
     {
         try{
             DB::beginTransaction();
@@ -106,6 +112,30 @@ trait UserHandlerTrait
                 'type' => User::TYPE_QQ
             ];
             DB::commit();
+            return $user = User::create($arr);
+
+        }catch (\Exception $e){
+            DB::rollback();
+            throw new SysException([
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public static function WeixinHandler($userInfo,$field)
+    {
+        try{
+            DB::beginTransaction();
+            $arr = [
+                'name' => $userInfo['nickname'],
+                $field => $userInfo['openid'],
+                'avatar' => $userInfo['headimgurl'] ?? 'https://laravel-china.org/users/5758',
+                'actived' => '1',
+                'type' => User::TYPE_WECHAT
+            ];
+
+            DB::commit();
+
             return $user = User::create($arr);
 
         }catch (\Exception $e){

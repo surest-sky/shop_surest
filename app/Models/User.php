@@ -18,7 +18,7 @@ class User extends Authenticatable
 
     const TYPE_WEIBO = 'weibo';
     const TYPE_QQ = 'qq';
-    const TYPE_WECHAT = 'wechat';
+    const TYPE_WECHAT = 'weixin';
     const FIELD = [
         self::TYPE_WEIBO => 'w_id',
         self::TYPE_QQ => 'q_id',

@@ -8,13 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-<form action="{{ route('test.store') }}">
-    <input type="text" name="a[][]" id="" value="222">
-    <input type="text" name="a[][]" id="" value="222">
-
-    <input type="text" name="b[][]" id="" value="333">>
-    <input type="submit" value="tijiao">
-
-</form>
+<img src="{{ route('qcode') }}" alt="">
 </body>
 </html>

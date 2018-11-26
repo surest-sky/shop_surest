@@ -59,7 +59,7 @@
                                     <a href="{{ route('login.qq') }}" class="btn btn-lg btn-block btn-social btn-twitter"><i class="fa fa-qq"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">QQ登录</font></font></a>
                                 </div>
                                 <div class="mb-20">
-                                    <button class="btn btn-lg btn-block btn-social btn-google-plus"><i class="fa fa-wechat"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">微信登录</font></font></button>
+                                    <button id="w_login" class="btn btn-lg btn-block btn-social btn-google-plus"><i class="fa fa-wechat"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">微信登录</font></font></button>
                                 </div>
                                 <div class="custom-checkbox mb-20">
                                     <input type="checkbox" id="remember_social" checked="">
@@ -75,4 +75,64 @@
             </div>
         </div>
     </main>
-@endsection()
+@endsection
+@section( 'script' )
+    <script>
+        $('#w_login').on('click' , function () {
+            // 请求获得二维码地址和标识符
+            $.ajax({
+                url: '{{ route('wx.data') }}',
+                type: 'get',
+                success: function (data) {
+                    if( data.codeUri && data.stateCode ) {
+                        swal({
+                            title: '<img src="'+ data.codeUri +'" alt="">',
+                            showCloseButton: true,
+                            showCancelButton: true,
+                            html:
+                                '<h2>登录成功将自动跳转</h2><br><h4>此为模拟登录</h4>',
+                        })
+                        running(data.stateCode);
+                    }else{
+                        swal('请求发生错误，请重试','','error');
+                    }
+                },
+                error: function () {
+                    swal('请求发生错误，请重试','','error');
+                }
+            })
+        })
+        function running($state) {
+            var i = 0;
+            var run;
+            run = setInterval(function () {
+                if( i>60 ) {
+                    clearInterval(run);
+                }else{
+                    $.ajax({
+                        url : '{{ route('wx.read') }}',
+                        type: 'post',
+                        data: {
+                            state: $state
+                        },
+                        success:function (data) {
+                            if( data.key ) {
+                                var key = data.key;
+                                window.location.href = '{{route('wx.login')}}'+'?key=' + key;
+                                clearInterval(run);
+                                swal('扫码成功,请勿关闭,登陆中......','','true');
+                            }
+                        },
+                        error: function (error) {
+                        }
+                    })
+                    i++;
+                }
+            },1000);
+        }
+
+        function checkLogin($state) {
+            console.log('登陆中..' +$state )
+        }
+    </script>
+@stop

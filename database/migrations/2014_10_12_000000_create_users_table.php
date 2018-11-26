@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->enum('active',[0,1])->comment('头像');
             $table->string('password')->nullable()->comment('密码');
             $table->string('salt')->nullable()->comment('加盐串');
-            $table->enum('type',['weibo','wechat','qq'])->nullable();
+            $table->enum('type',['weibo','weixin','qq'])->nullable();
             $table->timestamp('login_at')->nullbale();
             $table->softDeletes();
             $table->rememberToken();

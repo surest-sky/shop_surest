@@ -32,7 +32,7 @@ class SqlListener
         $log = vsprintf($sql, $event->bindings);
 
         $log = '[' . date('Y-m-d H:i:s') . '] ' . $log . "\r\n";
-        $filepath = storage_path('logs\sql.log');
+        $filepath = storage_path('logs/sql.log');
         file_put_contents($filepath, $log, FILE_APPEND);
 
         // 这里也可以直接用Log::info() 里的函数，只是这样会和其他调试信息掺在一起。

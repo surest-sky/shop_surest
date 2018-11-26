@@ -41,8 +41,7 @@ class Kernel extends ConsoleKernel
     }
 
     /**
-     * Register the commands for the application.
-     *
+     * Register the commands for the application
      * @return void
      */
     protected function commands()

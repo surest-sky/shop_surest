@@ -14,3 +14,6 @@
 
 - yansongda/pay
 
+- endroid/qr-code
+
+- emadadly/laravel-uuid
