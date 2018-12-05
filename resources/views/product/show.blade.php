@@ -38,7 +38,7 @@
                                 <div class="deal-single panel">
                                     <figure class="deal-thumbnail embed-responsive embed-responsive-16by9"
                                             data-bg-img="{{ $product->image->src ?? '' }}">
-                                        <div class="label-discount left-20 top-15">{{ str_limit($product->category->name,4,'..') }}</div>
+                                        <div class="label-discount left-20 top-15">{{ $product->cName }}</div>
                                         <ul class="deal-actions top-15 right-20">
                                             <li class="like-deal" data-id="{{ $product->id }}"><span><i class="fa fa-heart"></i></span>
                                             </li>

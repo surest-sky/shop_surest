@@ -81,4 +81,8 @@ exit
   
 后台账号密码： admin / admin 
 
+ # 页面错误修改
  
+ - 当删除分类后商品链接到分类id的时候回报错 no-object ， 已修改
+ 
+ - 后台分类添加的时候，添加异常， 可查看storage\log\sys文件

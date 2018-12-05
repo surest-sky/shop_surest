@@ -64,7 +64,7 @@ class CategoryController extends Controller
             ]);
 
             #执行重新写缓存
-            self::setCacheCategory();
+            self::setRedisCategory();
 
             \DB::commit();
             return response()->view('admin.error.title', ['msg' => '更新成功,请刷新']);
@@ -88,7 +88,7 @@ class CategoryController extends Controller
             $category->save();
 
             #执行重新写缓存
-            self::setCacheCategory();
+            self::setRedisCategory();
 
             session()->flash('status','添加成功');
             \DB::commit();
