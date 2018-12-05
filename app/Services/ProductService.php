@@ -27,6 +27,7 @@ class ProductService
             'actived' => $request->actived,
             'sold_count' => 0,
             'price' => $this->getMinPrice($request->skus),
+            'actived' => intval($request->actived)
         ];
 
         return $arr;

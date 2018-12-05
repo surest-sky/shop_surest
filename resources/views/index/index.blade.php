@@ -29,8 +29,8 @@
                                 @foreach($banners as $banner)
                                 <div class="deal-single panel item">
                                     <figure class="deal-thumbnail embed-responsive embed-responsive-16by9"
-                                            data-bg-img="{{ $banner->image }}">
-                                        <div class="label-discount top-10 right-10">{{ $banner->cName }}</div>
+                                            data-bg-img="{{ $banner->product->image_src }}">
+                                        <div class="label-discount top-10 right-10">{{ $banner->product->cname }}</div>
                                         <ul class="deal-actions top-10 left-10">
                                             <li class="like-deal" data-id="{{ $banner->product->id }}">
                                                     <span>
@@ -83,8 +83,8 @@
                             <div class="col-sm-6 col-lg-4">
                                 <div class="deal-single panel">
                                     <figure class="deal-thumbnail embed-responsive embed-responsive-16by9"
-                                            data-bg-img="{{ $product->image->src ?? '' }}">
-                                        <div class="label-discount left-20 top-15">{{ str_limit($product->category->name,4,'..') }}</div>
+                                            data-bg-img="{{ $product->image_src }}">
+                                        <div class="label-discount left-20 top-15">{{ $product->cName }}</div>
                                         <ul class="deal-actions top-15 right-20">
                                             <li class="like-deal" data-id="{{ $product->id }}"><span><i class="fa fa-heart"></i></span>
                                             </li>
@@ -99,7 +99,7 @@
                                             </li>
                                         </ul>
                                         <div class="deal-store-logo">
-                                            <a href="{{ route('product.show',['id'=>$product->id]) }}"><img src="{{ $product->image->src ?? '' }}" alt=""></a>
+                                            <a href="{{ route('product.show',['id'=>$product->id]) }}"><img src="{{ $product->image_src }}" alt=""></a>
                                         </div>
                                     </figure>
                                     <div class="bg-white pt-20 pl-20 pr-15">

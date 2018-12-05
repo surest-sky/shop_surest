@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use App\Http\Traits\CategoryCacheTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends BaseModel
 {
     use CategoryCacheTrait;
+
+    use SoftDeletes;
 
     const key = 'category';
 

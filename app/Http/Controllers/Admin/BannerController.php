@@ -13,7 +13,7 @@ class BannerController extends Controller
     {
         $banners = Banner::getCacheBanner();
 
-        $products = Product::getCacheProduct();
+        $products = Product::getAllProduct();
 
         return view('admin.banner.list',compact('banners','products'));
     }

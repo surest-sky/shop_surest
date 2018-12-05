@@ -40,6 +40,7 @@ class ProductController
     {
         $product = null;
         $id = $request->id ?? null;
+
         if( $id ) {
             $product = Product::withoutGlobalScope(ProductScope::class)->with(['image','category','productSkus.image'])->find($id);
         }
@@ -132,6 +133,7 @@ class ProductController
         }
     }
 
+
     public function update(ProductUpdateRequest $request , ProductService $productService)
     {
         try{
@@ -146,7 +148,7 @@ class ProductController
             #先更新商品的数据
             $result = $productService->getParams($request);
 
-            Product::where('id',$id)->update($result);
+            Product::withoutGlobalScope(ProductScope::class)->where('id',$id)->update($result);
 
             # 写入商品的图片数据
             $img = $request->product_img;

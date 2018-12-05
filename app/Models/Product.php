@@ -29,6 +29,11 @@ class Product extends Model
     public $hidden = [
         'updated_at'
         ,'actived'
+        ,'cName'
+    ];
+
+    public $appends = [
+        'image_src'
     ];
 
     public static function boot()
@@ -243,5 +248,21 @@ class Product extends Model
     {
         $products = self::query()->orderBy('created_at','DESC')->limit(5)->get();
         return $products;
+    }
+
+    public function getCNameAttribute()
+    {
+        if(!$cate = $this->category) {
+            $cname = '其他';
+        }else{
+            $cname = $cate->name;
+        }
+        return str_limit($cname,4,'...');
+    }
+
+
+    public function getImageSrcAttribute()
+    {
+        return $this->image->src ?? '/404.jpg';
     }
 }

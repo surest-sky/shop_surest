@@ -14,7 +14,6 @@ class Banner extends BaseModel
 
     public $appends = [
         'image',
-        'cName'
     ];
 
     public function product()
@@ -22,13 +21,4 @@ class Banner extends BaseModel
         return $this->hasOne(Product::class , 'id','product_id');
     }
 
-    public function getImageAttribute()
-    {
-        return $this->product->image->src;
-    }
-
-    public function getCNameAttribute()
-    {
-        return str_limit($this->product->category->name,4,'...');
-    }
 }

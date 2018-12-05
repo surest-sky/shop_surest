@@ -29,7 +29,7 @@
                                 <button type="submit"></button>
                             </form>
                         @else
-                        <li><a href="{{ route('login') }}"><i class="fa fa-lock"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登入</font></font></a>
+                        <li><a href="{{ route('login') }}"><i class="fa fa-lock"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登录</font></font></a>
                         </li>
                         <li><a href="{{ route('register') }}"><i class="fa fa-user"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册</font></font></a>
                         </li>

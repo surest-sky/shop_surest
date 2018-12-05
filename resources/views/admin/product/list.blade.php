@@ -65,7 +65,7 @@
                         {{ $product->price }}
                     </td>
                     <td >
-                        {{ $product->category->name }}
+                        {{ $product->cname }}
                     </td>
                     <td >
                         {{ $product->sold_count }}
