@@ -5,12 +5,14 @@ namespace App\Providers;
 use App\Models\Address;
 use App\Models\Banner;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Wish;
 use App\Observers\AddressObserver;
 use App\Observers\BannerObserver;
 use App\Observers\CartObserver;
+use App\Observers\CategoryObserver;
 use App\Observers\OrderObserver;
 use App\Observers\ProductObserver;
 use App\Observers\WishObserver;
@@ -35,6 +37,8 @@ class AppServiceProvider extends ServiceProvider
         Address::observe(AddressObserver::class);
         Banner::observe(BannerObserver::class);
         Address::observe(AddressObserver::class);
+        Category::observe(CategoryObserver::class);
+
         \Debugbar::enabled();
 
         Schema::defaultStringLength(191);

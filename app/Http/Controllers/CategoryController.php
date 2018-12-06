@@ -22,7 +22,8 @@ class CategoryController extends Controller
     public function show(Request $request,Product $product)
     {
         $id = $request->id;
-        if( !$products = Category::getCategoryByProduct($id) ){
+
+        if( empty($products) || !$products = Category::getCategoryByProduct($id) ){
             return view('error.404',['msg'=>'未找到分类']);
         }
 

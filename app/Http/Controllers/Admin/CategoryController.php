@@ -41,11 +41,15 @@ class CategoryController extends Controller
         if ($id) {
             if ($categroy = Category::find($id)) {
                 $categroy->delete();
+
                 return response()->json([
                     'message' => '删除成功'
                 ], 200);
             }
         }
+
+        # 当未找到的时候需要触发缓存，保持一致性
+        Category::setRedisCategory();
 
         return response()->json([
             'message' => '未找到'
