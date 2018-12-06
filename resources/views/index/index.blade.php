@@ -10,9 +10,11 @@
                             <aside>
                                 <ul class="nav-coupon-category panel">
                                     @foreach($categories as $category)
+                                        @if( $category->pcount > 0 )
                                         <li><a href="{{ route('category.show',['id' => $category->id]) }}"><i class="fa fa-navicon"></i>{{ $category->name }}
                                                 <span>{{ $category->pcount }}</span></a>
                                         </li>
+                                        @endif
                                     @endforeach
                                     <li class="all-cat">
                                         <a class="font-14" href="{{ route('category') }}">查看所有分类</a>

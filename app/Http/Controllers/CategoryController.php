@@ -24,7 +24,7 @@ class CategoryController extends Controller
         $id = $request->id;
 
         if( empty($products) || !$products = Category::getCategoryByProduct($id) ){
-            return view('error.404',['msg'=>'未找到分类']);
+            return view('error.404',['msg'=>'未找到分类或者分类下面不存在数据']);
         }
 
         $sort = $request->sort ?? 'new';
