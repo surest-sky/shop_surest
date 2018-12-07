@@ -35,11 +35,11 @@ class OrderController extends Controller
         if( !$order = Order::find($id) ) {
             return view('admin.error.title',['msg' => "订单不存在"]);
         }
-        $expresses = Express::getAll();
+//        $expresses = Express::getAll();
 
         # 快递讯息
-        $result = Express::getDetail($order);
-
+//        $result = Express::getDetail($order);
+        $expresses = $result = [];
         return view('admin.order.show', compact('order','expresses','result'));
     }
 
