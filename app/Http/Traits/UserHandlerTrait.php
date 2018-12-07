@@ -36,7 +36,7 @@ trait UserHandlerTrait
      * @param $type string 字段
      * @param $userInfo
      */
-    public static function kindStore($uid,$type,$userInfo,$isWx)
+    public static function kindStore($uid,$type,$userInfo,$isWx=false)
     {
         $field = User::FIELD[$type];
 

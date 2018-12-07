@@ -33,11 +33,15 @@ class Kernel extends ConsoleKernel
                  });
 
         $schedule->command('me:subSend')
-            ->dailyAt('23.00')
+            ->dailyAt('9.00')
 //            ->everyMinute()
             ->after(function (){
                 (new \App\Models\Adminer())->notify(new \App\Notifications\MsgToMailNotification('给用户发送了订阅信息'));
             });
+
+//        异步触发每三分钟更新商品的数据
+        $schedule->command('update:category')
+            ->everyFiveMinutes();
     }
 
     /**

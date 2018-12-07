@@ -43,6 +43,7 @@ class InstallCacheClearCommand extends Command
         \Artisan::call('view:clear');
         \Artisan::call('route:clear');
         \Artisan::call('cache:clear');
+        \Artisan::call('update:category');
 
         # 清除页面中的缓存
         Redis::del(\App\Models\Product::key);
